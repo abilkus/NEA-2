@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Borrowed music</h1>
+
+    {% if musicinstance_list %}
+    <ul>
+
+      {% for musicinst in musicinstance_list %} 
+      <li class="{% if musicinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'music-detail' musicinst.music.pk %}">{{musicinst.music.title}}</a> ({{ musicinst.due_back }})        
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There is no music borrowed.</p>
+    {% endif %}       
+{% endblock %}
+

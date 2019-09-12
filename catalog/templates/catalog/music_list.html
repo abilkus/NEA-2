@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Music List</h1>
+
+    {% if music_list %}
+    <ul>
+
+      {% for music in music_list %}
+      <li>
+        <a href="{{ music.get_absolute_url }}">{{ music.title }}</a> ({{music.composer}})
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>There is no music in the music office.</p>
+    {% endif %}       
+{% endblock %}
+

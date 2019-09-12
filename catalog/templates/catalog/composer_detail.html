@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Composer: {{ composer }} </h1>
+<p>{{composer.date_of_birth}} - {% if composer.date_of_death %}{{composer.date_of_death}}{% endif %}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Music</h4>
+
+<dl>
+{% for music in composer.music_set.all %}
+  <dt><a href="{% url 'music-detail' music.pk %}">{{music}}</a> ({{music.musicinstance_set.all.count}})</dt>
+  <dd>{{music.summary}}</dd>
+{% endfor %}
+</dl>
+
+</div>
+{% endblock %}
