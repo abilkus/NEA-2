@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Barnet Education Arts Trust</h1>
+
+<p>Welcome to <em>Barnet Education Arts Trust Website</em>, a draft website developed as a start to computer science coursework</p>
+
+
+
+
+
+<h2>Dynamic content</h2>
+
+<p>The music office has the following record counts:</p>
+<ul>
+<li><strong>Music:</strong> {{ num_music }}</li>
+<li><strong>Amount of music owned:</strong> {{ num_instances }}</li>
+<li><strong>Amount of music available:</strong> {{ num_instances_available }}</li>
+<li><strong>Composers:</strong> {{ num_composers }}</li>
+</ul>
+
+
+
+
+{% endblock %}
