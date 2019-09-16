@@ -181,3 +181,9 @@ class MusicDelete(PermissionRequiredMixin, DeleteView):
     model = Music
     success_url = reverse_lazy('musics')
     permission_required = 'catalog.can_mark_returned'
+
+class Borrow(View):
+
+    def get(self,request):
+
+        return HttpResponse('<h1>Work in progress</h1>')

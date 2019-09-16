@@ -40,3 +40,6 @@ urlpatterns += [
     path('music/<int:pk>/update/', views.MusicUpdate.as_view(), name='music_update'),
     path('music/<int:pk>/delete/', views.MusicDelete.as_view(), name='music_delete'),
 ]
+urlpatterns += [ 
+
+    path('borrow/',views.Borrow.as_view(),name='borrow'),]
