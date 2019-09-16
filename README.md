@@ -10,3 +10,4 @@ This website is a way of allowing conductors at Barnet Education Arts Trust to r
 AI Chatbot
 
 https://www.youtube.com/watch?v=wypVcNIH6D4 https://pypi.org/project/chatbotAI/ https://towardsdatascience.com/build-your-first-chatbot-using-python-nltk-5d07b027e727
+https://www.youtube.com/watch?v=0Ov1Yd1uCuA
