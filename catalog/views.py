@@ -183,7 +183,9 @@ class MusicDelete(PermissionRequiredMixin, DeleteView):
     permission_required = 'catalog.can_mark_returned'
 
 class Borrow(View):
+    model = MusicInstance
+    template_name = 'catalog/musicinstance_list_available_all.html'
+    paginate_by = 10
 
-    def get(self,request):
-
-        return HttpResponse('<h1>Work in progress</h1>')
+    def get_queryset(self):
+        return MusicInstance.objects.filter(status__exact='a')
