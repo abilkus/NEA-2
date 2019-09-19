@@ -1,8 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\catalog"
+    "\\catalog",
+    "\\catalog\\templates",
+    "\\catalog\\templates\\catalog",
+    "\\env",
+    "\\env\\Lib",
+    "\\env\\Scripts",
+    "\\templates"
   ],
-  "SelectedNode": "\\catalog\\views.py",
+  "SelectedNode": "\\catalog\\urls.py",
   "PreviewInSolutionExplorer": false
 }

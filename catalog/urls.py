@@ -42,4 +42,6 @@ urlpatterns += [
 ]
 urlpatterns += [ 
 
-    path('borrow/',views.Borrow.as_view(),name='borrow'),]
+    path('borrow/',views.Borrow.as_view(),name='borrow'),
+    path('templates/borrow_music.html/<int:pk>', views.MusicDetailView.as_view(), name='borrow-music'),
+    ]
