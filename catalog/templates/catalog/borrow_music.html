@@ -15,7 +15,7 @@
 
     {% for copy in music.musicinstance_set.all %}
     <hr>
-    <p class="{% if copy.status == 'a' %}<button>Borrow</button>{{ copy.get_status_display }}</p>
+    <p class="{% if copy.status == 'a' %}<button>Borrow</button>">{{ copy.get_status_display }}</p>
     {% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{copy.due_back}}</p>{% endif %}
     <p><strong>Imprint:</strong> {{copy.imprint}}</p>
     <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
