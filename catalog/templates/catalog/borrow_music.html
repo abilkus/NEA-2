@@ -13,14 +13,18 @@
 <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
 
-    {% for copy in music.musicinstance_set.all %}
-    <hr>
-    {% if copy.status = 'a' %}<p><a href="{% url 'borrow' %}">Borrow</a></p>{%endif %}
-    {% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{copy.due_back}}</p>{% endif %}
-    <p><strong>Imprint:</strong> {{copy.imprint}}</p>
-    <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    <table>
+        <thead></thead>
+        <tbody>
+            {% for copy in music.musicinstance_set.all %}
+            <tr>
+                <td>{{copy.id}}</td>
+                <td><button name="reservebutton" value="{{copy.id}}">Reserve</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    {% endfor %}
 </div>
 {% endblock %}
 

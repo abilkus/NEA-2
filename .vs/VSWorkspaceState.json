@@ -6,9 +6,8 @@
     "\\catalog\\templates\\catalog",
     "\\env",
     "\\env\\Lib",
-    "\\env\\Scripts",
-    "\\templates"
+    "\\env\\Scripts"
   ],
-  "SelectedNode": "\\catalog\\urls.py",
+  "SelectedNode": "\\catalog\\templates\\catalog\\borrow_music.html",
   "PreviewInSolutionExplorer": false
 }
