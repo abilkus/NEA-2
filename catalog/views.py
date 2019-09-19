@@ -182,7 +182,7 @@ class MusicDelete(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('musics')
     permission_required = 'catalog.can_mark_returned'
 
-class Borrow(View):
+class Borrow(generic.ListView):
     model = MusicInstance
     template_name = 'catalog/musicinstance_list_available_all.html'
     paginate_by = 10
