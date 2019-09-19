@@ -12,19 +12,19 @@
 
 <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
-
+    <form action="{%url 'borrow_action' %}" method="post">
+    {% csrf_token %}
     <table>
         <thead></thead>
         <tbody>
             {% for copy in music.musicinstance_set.all %}
             <tr>
                 <td>{{copy.id}}</td>
-                <td><button name="reservebutton" value="{{copy.id}}">Reserve</button></td>
+                <td><button type="submit" name="reservebutton" value="{{copy.id}}">Reserve</button></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
+    </form>
 </div>
 {% endblock %}
-

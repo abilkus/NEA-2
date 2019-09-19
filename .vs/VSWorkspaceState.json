@@ -8,6 +8,6 @@
     "\\env\\Lib",
     "\\env\\Scripts"
   ],
-  "SelectedNode": "\\catalog\\templates\\catalog\\borrow_music.html",
+  "SelectedNode": "\\catalog\\urls.py",
   "PreviewInSolutionExplorer": false
 }

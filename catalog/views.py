@@ -3,6 +3,7 @@ from django.views import View
 # Create your views here.
 from django.http import HttpResponse
 from .models import Music, Composer, MusicInstance, Genre
+from django.template import loader
 
 
 def index(request):
@@ -189,3 +190,16 @@ class Borrow(generic.ListView):
 
     def get_queryset(self):
         return MusicInstance.objects.filter(status__exact='a')
+
+def BorrowMusicDetail(request, pk):
+    template = loader.get_template("catalog/borrow_music.html")
+    music=Music.objects.get(pk=pk)
+    context= {"music":music}
+    return HttpResponse(template.render(context,request))
+
+def BorrowAction(request):
+    whichCopy= request.POST['reservebutton']
+    return HttpResponse( ("Reserving %s") % (whichCopy))
+
+
+   
