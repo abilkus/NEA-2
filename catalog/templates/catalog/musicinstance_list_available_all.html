@@ -1,18 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>All Reserved Music</h1>
+<h1>All Reserved Music</h1>
 
     {% if musicinstance_list %}
-    <ul>
+<ul>
 
-      {% for musicinst in musicinstance_list %} 
-      <li class="{% if musicinst.is_available %}text-danger{% endif %}">
+    {% for musicinst in musicinstance_list %}
+    <li class="{% if musicinst.is_available %}text-danger{% endif %}">
         <a href="{% url 'borrow-music' musicinst.music.pk %}">{{musicinst.music.title}}</a>
-      </li>
-      {% endfor %}
-    </ul>
+    </li>
+    {% endfor %}
+</ul>
 
     {% else %}
-      <p>There is no music available.</p>
-    {% endif %}       
+<p>There is no music available.</p>
+    {% endif %}
+{% endblock %}
