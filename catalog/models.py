@@ -148,7 +148,7 @@ class Reserved(models.Model):
     borrowedid = models.IntegerField()
     music = models.ForeignKey('music', on_delete=models.SET_NULL, null=True)
     #userid= models.ForeignKey(User.username, on_delete = models.SET_NULL, null=True)
-    takenoutdate=models.DateField(default=date.today(), null=False)
+    takenoutdate=models.DateField(default=django.utils.timezone.now, null=False)
    
     
 
