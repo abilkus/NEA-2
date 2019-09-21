@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.mail import send_mail
+from django.utils import timezone
 # Create your models here.
 import datetime
 from django.urls import reverse  # To generate URLS by reversing URL patterns
@@ -148,7 +149,7 @@ class Reserved(models.Model):
     borrowedid = models.IntegerField()
     music = models.ForeignKey('music', on_delete=models.SET_NULL, null=True)
     #userid= models.ForeignKey(User.username, on_delete = models.SET_NULL, null=True)
-    takenoutdate=models.DateField(default=django.utils.timezone.now, null=False)
+    takenoutdate=models.DateTimeField(default=timezone.now() )
    
     
 
