@@ -67,7 +67,7 @@ from django.contrib.auth.models import User  # Required to assign User as a borr
 class MusicInstance(models.Model):
     atomic = False
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+    musicinstanceid = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text="Unique ID for this particular book across whole library")
     music = models.ForeignKey('music', on_delete=models.SET_NULL, null=True)
     due_back = models.DateField(null=True, blank=True)
@@ -144,11 +144,11 @@ class Composer(models.Model):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
 
-'''class Borrowed(models.Model):
-    borrowedid = models.ForeignKey('borrowedid', primary_key=True, on_delete =models.SET_NULL, null=False)
-    musicid = models.ForeignKey('music', on_delete=models.SET_NULL, null=True)
+class Reserved(models.Model):
+    borrowedid = models.IntegerField()
+    musicinstanceid = models.ForeignKey('MusicInstance', on_delete=models.SET_NULL, null=True)
     userid = models.ForeignKey(User, on_delete = models.SET_NULL, null=True)
     takenoutdate=models.DateField(default=date.today(), null=False)
- '''   
+   
     
 

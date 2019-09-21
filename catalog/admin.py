@@ -55,7 +55,7 @@ class MusicInstanceAdmin(admin.ModelAdmin):
      - filters that will be displayed in sidebar (list_filter)
      - grouping of fields into sections (fieldsets)
     """
-    list_display = ('music', 'status', 'borrower', 'due_back', 'id')
+    list_display = ('music', 'status', 'borrower', 'due_back', 'musicinstanceid')
     list_filter = ('status', 'due_back')
 
     fieldsets = (

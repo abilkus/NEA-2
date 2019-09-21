@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.views import View
 # Create your views here.
 from django.http import HttpResponse
-from .models import Music, Composer, MusicInstance, Genre
+from .models import Music, Composer, MusicInstance, Genre, Reserved
 from django.template import loader
-
-
+from django.utils.crypto import get_random_string
+from datetime import date
+from django.contrib.auth.models import User
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
@@ -199,7 +200,11 @@ def BorrowMusicDetail(request, pk):
 
 def BorrowAction(request):
     whichCopy= request.POST['reservebutton']
-    return HttpResponse( ("Reserving %s") % (whichCopy))
+    rezervationnumber = get_random_string(length=6, allowed_chars='1234567890')
+    rezervationnumber = int(rezervationnumber)
+    p = Reserved(borrowedid = rezervationnumber, musicinstanceid = whichCopy, userid = User, takenoutdate = date.today())
+    Reserved.save(p)
+    return HttpResponse( ("You have rezerved %s and your rezervation number is %s") % (whichCopy, rezervationnumber))
 
 
    
