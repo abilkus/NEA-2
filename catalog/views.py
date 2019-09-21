@@ -202,7 +202,10 @@ def BorrowAction(request):
     whichCopy= request.POST['reservebutton']
     rezervationnumber = get_random_string(length=6, allowed_chars='1234567890')
     rezervationnumber = int(rezervationnumber)
-    p = Reserved(borrowedid = rezervationnumber, musicinstanceid = whichCopy, userid = User, takenoutdate = date.today())
+    musicname = None
+    #if MusicInstance.id == whichCopy:
+        #musicname = MusicInstance.music
+    p = Reserved(borrowedid = rezervationnumber, id = musicname, takenoutdate = date.today())
     Reserved.save(p)
     return HttpResponse( ("You have rezerved %s and your rezervation number is %s") % (whichCopy, rezervationnumber))
 
