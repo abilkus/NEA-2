@@ -8,7 +8,8 @@ from django.utils.crypto import get_random_string
 from datetime import date
 from django.contrib.auth.models import User
 from django.db.models import Exists, OuterRef
-
+import datetime
+from datetime import timedelta
 
 def index(request):
     """View function for home page of site."""
@@ -199,7 +200,8 @@ class Borrow(generic.ListView):
 def BorrowMusicDetail(request, pk):
     template = loader.get_template("catalog/borrow_music.html")
     music=Music.objects.get(pk=pk)
-    context= {"music":music}
+    available=music.musicinstance_set.filter(status__exact = 'a')
+    context= {"music":music,"available":available}
     return HttpResponse(template.render(context,request))
 
 def BorrowAction(request):
@@ -208,6 +210,7 @@ def BorrowAction(request):
     reservationnumber = int(reservationnumber)
     a = MusicInstance.objects.get(id = whichCopy)
     a.status = 'r'
+    a.due_back = datetime.date.today() + timedelta(days=7)
     a.save()
     p = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=a , takenoutdate = date.today())
     p.save()

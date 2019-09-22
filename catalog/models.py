@@ -4,7 +4,7 @@ from django.utils.timezone import now
 # Create your models here.
 from django.utils import timezone
 from django.urls import reverse  # To generate URLS by reversing URL patterns
-
+from django.contrib.auth.models import User
 
 class Genre(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
@@ -148,5 +148,5 @@ class Composer(models.Model):
 class MusicInstanceReservation(models.Model):
     borrowedid = models.IntegerField()
     musicInstance = models.ForeignKey("musicInstance", on_delete=models.SET_NULL, null=True)
-    #userid= models.ForeignKey(User.username, on_delete = models.SET_NULL, null=True)
+    #userid= models.ForeignKey(User, on_delete = models.SET_NULL, null=True)
     takenoutdate=models.DateTimeField(default=timezone.now)

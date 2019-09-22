@@ -17,7 +17,7 @@
     <table>
         <thead></thead>
         <tbody>
-            {% for copy in music.musicinstance_set.all %}
+            {% for copy in available %}
             <tr>
                 <td>{{copy.id}}</td>
                 <td><button type="submit" name="reservebutton" value="{{copy.id}}">Reserve</button></td>
