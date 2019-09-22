@@ -145,11 +145,8 @@ class Composer(models.Model):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
 
-class Reserved(models.Model):
+class MusicInstanceReservation(models.Model):
     borrowedid = models.IntegerField()
-    music = models.ForeignKey('music', on_delete=models.SET_NULL, null=True)
+    musicInstance = models.ForeignKey("musicInstance", on_delete=models.SET_NULL, null=True)
     #userid= models.ForeignKey(User.username, on_delete = models.SET_NULL, null=True)
     takenoutdate=models.DateTimeField(default=timezone.now)
-   
-    
-

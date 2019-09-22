@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>All Available Music Version 1.2</h1>
+
+    {% if music_list %}
+<ul>
+
+    {% for music in music_list %}
+    <li>
+        <a href="{% url 'borrow-music' music.pk %}">{{music.title}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+    {% else %}
+<p>There is no music available.</p>
+    {% endif %}
+{% endblock %}

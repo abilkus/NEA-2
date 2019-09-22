@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Django launcher</LaunchProvider>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env2|$(MSBuildProjectFullPath)</InterpreterId>
     <WebBrowserUrl>http://localhost</WebBrowserUrl>
     <DjangoSettingsModule>locallibrary.settings</DjangoSettingsModule>
   </PropertyGroup>
@@ -29,7 +29,7 @@
     <Content Include="catalog\templates\catalog\composer_detail.html" />
     <Content Include="catalog\templates\catalog\composer_form.html" />
     <Content Include="catalog\templates\catalog\composer_list.html" />
-    <Content Include="catalog\templates\catalog\musicinstance_list_available_all.html" />
+    <Content Include="catalog\templates\catalog\music_list_available_all.html" />
     <Content Include="catalog\templates\catalog\musicinstance_list_borrowed_all.html" />
     <Content Include="catalog\templates\catalog\musicinstance_list_borrowed_user.html" />
     <Content Include="catalog\templates\catalog\musicinstance_list_reserved_all.html" />
@@ -291,34 +291,6 @@
     <Compile Include="catalog\admin.py" />
     <Compile Include="catalog\apps.py" />
     <Compile Include="catalog\forms.py" />
-    <Compile Include="catalog\migrations\0001_initial.py" />
-    <Compile Include="catalog\migrations\0002_auto_20160921_1401.py" />
-    <Compile Include="catalog\migrations\0003_auto_20160921_1420.py" />
-    <Compile Include="catalog\migrations\0004_auto_20160921_1422.py" />
-    <Compile Include="catalog\migrations\0005_auto_20160921_1433.py" />
-    <Compile Include="catalog\migrations\0006_auto_20160921_1439.py" />
-    <Compile Include="catalog\migrations\0007_auto_20160921_1444.py" />
-    <Compile Include="catalog\migrations\0008_auto_20160921_1511.py" />
-    <Compile Include="catalog\migrations\0009_remove_bookinstance_summary.py" />
-    <Compile Include="catalog\migrations\0010_auto_20160921_1527.py" />
-    <Compile Include="catalog\migrations\0011_auto_20160922_1029.py" />
-    <Compile Include="catalog\migrations\0012_bookinstance_date_acquired.py" />
-    <Compile Include="catalog\migrations\0013_auto_20160926_1901.py" />
-    <Compile Include="catalog\migrations\0014_remove_bookinstance_date_acquired.py" />
-    <Compile Include="catalog\migrations\0015_auto_20160927_1808.py" />
-    <Compile Include="catalog\migrations\0016_auto_20160927_1947.py" />
-    <Compile Include="catalog\migrations\0017_language.py" />
-    <Compile Include="catalog\migrations\0018_book_language.py" />
-    <Compile Include="catalog\migrations\0019_bookinstance_borrower.py" />
-    <Compile Include="catalog\migrations\0020_auto_20161012_1044.py" />
-    <Compile Include="catalog\migrations\0021_auto_20171229_1056.py" />
-    <Compile Include="catalog\migrations\0022_auto_20181028_1731.py" />
-    <Compile Include="catalog\migrations\0023_auto_20190718_1542.py" />
-    <Compile Include="catalog\migrations\0024_auto_20190722_1656.py" />
-    <Compile Include="catalog\migrations\0025_auto_20190723_1358.py" />
-    <Compile Include="catalog\migrations\0026_auto_20190802_1753.py" />
-    <Compile Include="catalog\migrations\0027_auto_20190807_1422.py" />
-    <Compile Include="catalog\migrations\0028_borrowed.py" />
     <Compile Include="catalog\models.py" />
     <Compile Include="catalog\urls.py" />
     <Compile Include="catalog\views.py" />

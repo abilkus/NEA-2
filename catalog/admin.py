@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Composer, Genre, Music, MusicInstance, Language
+from .models import Composer, Genre, Music, MusicInstance, Language, MusicInstanceReservation 
 
 
 admin.site.register(Genre)
@@ -63,3 +63,7 @@ class MusicInstanceAdmin(admin.ModelAdmin):
             'fields': ('status', 'due_back', 'borrower')
         }),
     )
+
+@admin.register(MusicInstanceReservation)
+class MusicInstanceReservationAdmin(admin.ModelAdmin):
+    model = MusicInstanceReservation

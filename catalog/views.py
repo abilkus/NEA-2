@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.views import View
 # Create your views here.
 from django.http import HttpResponse
-from .models import Music, Composer, MusicInstance, Genre, Reserved
+from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation
 from django.template import loader
 from django.utils.crypto import get_random_string
 from datetime import date
 from django.contrib.auth.models import User
+from django.db.models import Exists, OuterRef
+
+
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
@@ -185,12 +188,13 @@ class MusicDelete(PermissionRequiredMixin, DeleteView):
     permission_required = 'catalog.can_mark_returned'
 
 class Borrow(generic.ListView):
-    model = MusicInstance
-    template_name = 'catalog/musicinstance_list_available_all.html'
+    model = Music
+    template_name = 'catalog/music_list_available_all.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return MusicInstance.objects.filter(status__exact='a')
+        is_available = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='a')
+        return Music.objects.annotate(is_available=Exists(is_available)).filter(is_available=True)
 
 def BorrowMusicDetail(request, pk):
     template = loader.get_template("catalog/borrow_music.html")
@@ -200,14 +204,14 @@ def BorrowMusicDetail(request, pk):
 
 def BorrowAction(request):
     whichCopy= request.POST['reservebutton']
-    rezervationnumber = get_random_string(length=6, allowed_chars='1234567890')
-    rezervationnumber = int(rezervationnumber)
-    musicname = None
-    #if MusicInstance.id == whichCopy:
-        #musicname = MusicInstance.music
-    p = Reserved(borrowedid = rezervationnumber, id = musicname, takenoutdate = date.today())
-    Reserved.save(p)
-    return HttpResponse( ("You have rezerved %s and your rezervation number is %s") % (whichCopy, rezervationnumber))
+    reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
+    reservationnumber = int(reservationnumber)
+    a = MusicInstance.objects.get(id = whichCopy)
+    a.status = 'r'
+    a.save()
+    p = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=a , takenoutdate = date.today())
+    p.save()
+    return HttpResponse( ("You have reserved %s and your reservation number is %s") % (whichCopy, reservationnumber))
 
 
    
