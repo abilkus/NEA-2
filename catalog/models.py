@@ -89,20 +89,7 @@ class MusicInstance(models.Model):
             return True
         
         return False
-    def is_reserved(self):
-        if self.due_back > date.today() and self.status == 'r':
-            reservedid=uuid.uuid4()
-            reservedid= str(reservedid)
-            send_mail(
-                'Music Reserved',
-                'Your reservation id is: ' + reservedid,
-                'adam@Bilkus.com',
-                ['adam@Bilkus.com'],
-                fail_silently = False,
-            )
-            print(reservedid)
-            return True
-        return False
+    
     LOAN_STATUS = (
         ('d', 'Maintenance'),
         ('o', 'On loan'),
@@ -148,5 +135,5 @@ class Composer(models.Model):
 class MusicInstanceReservation(models.Model):
     borrowedid = models.IntegerField()
     musicInstance = models.ForeignKey("musicInstance", on_delete=models.SET_NULL, null=True)
-    #userid= models.ForeignKey(User, on_delete = models.SET_NULL, null=True)
+    userid= models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     takenoutdate=models.DateTimeField(default=timezone.now)

@@ -24,7 +24,7 @@
     <Content Include="catalog\static\css\styles.css" />
     <Content Include="catalog\static\images\favicon.ico" />
     <Content Include="catalog\templates\base_generic.html" />
-    <Content Include="catalog\templates\catalog\borrow_music.html" />
+    <Content Include="catalog\templates\catalog\reserve_music.html" />
     <Content Include="catalog\templates\catalog\composer_confirm_delete.html" />
     <Content Include="catalog\templates\catalog\composer_detail.html" />
     <Content Include="catalog\templates\catalog\composer_form.html" />
