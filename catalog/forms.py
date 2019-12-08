@@ -23,14 +23,3 @@ class RenewMusicForm(forms.Form):
 
         # Remember to always return the cleaned data.
         return data
-'''
-class BorrowMusicForm(forms.Form):
-     renewal_date=forms.DateField(help_text="Enter a date between now and 4 weeks (default 3).")
-     def clean_renew_date(self):
-        data = self.clean_data['renewal_date']
-        if data < datetime.date.today():
-            raise ValidationError(_('Invalid date - renewal in past'))
-        if data > datetime.date.today() + datetime.timedelta(weeks= 4):
-            raise ValidationError(_'Invalid date - renewal more than 4 weeks ahead'))
-        return data'''
-

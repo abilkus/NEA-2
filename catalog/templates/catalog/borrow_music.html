@@ -12,7 +12,7 @@
 
 <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
-    <form action="{%url 'reserve_action' %}" method="post">
+    <form action="{%url 'borrow_action' %}" method="post">
     {% csrf_token %}
     <table>
         <thead></thead>
@@ -20,7 +20,7 @@
             {% for copy in available %}
             <tr>
                 <td>{{copy.id}}</td>
-                <td><button type="submit" name="reservebutton" value="{{copy.id}}">Reserve</button></td>
+                <td><button type="submit" name="borrowbutton" value="{{copy.id}}">Borrow</button></td>
             </tr>
             {% endfor %}
         </tbody>

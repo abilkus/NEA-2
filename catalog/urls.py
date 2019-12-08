@@ -14,9 +14,15 @@ urlpatterns = [
 
 urlpatterns += [
     path('mymusicss/', views.LoanedMusicByUserListView.as_view(), name='my-borrowed'),
-    path(r'borrowed/', views.LoanedMusicAllListView.as_view(), name='all-borrowed'),  # Added for challenge
-    path('myreserveds/', views.ReservedMusicByUserListView.as_view(), name='my-reserved'),
-    path(r'reserved/', views.ReservedMusicAllListView.as_view(), name='all-reserved'),
+    path('reservedMusicDetailUser/<int:pk>', views.ReservedMusicDetail, name='reserved-music'),
+    path('borrowed/', views.Return.as_view(), name='return'),  # Added for challenge
+    path('returnAction',views.ReturnAction, name='return_action'),
+    path('borrowedMusicDetail/<int:pk>', views.ReturnMusicDetail, name='return-music'),
+    path('myreserveds/', views.ReservedUser.as_view(), name='my-reserved'),
+    path('reserved/', views.Borrow.as_view(), name='borrow'),
+    path('reservedMusicDetailAll/<int:pk>', views.BorrowMusicDetail,name='borrow-music'),
+    path('borrowAction',views.BorrowAction,name='borrow_action')
+
 ]
 
 
@@ -41,7 +47,8 @@ urlpatterns += [
 ]
 urlpatterns += [ 
 
-    path('borrow/',views.Borrow.as_view(),name='borrow'),
-    path('borrowMusicDetail/<int:pk>', views.BorrowMusicDetail,name='borrow-music'),
-    path('borrowAction',views.BorrowAction,name='borrow_action')
+    path('reserve/',views.Reserve.as_view(),name='reserve'),
+    path('reserveMusicDetail/<int:pk>', views.ReserveMusicDetail,name='reserve-music'),
+    path('reserveAction',views.ReserveAction,name='reserve_action')
     ]
+

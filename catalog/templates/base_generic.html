@@ -1,7 +1,10 @@
-﻿<!DOCTYPE html>
+﻿{% load static %}
+<!DOCTYPE html>
 <html lang="en">
+<a href="http://smartdailysaver.com/catalog/">
+<h1  role='textbox' align="center"><img src="/static/images/BEAT-logo.png" width="200" height="200" alt="Italian Trulli"></img></h1>
+</a>
 <head>
-  
   {% block title %}<title>Barnet Education Arts Trust</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +15,18 @@
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+body {
+    background-color: white;
+}
+html { 
+  background-image: url("/static/images/background.jpg");
+  background-size: cover;
+}
+</style>
+<link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
 </head>
 <body>
 
@@ -31,7 +46,7 @@
       <li>User: {{ user.get_username }}</li>
       <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
       <li><a href="{% url 'my-reserved' %}">My Reserved</a></li>
-      <li><a href="{% url 'borrow' %}">Borrow</a></li>
+      <li><a href="{% url 'reserve' %}">Reserve</a></li>
       <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
 
       {% else %}
@@ -44,8 +59,8 @@
    <ul class="sidebar-nav">
    <li>Staff</li>
    {% if perms.catalog.can_mark_returned %}
-   <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
-   <li><a href="{% url 'all-reserved' %}">All Reserved</a></li>
+   <li><a href="{% url 'return' %}">All borrowed</a></li>
+   <li><a href="{% url 'borrow' %}">All Reserved</a></li>
    {% endif %}
    </ul>
     {% endif %}

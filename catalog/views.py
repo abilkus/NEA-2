@@ -11,7 +11,7 @@ from django.db.models import Exists, OuterRef
 import datetime
 from datetime import timedelta
 from django.core.mail import send_mail
-
+from django.contrib.auth.models import User
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
@@ -72,13 +72,23 @@ class LoanedMusicByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
 
-class ReservedMusicByUserListView(LoginRequiredMixin, generic.ListView):
-    model = MusicInstance
-    template_name = 'catalog/musicinstance_list_reserved_user.html'
+class ReservedUser(LoginRequiredMixin, generic.ListView):
+    model = Music
+    template_name = 'catalog/music_list_reserved_user.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return MusicInstance.objects.filter(borrower=self.request.user).filter(status__exact='r').order_by('due_back')
+        is_borrowed = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='r').filter(borrower=self.request.user)
+        return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
+
+
+def ReservedMusicDetail(LoginRequiredMixin, request, pk):
+    template = loader.get_template("catalog/reserved_music.html")
+    music=Music.objects.get(pk=pk)
+    reserved=music.musicinstance_set.filter(status__exact = 'r').filter(borrower=self.request.user)
+    dueback = reserved.due_back
+    context= {"music":music,"available":reserved, "dueback":dueback}
+    return HttpResponse(template.render(context,request))
 
 # Added as part of challenge!
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -94,7 +104,7 @@ class LoanedMusicAllListView(PermissionRequiredMixin, generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(status__exact='o').order_by('due_back')
 
-class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
+'''class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
     model = Music
     permission_required = 'catalog.can_mark_returned'
     template_name = 'catalog/musicinstance_list_reserved_all.html'
@@ -103,7 +113,7 @@ class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(status__exact='r').order_by('due_back')
     
-
+'''
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -189,7 +199,7 @@ class MusicDelete(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('musics')
     permission_required = 'catalog.can_mark_returned'
 
-class Borrow(generic.ListView):
+class Reserve(generic.ListView):
     model = Music
     template_name = 'catalog/music_list_available_all.html'
     paginate_by = 10
@@ -197,15 +207,43 @@ class Borrow(generic.ListView):
     def get_queryset(self):
         is_available = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='a')
         return Music.objects.annotate(is_available=Exists(is_available)).filter(is_available=True)
+class Borrow(generic.ListView):
+    model = Music
+    template_name = 'catalog/music_list_reserved_all.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        is_reserved = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='r')
+        return Music.objects.annotate(is_reserved=Exists(is_reserved)).filter(is_reserved=True)
+class Return(generic.ListView):
+    model = Music
+    template_name = 'catalog/music_list_borrowed_all.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        is_borrowed = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='o')
+        return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
 
 def BorrowMusicDetail(request, pk):
+    template = loader.get_template("catalog/borrow_music.html")
+    music=Music.objects.get(pk=pk)
+    reserved=music.musicinstance_set.filter(status__exact = 'r')
+    context= {"music":music,"available":reserved}
+    return HttpResponse(template.render(context,request))
+def ReturnMusicDetail(request, pk):
+    template = loader.get_template("catalog/return_music.html")
+    music=Music.objects.get(pk=pk)
+    borrowed=music.musicinstance_set.filter(status__exact = 'o')
+    context= {"music":music,"available":borrowed}
+    return HttpResponse(template.render(context,request))
+def ReserveMusicDetail(request, pk):
     template = loader.get_template("catalog/reserve_music.html")
     music=Music.objects.get(pk=pk)
     available=music.musicinstance_set.filter(status__exact = 'a')
     context= {"music":music,"available":available}
     return HttpResponse(template.render(context,request))
 from django.contrib.auth import get_user_model
-def BorrowAction(request):
+def ReserveAction(request):
     whichCopy= request.POST['reservebutton']
     reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
     reservationnumber = int(reservationnumber)
@@ -213,25 +251,68 @@ def BorrowAction(request):
         username = request.user
     a = MusicInstance.objects.get(id = whichCopy)
     a.status = 'r'
-    a.due_back = datetime.date.today() + timedelta(days=7)
+    a.due_back = datetime.date.today() + timedelta(days=122)
     a.borrower = username
     a.save()
     b=request.user
     c= b.email
     print(c)
-    p = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=a , takenoutdate = date.today(), userid=username)
+    p = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=a , takenoutdate = date.today(), userid=username, takenout= False)
     p.save()
     send_mail(
         'Music Reserved',
-        'Your reservation id is: ' + str(reservationnumber),
+        'Your Borrowed id is: ' + str(reservationnumber),
         'adam@Bilkus.com',
         [c])
     return HttpResponse( ("You have reserved %s and your reservation number is %s") % (whichCopy, reservationnumber))
 
-class ChangeToBorrowed(generic.ListView):
-    model = Music
-    template_name = 'catalog/musicinstance_list_reserved_all.html'
-    paginate_by=10
-    def get_queryset(self):
-        is_reserved = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='r')
-        return Music.objects.annotate(is_available=Exists(is_reserved)).filter(is_reserved=True)
+def BorrowAction(request):
+    whichCopy= request.POST['borrowbutton']
+    a = MusicInstance.objects.get(id = whichCopy)
+    a.status = 'o'
+    a.due_back = date.today() + timedelta(days=42)
+    a.save()
+    p = MusicInstanceReservation.objects.get(musicInstance = a, takenout = False)
+    p.due_back = a.due_back
+    p.takenout = True
+    p.takenoutdate=date.today()
+    p.returned=False
+    p.save()
+    userid = p.userid_id
+    user = User.objects.get(id=str(userid))
+    username=user.username
+    reservationnumber = p.borrowedid
+    email = user.email
+    send_mail(
+        'Music Borrowed',
+        'Your Borrowed id is: ' + str(reservationnumber),
+        'adam@Bilkus.com',
+        [email])
+
+    return HttpResponse( ("%s has borrowed %s") % (username, whichCopy))
+
+def bview(request):
+    return HttpResponse("Hello World")
+
+def ReturnAction(request):
+    whichCopy= request.POST['returnbutton']
+    a = MusicInstance.objects.get(id = whichCopy)
+    a.status = 'a'
+    a.due_back = None
+    a.borrower = None
+    a.save()
+    p = MusicInstanceReservation.objects.get(musicInstance = a, takenout=True, returned= False)
+    c=p.borrowedid
+    p.returneddate= date.today()
+    p.returned = True
+    p.save()
+    d = p.userid_id
+    e = User.objects.get(id = str(d))
+    f = e.email
+    send_mail(
+        'Music Returned',
+        'Your reservation: ' + str(c) +' has been returned',
+        'adam@Bilkus.com',
+        [f])
+    return HttpResponse( ("You have returned %s ") % (whichCopy))
+

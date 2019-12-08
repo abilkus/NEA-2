@@ -137,3 +137,7 @@ class MusicInstanceReservation(models.Model):
     musicInstance = models.ForeignKey("musicInstance", on_delete=models.SET_NULL, null=True)
     userid= models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     takenoutdate=models.DateTimeField(default=timezone.now)
+    returneddate=models.DateTimeField(default=timezone.now)
+    returned = models.CharField(max_length=5, blank=True)
+    takenout = models.CharField(max_length=5, blank = True)
+    duedate = models.DateTimeField(default=timezone.now)
