@@ -63,14 +63,23 @@ class ComposerDetailView(generic.DetailView):
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class LoanedMusicByUserListView(LoginRequiredMixin, generic.ListView):
-    """Generic class-based view listing books on loan to current user."""
-    model = MusicInstance
-    template_name = 'catalog/musicinstance_list_borrowed_user.html'
+class BorrowedUser(LoginRequiredMixin, generic.ListView):
+    model = Music
+    template_name = 'catalog/music_list_borrowed_user.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return MusicInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+        is_borrowed = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='o').filter(borrower=self.request.user)
+        return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
+
+def BorrowedMusicDetail(request, pk):
+    if request.user.is_authenticated:
+        username = request.user
+    template = loader.get_template("catalog/borrowed_music.html")
+    music=Music.objects.get(pk=pk)
+    reserved=music.musicinstance_set.filter(status__exact = 'o').filter(borrower=username)
+    context= {"music":music,"available":reserved}
+    return HttpResponse(template.render(context,request))
 
 class ReservedUser(LoginRequiredMixin, generic.ListView):
     model = Music
@@ -82,12 +91,13 @@ class ReservedUser(LoginRequiredMixin, generic.ListView):
         return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
 
 
-def ReservedMusicDetail(LoginRequiredMixin, request, pk):
+def ReservedMusicDetail(request, pk):
+    if request.user.is_authenticated:
+        username = request.user
     template = loader.get_template("catalog/reserved_music.html")
     music=Music.objects.get(pk=pk)
-    reserved=music.musicinstance_set.filter(status__exact = 'r').filter(borrower=self.request.user)
-    dueback = reserved.due_back
-    context= {"music":music,"available":reserved, "dueback":dueback}
+    reserved=music.musicinstance_set.filter(status__exact = 'r').filter(borrower=username)
+    context= {"music":music,"available":reserved}
     return HttpResponse(template.render(context,request))
 
 # Added as part of challenge!
