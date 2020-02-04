@@ -141,3 +141,10 @@ class MusicInstanceReservation(models.Model):
     returned = models.CharField(max_length=5, blank=True)
     takenout = models.CharField(max_length=5, blank = True)
     duedate = models.DateTimeField(default=timezone.now)
+
+from django.db import models
+from django_google_maps import fields as map_fields
+
+class Rental(models.Model):
+    address = map_fields.AddressField(max_length=200)
+    geolocation = map_fields.GeoLocationField(max_length=100)

@@ -14,7 +14,7 @@ urlpatterns = [
 
 urlpatterns += [
     path('mymusicss/', views.BorrowedUser.as_view(), name='my-borrowed'),
-    path('reservedMusicDetailUser/<int:pk>', views.ReservedMusicDetail, name='reserved-music'),
+    path('reservedMusicDetailUser/<int:pk>', views.BorrowMusicDetail, name='reserved-music'),
     path('borrowedMusicDetailUser/<int:pk>', views.BorrowedMusicDetail, name = 'borrowed-music'),
     path('borrowed/', views.Return.as_view(), name='return'),  # Added for challenge
     path('returnAction',views.ReturnAction, name='return_action'),
@@ -22,7 +22,8 @@ urlpatterns += [
     path('myreserveds/', views.ReservedUser.as_view(), name='my-reserved'),
     path('reserved/', views.Borrow.as_view(), name='borrow'),
     path('reservedMusicDetailAll/<int:pk>', views.BorrowMusicDetail,name='borrow-music'),
-    path('borrowAction',views.BorrowAction,name='borrow_action')
+    path('borrowAction',views.BorrowAction,name='borrow_action'),
+    path('map', views.map, name='mapping')
 
 ]
 

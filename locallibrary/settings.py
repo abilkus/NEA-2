@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 # Set hosts to allow any app on Heroku and the local testing URL
-ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1', 'localhost','134.209.189.59','68.183.254.115', 'gshs.tech','smartdailysaver.com']
+ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1', 'localhost','134.209.189.59','68.183.254.115', 'gshs.tech','smartdailysaver.com','10.29.5.213', 'f56f6742.ngrok.io']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'pwa',
     # Add our new application 
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
+    'easy_maps',
 ]
 
 MIDDLEWARE = [
@@ -159,3 +160,9 @@ DEFAULT_FROM_EMAIL   = EMAIL_HOST_USER
 EMAIL_FROM           = EMAIL_HOST_USER
 EMAIL_SUBJECT_PREFIX = '[Project] '
 EMAIL_BACKEND        = 'django.core.mail.backends.smtp.EmailBackend'
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyATS4E8zBrFLynUOAIuxm2DcfwnUPbIdLc'
+
+EASY_MAPS_GOOGLE_KEY = 'AIzaSyATS4E8zBrFLynUOAIuxm2DcfwnUPbIdLc'
+EASY_MAPS_CENTER = (-41.3, 32)
+

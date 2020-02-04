@@ -238,7 +238,10 @@ def BorrowMusicDetail(request, pk):
     template = loader.get_template("catalog/borrow_music.html")
     music=Music.objects.get(pk=pk)
     reserved=music.musicinstance_set.filter(status__exact = 'r')
-    context= {"music":music,"available":reserved}
+    if request.user.is_authenticated:
+        username = request.user
+    reserved = music.musicinstance_set.filter(status__exact = 'r' , borrower_id = username.id)
+    context= {"music":music,"reserved":reserved, "user":username}
     return HttpResponse(template.render(context,request))
 def ReturnMusicDetail(request, pk):
     template = loader.get_template("catalog/return_music.html")
@@ -325,4 +328,8 @@ def ReturnAction(request):
         'adam@Bilkus.com',
         [f])
     return HttpResponse( ("You have returned %s ") % (whichCopy))
+
+def map(request):
+    template = loader.get_template("catalog/maps.html")
+    return HttpResponse(template.render())
 

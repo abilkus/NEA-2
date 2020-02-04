@@ -56714,3 +56714,1136 @@ Traceback (most recent call last):
 AttributeError: module 'catalog.views' has no attribute 'Borrow'
 Performing system checks...
 
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 27, 2020 - 19:34:21
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[27/Jan/2020 19:34:43] "GET /catalog/ HTTP/1.1" 200 2155
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 27, 2020 - 19:34:38
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[27/Jan/2020 19:34:58] "GET /catalog/ HTTP/1.1" 200 2155
+[27/Jan/2020 19:36:14] "GET /catalog/ HTTP/1.1" 200 2155
+[27/Jan/2020 19:36:16] "GET /catalog/ HTTP/1.1" 200 2155
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[27/Jan/2020 19:36:18] "GET /catalog/musics/ HTTP/1.1" 200 1753
+[27/Jan/2020 19:38:30] "GET /catalog/ HTTP/1.1" 200 2145
+[27/Jan/2020 19:38:33] "GET /catalog/ HTTP/1.1" 200 2145
+[27/Jan/2020 19:52:46] "GET /catalog HTTP/1.1" 301 0
+[27/Jan/2020 19:52:46] "GET /catalog/ HTTP/1.1" 200 2145
+[27/Jan/2020 19:52:46] "GET /static/images/BEAT-logo.png HTTP/1.1" 200 12064
+[27/Jan/2020 19:52:46] "GET /static/css/styles.css HTTP/1.1" 200 114
+[27/Jan/2020 19:52:47] "GET /static/images/background.jpg HTTP/1.1" 200 41531
+[27/Jan/2020 19:53:08] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[27/Jan/2020 19:59:45] "GET /catalog/ HTTP/1.1" 200 2145
+[27/Jan/2020 20:00:10] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[27/Jan/2020 20:00:15] "POST /accounts/login/ HTTP/1.1" 302 0
+[27/Jan/2020 20:00:15] "GET /catalog/ HTTP/1.1" 200 2548
+[27/Jan/2020 20:01:00] "GET /catalog/ HTTP/1.1" 200 2548
+[27/Jan/2020 20:01:09] "GET /accounts/logout/?next=/catalog/ HTTP/1.1" 302 0
+[27/Jan/2020 20:01:09] "GET /catalog/ HTTP/1.1" 200 2145
+[27/Jan/2020 20:01:14] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[27/Jan/2020 20:01:18] "GET /catalog/ HTTP/1.1" 200 2145
+[27/Jan/2020 20:01:34] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[27/Jan/2020 20:01:41] "POST /accounts/login/ HTTP/1.1" 200 2377
+[27/Jan/2020 20:01:55] "POST /accounts/login/ HTTP/1.1" 302 0
+[27/Jan/2020 20:01:55] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 09:41:48] "GET / HTTP/1.1" 301 0
+[28/Jan/2020 09:41:48] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 09:41:48] "GET /static/images/BEAT-logo.png HTTP/1.1" 200 12064
+[28/Jan/2020 09:41:49] "GET /static/css/styles.css HTTP/1.1" 200 114
+[28/Jan/2020 09:41:49] "GET /static/images/background.jpg HTTP/1.1" 200 41531
+Not Found: /favicon.ico
+[28/Jan/2020 09:41:52] "GET /favicon.ico HTTP/1.1" 404 2418
+[28/Jan/2020 09:41:57] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[28/Jan/2020 09:41:59] "POST /accounts/login/ HTTP/1.1" 302 0
+[28/Jan/2020 09:41:59] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 09:42:03] "GET /admin HTTP/1.1" 301 0
+[28/Jan/2020 09:42:03] "GET /admin/ HTTP/1.1" 200 9561
+[28/Jan/2020 09:42:03] "GET /static/admin/css/base.css HTTP/1.1" 200 16225
+[28/Jan/2020 09:42:03] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+[28/Jan/2020 09:42:03] "GET /static/admin/css/responsive.css HTTP/1.1" 200 17976
+[28/Jan/2020 09:42:03] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[28/Jan/2020 09:42:03] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+[28/Jan/2020 09:42:03] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+[28/Jan/2020 09:42:03] "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+[28/Jan/2020 09:42:03] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 81348
+[28/Jan/2020 09:42:03] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 82564
+[28/Jan/2020 09:42:03] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 80304
+[28/Jan/2020 09:42:06] "GET /admin/auth/user/ HTTP/1.1" 200 7040
+[28/Jan/2020 09:42:06] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 09:42:06] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+[28/Jan/2020 09:42:06] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+[28/Jan/2020 09:42:06] "GET /static/admin/js/core.js HTTP/1.1" 200 7135
+[28/Jan/2020 09:42:06] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+[28/Jan/2020 09:42:06] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+[28/Jan/2020 09:42:06] "GET /static/admin/js/actions.js HTTP/1.1" 200 6538
+[28/Jan/2020 09:42:06] "GET /static/admin/js/urlify.js HTTP/1.1" 200 8972
+[28/Jan/2020 09:42:06] "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+[28/Jan/2020 09:42:06] "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+[28/Jan/2020 09:42:06] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+[28/Jan/2020 09:42:06] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+[28/Jan/2020 09:42:06] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271751
+[28/Jan/2020 09:42:06] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+[28/Jan/2020 09:42:06] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+[28/Jan/2020 09:42:09] "GET /admin/auth/user/2/change/ HTTP/1.1" 200 15877
+[28/Jan/2020 09:42:09] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 09:42:09] "GET /static/admin/css/forms.css HTTP/1.1" 200 8505
+[28/Jan/2020 09:42:09] "GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+[28/Jan/2020 09:42:09] "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 12712
+[28/Jan/2020 09:42:09] "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 5755
+[28/Jan/2020 09:42:09] "GET /static/admin/js/calendar.js HTTP/1.1" 200 7777
+[28/Jan/2020 09:42:09] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 20281
+[28/Jan/2020 09:42:09] "GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+[28/Jan/2020 09:42:09] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+[28/Jan/2020 09:42:09] "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+[28/Jan/2020 09:42:09] "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 200 655
+[28/Jan/2020 09:42:09] "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+[28/Jan/2020 09:42:10] "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+[28/Jan/2020 09:42:10] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+[28/Jan/2020 09:42:13] "GET /admin/auth/user/ HTTP/1.1" 200 7040
+[28/Jan/2020 09:42:14] "GET /admin/ HTTP/1.1" 200 9561
+[28/Jan/2020 09:42:17] "GET /accounts/logout/?next=/catalog/ HTTP/1.1" 302 0
+[28/Jan/2020 09:42:17] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 09:42:19] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[28/Jan/2020 09:42:25] "POST /accounts/login/ HTTP/1.1" 200 2359
+[28/Jan/2020 09:42:32] "POST /accounts/login/ HTTP/1.1" 302 0
+[28/Jan/2020 09:42:32] "GET /catalog/ HTTP/1.1" 200 2356
+[28/Jan/2020 09:42:34] "GET /accounts/logout/?next=/catalog/ HTTP/1.1" 302 0
+[28/Jan/2020 09:42:34] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 09:43:16] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 09:44:32] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[28/Jan/2020 09:44:35] "POST /accounts/login/ HTTP/1.1" 302 0
+[28/Jan/2020 09:44:35] "GET /catalog/ HTTP/1.1" 200 2356
+[28/Jan/2020 11:36:47] "GET /catalog/ HTTP/1.1" 200 2356
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[28/Jan/2020 11:37:47] "GET /catalog/mymusicss/ HTTP/1.1" 200 1869
+[28/Jan/2020 11:37:51] "GET /catalog/musics/ HTTP/1.1" 200 1954
+[28/Jan/2020 11:37:53] "GET /catalog/music/1 HTTP/1.1" 200 2523
+[28/Jan/2020 11:37:59] "GET /catalog/reserve/ HTTP/1.1" 200 1944
+[28/Jan/2020 11:38:29] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2680
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.takenoutdate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 11:38:34] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 11:38:41] "GET /catalog/ HTTP/1.1" 200 2356
+[28/Jan/2020 11:38:44] "GET /catalog/mymusicss/ HTTP/1.1" 200 1869
+[28/Jan/2020 11:38:45] "GET /catalog/myreserveds/ HTTP/1.1" 200 1953
+[28/Jan/2020 11:38:48] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2528
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 09:41:47
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+adam.bilkus@gmail.com
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/subprocess.py", line 289, in call
+    return p.wait(timeout=timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1477, in wait
+    (pid, sts) = self._try_wait(0)
+  File "/usr/lib/python3.6/subprocess.py", line 1424, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/__init__.py", line 375, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 316, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 60, in execute
+    super().execute(*args, **options)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 353, in execute
+    output = self.handle(*args, **options)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 95, in handle
+    self.run(**options)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 102, in run
+    autoreload.main(self.inner_run, None, options)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 323, in main
+    python_reloader(wrapped_main_func, args, kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 307, in python_reloader
+    exit_code = restart_with_reloader()
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 293, in restart_with_reloader
+    exit_code = subprocess.call(args, env=new_environ)
+  File "/usr/lib/python3.6/subprocess.py", line 291, in call
+    p.kill()
+  File "/usr/lib/python3.6/subprocess.py", line 1610, in kill
+    self.send_signal(signal.SIGKILL)
+  File "/usr/lib/python3.6/subprocess.py", line 1600, in send_signal
+    os.kill(self.pid, sig)
+ProcessLookupError: [Errno 3] No such process
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7f3c504f8268>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 379, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 366, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/registry.py", line 71, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 396, in check
+    for pattern in self.url_patterns:
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 533, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 526, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/locallibrary/urls.py", line 37, in <module>
+    path('catalog/', include('catalog.urls')),
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/urls.py", line 23, in <module>
+    path('reserved/', views.BorrowMusicDetail.as_view(), name='borrow'),
+AttributeError: 'function' object has no attribute 'as_view'
+Performing system checks...
+
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7fb0104b8268>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 379, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 366, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/registry.py", line 71, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 396, in check
+    for pattern in self.url_patterns:
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 533, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 526, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/locallibrary/urls.py", line 37, in <module>
+    path('catalog/', include('catalog.urls')),
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/urls.py", line 23, in <module>
+    path('reserved/', views.BorrowMusicDetail.as_view(), name='borrow'),
+AttributeError: 'function' object has no attribute 'as_view'
+Performing system checks...
+
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7f0acc9c8268>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 379, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 366, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/registry.py", line 71, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 396, in check
+    for pattern in self.url_patterns:
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 533, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 526, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/locallibrary/urls.py", line 37, in <module>
+    path('catalog/', include('catalog.urls')),
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/urls.py", line 23, in <module>
+    path('reserved/', views.BorrowMusicDetail.as_view(), name='borrow'),
+AttributeError: 'function' object has no attribute 'as_view'
+Performing system checks...
+
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7f0c1a0e8268>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 379, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 366, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/registry.py", line 71, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 396, in check
+    for pattern in self.url_patterns:
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 533, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 526, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/locallibrary/urls.py", line 37, in <module>
+    path('catalog/', include('catalog.urls')),
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/urls.py", line 23, in <module>
+    path('reserved/', views.BorrowedMusicDetail.as_view(), name='borrow'),
+AttributeError: 'function' object has no attribute 'as_view'
+Performing system checks...
+
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7f0d540b8268>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 379, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/base.py", line 366, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/registry.py", line 71, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 396, in check
+    for pattern in self.url_patterns:
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 533, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 37, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 526, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/locallibrary/urls.py", line 37, in <module>
+    path('catalog/', include('catalog.urls')),
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/urls.py", line 23, in <module>
+    path('reserved/', views.BorrowedMusicDetail.as_view(), name='borrow'),
+AttributeError: 'function' object has no attribute 'as_view'
+Performing system checks...
+
+[28/Jan/2020 13:21:33] "GET /catalog/ HTTP/1.1" 200 2548
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[28/Jan/2020 13:21:37] "GET /catalog/myreserveds/ HTTP/1.1" 200 2063
+Not Found: /favicon.ico
+[28/Jan/2020 13:21:37] "GET /favicon.ico HTTP/1.1" 404 2418
+[28/Jan/2020 13:21:39] "GET /catalog/mymusicss/ HTTP/1.1" 200 2143
+[28/Jan/2020 13:21:43] "GET /catalog/borrowedMusicDetailUser/1 HTTP/1.1" 200 2721
+[28/Jan/2020 13:21:45] "GET /catalog/myreserveds/ HTTP/1.1" 200 2063
+[28/Jan/2020 13:21:47] "GET /catalog/reserve/ HTTP/1.1" 200 2060
+[28/Jan/2020 13:21:51] "GET /catalog/borrowed/ HTTP/1.1" 200 2137
+[28/Jan/2020 13:21:53] "GET /catalog/borrowedMusicDetail/1 HTTP/1.1" 200 2870
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.returneddate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 13:21:56] "POST /catalog/returnAction HTTP/1.1" 200 55
+[28/Jan/2020 13:21:59] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:22:55] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:23:42] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 13:23:43] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2872
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.takenoutdate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 13:23:46] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 13:23:52] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:23:54] "GET /catalog/mymusicss/ HTTP/1.1" 200 2061
+[28/Jan/2020 13:23:56] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:24:07] "GET /catalog/reserved/ HTTP/1.1" 200 2140
+[28/Jan/2020 13:24:08] "GET /catalog/borrowed/ HTTP/1.1" 200 2059
+[28/Jan/2020 13:24:10] "GET /catalog/mymusicss/ HTTP/1.1" 200 2061
+[28/Jan/2020 13:24:11] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:24:12] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2720
+[28/Jan/2020 13:24:17] "GET /catalog/reserved/ HTTP/1.1" 200 2140
+[28/Jan/2020 13:24:18] "GET /catalog/borrowed/ HTTP/1.1" 200 2059
+Not Found: /adnub
+[28/Jan/2020 13:24:26] "GET /adnub HTTP/1.1" 404 2400
+[28/Jan/2020 13:24:31] "GET /admin HTTP/1.1" 301 0
+[28/Jan/2020 13:24:31] "GET /admin/ HTTP/1.1" 200 9561
+[28/Jan/2020 13:24:31] "GET /static/admin/css/base.css HTTP/1.1" 200 16225
+[28/Jan/2020 13:24:31] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+[28/Jan/2020 13:24:31] "GET /static/admin/css/responsive.css HTTP/1.1" 200 17976
+[28/Jan/2020 13:24:31] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[28/Jan/2020 13:24:31] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+[28/Jan/2020 13:24:31] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+[28/Jan/2020 13:24:31] "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+[28/Jan/2020 13:24:31] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 81348
+[28/Jan/2020 13:24:31] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 82564
+[28/Jan/2020 13:24:31] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 80304
+[28/Jan/2020 13:24:35] "GET /admin/catalog/musicinstancereservation/ HTTP/1.1" 200 8865
+[28/Jan/2020 13:24:35] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+[28/Jan/2020 13:24:35] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+[28/Jan/2020 13:24:35] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+[28/Jan/2020 13:24:35] "GET /static/admin/js/core.js HTTP/1.1" 200 7135
+[28/Jan/2020 13:24:35] "GET /static/admin/js/actions.js HTTP/1.1" 200 6538
+[28/Jan/2020 13:24:35] "GET /static/admin/js/urlify.js HTTP/1.1" 200 8972
+[28/Jan/2020 13:24:35] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:24:35] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271751
+[28/Jan/2020 13:24:35] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+[28/Jan/2020 13:24:35] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+[28/Jan/2020 13:24:35] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+[28/Jan/2020 13:24:39] "GET /admin/ HTTP/1.1" 200 9561
+[28/Jan/2020 13:24:43] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7327
+[28/Jan/2020 13:24:43] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:24:43] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+[28/Jan/2020 13:24:46] "GET /admin/catalog/musicinstance/e6f9f4e6-4161-4339-83bf-b198455f4241/change/ HTTP/1.1" 200 6687
+[28/Jan/2020 13:24:46] "GET /static/admin/css/forms.css HTTP/1.1" 200 8505
+[28/Jan/2020 13:24:46] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+[28/Jan/2020 13:24:46] "GET /static/admin/js/calendar.js HTTP/1.1" 200 7777
+[28/Jan/2020 13:24:46] "GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+[28/Jan/2020 13:24:46] "GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+[28/Jan/2020 13:24:46] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 20281
+[28/Jan/2020 13:24:46] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:24:46] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+[28/Jan/2020 13:24:55] "POST /admin/catalog/musicinstance/e6f9f4e6-4161-4339-83bf-b198455f4241/change/ HTTP/1.1" 302 0
+[28/Jan/2020 13:24:55] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7594
+[28/Jan/2020 13:24:55] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:24:55] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+[28/Jan/2020 13:24:57] "GET /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/change/ HTTP/1.1" 200 6687
+[28/Jan/2020 13:24:57] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:25:07] "POST /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/change/ HTTP/1.1" 302 0
+[28/Jan/2020 13:25:07] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7580
+[28/Jan/2020 13:25:07] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:25:11] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:25:20] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 13:25:22] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 3112
+[28/Jan/2020 13:25:25] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 13:25:29] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:25:31] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:25:32] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2720
+[28/Jan/2020 13:27:53] "GET /admin/ HTTP/1.1" 200 9561
+[28/Jan/2020 13:27:56] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7311
+[28/Jan/2020 13:27:56] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:27:58] "GET /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/change/ HTTP/1.1" 200 6687
+[28/Jan/2020 13:27:58] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:28:05] "POST /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/change/ HTTP/1.1" 302 0
+[28/Jan/2020 13:28:05] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7580
+[28/Jan/2020 13:28:05] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:28:09] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:28:23] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 13:28:24] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 3112
+[28/Jan/2020 13:28:27] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 13:28:30] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:28:32] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:30:19] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2720
+[28/Jan/2020 13:40:08] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:40:11] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:40:13] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2720
+[28/Jan/2020 13:40:21] "GET /catalog/mymusicss/ HTTP/1.1" 200 2061
+[28/Jan/2020 13:40:23] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 13:40:24] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2872
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:21:22
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:21:22
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+adam@bilkus.com
+adam@bilkus.com
+adam@bilkus.com
+[28/Jan/2020 13:44:21] "GET /catalog/ HTTP/1.1" 200 2356
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[28/Jan/2020 13:44:24] "GET /catalog/mymusicss/ HTTP/1.1" 200 1869
+[28/Jan/2020 13:44:26] "GET /catalog/myreserveds/ HTTP/1.1" 200 1871
+[28/Jan/2020 13:44:30] "GET /catalog/reserve/ HTTP/1.1" 200 1944
+[28/Jan/2020 13:44:31] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2680
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.takenoutdate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 13:44:34] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 13:44:38] "GET /catalog/ HTTP/1.1" 200 2356
+[28/Jan/2020 13:44:40] "GET /catalog/myreserveds/ HTTP/1.1" 200 1953
+[28/Jan/2020 13:44:41] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2528
+[28/Jan/2020 13:46:31] "GET /catalog/mymusicss/ HTTP/1.1" 200 2061
+[28/Jan/2020 13:46:32] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:46:34] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2727
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:42:35
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+adam.bilkus@gmail.com
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:42:35
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[28/Jan/2020 13:49:34] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2924
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[28/Jan/2020 13:49:41] "GET /catalog/myreserveds/ HTTP/1.1" 200 1953
+[28/Jan/2020 13:49:43] "GET /catalog/mymusicss/ HTTP/1.1" 200 1869
+[28/Jan/2020 13:49:47] "GET /admin/ HTTP/1.1" 302 0
+[28/Jan/2020 13:49:47] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1973
+[28/Jan/2020 13:49:47] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[28/Jan/2020 13:49:47] "GET /static/admin/css/login.css HTTP/1.1" 200 1203
+[28/Jan/2020 13:49:47] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[28/Jan/2020 13:49:47] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[28/Jan/2020 13:49:48] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[28/Jan/2020 13:49:48] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[28/Jan/2020 13:49:48] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[28/Jan/2020 13:49:52] "POST /admin/login/?next=/admin/ HTTP/1.1" 200 2134
+[28/Jan/2020 13:49:54] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[28/Jan/2020 13:49:55] "GET /admin/ HTTP/1.1" 200 9658
+[28/Jan/2020 13:49:55] "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[28/Jan/2020 13:49:55] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:49:55] "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:49:55] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:49:59] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7327
+[28/Jan/2020 13:50:00] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:50:00] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:50:00] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/change/ HTTP/1.1" 200 6687
+[28/Jan/2020 13:50:03] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:50:03] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[28/Jan/2020 13:50:03] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:50:13] "POST /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/change/ HTTP/1.1" 302 0
+[28/Jan/2020 13:50:13] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7596
+[28/Jan/2020 13:50:13] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 13:50:14] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[28/Jan/2020 13:50:16] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:50:23] "GET /catalog/myreserveds/ HTTP/1.1" 200 2063
+[28/Jan/2020 13:50:27] "GET /catalog/mymusicss/ HTTP/1.1" 200 2061
+[28/Jan/2020 13:50:29] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 13:50:30] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2872
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.takenoutdate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 13:50:34] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 13:50:38] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 13:50:55] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 13:50:58] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 3116
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:49:15
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:49:15
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+adam@bilkus.com
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:54:04
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:54:04
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[28/Jan/2020 14:03:58] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+Internal Server Error: /catalog/reservedMusicDetailUser/1
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adam/NEA-2/catalog/views.py", line 243, in BorrowMusicDetail
+    reserved = music.musicinstance_set.filter(status__exact = 'r' , userid = username.id)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 844, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 862, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1263, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1287, in _add_q
+    split_subq=split_subq,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1164, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1028, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1389, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'userid' into field. Choices are: borrower, borrower_id, due_back, id, music, music_id, musicinstancereservation, status
+[28/Jan/2020 14:04:01] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 500 106756
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:56:53
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 28, 2020 - 13:56:53
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[28/Jan/2020 14:04:46] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2878
+Internal Server Error: /catalog/borrowAction
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adam/NEA-2/catalog/views.py", line 288, in BorrowAction
+    p = MusicInstanceReservation.objects.get(musicInstance = a, takenout = False)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 403, in get
+    (self.model._meta.object_name, num)
+catalog.models.MusicInstanceReservation.MultipleObjectsReturned: get() returned more than one MusicInstanceReservation -- it returned 4!
+[28/Jan/2020 14:04:54] "POST /catalog/borrowAction HTTP/1.1" 500 76499
+[28/Jan/2020 14:05:09] "GET /admin/ HTTP/1.1" 200 9658
+[28/Jan/2020 14:05:12] "GET /admin/catalog/musicinstancereservation/ HTTP/1.1" 200 9945
+[28/Jan/2020 14:05:12] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:05:14] "GET /admin/catalog/musicinstancereservation/23/change/ HTTP/1.1" 200 11292
+[28/Jan/2020 14:05:14] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:05:14] "GET /static/admin/img/icon-clock.svg HTTP/1.1" 304 0
+[28/Jan/2020 14:05:18] "GET /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/delete/?_to_field=id&_popup=1 HTTP/1.1" 200 2496
+[28/Jan/2020 14:05:18] "GET /static/admin/js/cancel.js HTTP/1.1" 200 410
+[28/Jan/2020 14:05:20] "POST /admin/catalog/musicinstance/ef139300-68e3-4367-b3b8-9ef9c68881fa/delete/?_to_field=id&_popup=1 HTTP/1.1" 200 399
+[28/Jan/2020 14:05:20] "GET /static/admin/js/popup_response.js HTTP/1.1" 200 569
+[28/Jan/2020 14:05:27] "GET /admin/catalog/musicinstancereservation/ HTTP/1.1" 200 9945
+[28/Jan/2020 14:05:27] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:05:57] "GET /admin/catalog/musicinstancereservation/23/change/ HTTP/1.1" 200 11170
+[28/Jan/2020 14:05:57] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:00] "GET /admin/catalog/musicinstancereservation/23/delete/ HTTP/1.1" 200 3439
+[28/Jan/2020 14:06:02] "POST /admin/catalog/musicinstancereservation/23/delete/ HTTP/1.1" 302 0
+[28/Jan/2020 14:06:02] "GET /admin/catalog/musicinstancereservation/ HTTP/1.1" 200 9872
+[28/Jan/2020 14:06:02] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:04] "GET /admin/catalog/musicinstancereservation/22/change/ HTTP/1.1" 200 11170
+[28/Jan/2020 14:06:05] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:07] "GET /admin/catalog/musicinstancereservation/22/delete/ HTTP/1.1" 200 3439
+[28/Jan/2020 14:06:08] "POST /admin/catalog/musicinstancereservation/22/delete/ HTTP/1.1" 302 0
+[28/Jan/2020 14:06:09] "GET /admin/catalog/musicinstancereservation/ HTTP/1.1" 200 9602
+[28/Jan/2020 14:06:09] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:10] "GET /admin/catalog/musicinstancereservation/21/change/ HTTP/1.1" 200 11170
+[28/Jan/2020 14:06:11] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:13] "GET /admin/catalog/musicinstancereservation/21/delete/ HTTP/1.1" 200 3439
+[28/Jan/2020 14:06:15] "GET /admin/catalog/musicinstancereservation/21/change/ HTTP/1.1" 200 11170
+[28/Jan/2020 14:06:18] "POST /admin/catalog/musicinstancereservation/21/change/ HTTP/1.1" 200 11313
+[28/Jan/2020 14:06:18] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:21] "GET /catalog/ HTTP/1.1" 200 2548
+/usr/local/lib/python3.6/dist-packages/django/views/generic/list.py:88: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'catalog.models.Music'> QuerySet.
+  allow_empty_first_page=allow_empty_first_page, **kwargs)
+[28/Jan/2020 14:06:23] "GET /catalog/myreserveds/ HTTP/1.1" 200 2063
+[28/Jan/2020 14:06:26] "GET /catalog/reserve/ HTTP/1.1" 200 2060
+[28/Jan/2020 14:06:28] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 14:06:33] "GET /admin/ HTTP/1.1" 200 9572
+[28/Jan/2020 14:06:36] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 6818
+[28/Jan/2020 14:06:36] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:37] "GET /admin/catalog/musicinstance/e6f9f4e6-4161-4339-83bf-b198455f4241/change/ HTTP/1.1" 200 6687
+[28/Jan/2020 14:06:37] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:40] "POST /admin/catalog/musicinstance/e6f9f4e6-4161-4339-83bf-b198455f4241/change/ HTTP/1.1" 302 0
+[28/Jan/2020 14:06:40] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7101
+[28/Jan/2020 14:06:40] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:41] "GET /admin/catalog/ HTTP/1.1" 200 4763
+[28/Jan/2020 14:06:43] "GET /admin/catalog/music/ HTTP/1.1" 200 4739
+[28/Jan/2020 14:06:43] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:45] "GET /admin/catalog/music/1/change/ HTTP/1.1" 200 26722
+[28/Jan/2020 14:06:45] "GET /static/admin/js/inlines.js HTTP/1.1" 200 13810
+[28/Jan/2020 14:06:45] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:06:46] "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 304 0
+[28/Jan/2020 14:06:46] "GET /static/admin/img/tooltag-arrowright.svg HTTP/1.1" 200 280
+[28/Jan/2020 14:06:59] "POST /admin/catalog/music/1/change/ HTTP/1.1" 302 0
+[28/Jan/2020 14:06:59] "GET /admin/catalog/music/ HTTP/1.1" 200 4931
+[28/Jan/2020 14:06:59] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:07:02] "GET /admin/catalog/ HTTP/1.1" 200 4763
+[28/Jan/2020 14:07:04] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7325
+[28/Jan/2020 14:07:04] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:07:07] "GET /admin/catalog/musicinstance/d038a1cd-8cc4-47d6-82f6-775ee09007af/change/ HTTP/1.1" 200 6687
+[28/Jan/2020 14:07:07] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:07:11] "POST /admin/catalog/musicinstance/d038a1cd-8cc4-47d6-82f6-775ee09007af/change/ HTTP/1.1" 302 0
+[28/Jan/2020 14:07:11] "GET /admin/catalog/musicinstance/ HTTP/1.1" 200 7596
+[28/Jan/2020 14:07:11] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 14:07:14] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 14:07:16] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 14:07:17] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2872
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.takenoutdate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 14:07:20] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 14:07:24] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 14:07:25] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 14:07:27] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2878
+[28/Jan/2020 14:07:30] "POST /catalog/borrowAction HTTP/1.1" 200 55
+[28/Jan/2020 14:07:34] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 14:07:35] "GET /catalog/mymusicss/ HTTP/1.1" 200 2143
+[28/Jan/2020 14:07:36] "GET /catalog/borrowedMusicDetailUser/1 HTTP/1.1" 200 2727
+[28/Jan/2020 14:15:01] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:19:08] "GET /catalog/myreserveds/ HTTP/1.1" 200 2063
+[28/Jan/2020 15:19:12] "GET /catalog/borrowed/ HTTP/1.1" 200 2137
+[28/Jan/2020 15:19:13] "GET /catalog/borrowedMusicDetail/1 HTTP/1.1" 200 2870
+/usr/local/lib/python3.6/dist-packages/django/db/models/fields/__init__.py:1363: RuntimeWarning: DateTimeField MusicInstanceReservation.returneddate received a naive datetime (2020-01-28 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[28/Jan/2020 15:19:16] "POST /catalog/returnAction HTTP/1.1" 200 55
+[28/Jan/2020 15:19:21] "GET /catalog HTTP/1.1" 301 0
+[28/Jan/2020 15:19:21] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:19:24] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 15:19:25] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2872
+[28/Jan/2020 15:19:28] "POST /catalog/reserveAction HTTP/1.1" 200 92
+[28/Jan/2020 15:19:31] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:19:32] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 15:19:35] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2878
+[28/Jan/2020 15:19:54] "POST /catalog/borrowAction HTTP/1.1" 200 55
+[28/Jan/2020 15:19:57] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:19:59] "GET /catalog/mymusicss/ HTTP/1.1" 200 2143
+[28/Jan/2020 15:20:00] "GET /catalog/borrowedMusicDetailUser/1 HTTP/1.1" 200 2727
+[28/Jan/2020 15:21:48] "GET /catalog/myreserveds/ HTTP/1.1" 200 2063
+[28/Jan/2020 15:21:50] "GET /catalog/mymusicss/ HTTP/1.1" 200 2143
+[28/Jan/2020 15:21:54] "GET /catalog/borrowed/ HTTP/1.1" 200 2137
+[28/Jan/2020 15:21:56] "GET /catalog/borrowedMusicDetail/1 HTTP/1.1" 200 2870
+[28/Jan/2020 15:21:58] "POST /catalog/returnAction HTTP/1.1" 200 55
+[28/Jan/2020 15:22:02] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:22:04] "GET /catalog/reserve/ HTTP/1.1" 200 2136
+[28/Jan/2020 15:22:06] "GET /catalog/reserveMusicDetail/1 HTTP/1.1" 200 2872
+[28/Jan/2020 15:22:08] "POST /catalog/reserveAction HTTP/1.1" 200 90
+[28/Jan/2020 15:22:12] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:22:27] "GET /catalog/myreserveds/ HTTP/1.1" 200 2145
+[28/Jan/2020 15:22:40] "GET /catalog/reservedMusicDetailUser/1 HTTP/1.1" 200 2878
+[28/Jan/2020 15:22:43] "POST /catalog/borrowAction HTTP/1.1" 200 55
+[28/Jan/2020 15:22:46] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:22:48] "GET /catalog/mymusicss/ HTTP/1.1" 200 2143
+[28/Jan/2020 15:22:49] "GET /catalog/borrowedMusicDetailUser/1 HTTP/1.1" 200 2727
+[28/Jan/2020 15:39:01] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:39:02] "GET /admin/ HTTP/1.1" 200 9580
+[28/Jan/2020 15:39:02] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[28/Jan/2020 15:39:02] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /admin/auth/user/ HTTP/1.1" 200 7040
+[28/Jan/2020 15:39:09] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:39:09] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+[28/Jan/2020 15:39:09] "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+[28/Jan/2020 15:39:09] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:39:09] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:39:27] "GET /admin/auth/user/add/ HTTP/1.1" 200 5655
+[28/Jan/2020 15:39:27] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:27] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:27] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[28/Jan/2020 15:39:27] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[28/Jan/2020 15:39:27] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:39:38] "POST /admin/auth/user/add/ HTTP/1.1" 200 5909
+[28/Jan/2020 15:39:39] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:39:49] "POST /admin/auth/user/add/ HTTP/1.1" 200 5834
+[28/Jan/2020 15:39:49] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:40:24] "GET /admin/auth/user/ HTTP/1.1" 200 7040
+[28/Jan/2020 15:40:24] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:40:35] "GET /admin/auth/user/add/ HTTP/1.1" 200 5655
+[28/Jan/2020 15:40:35] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:40:48] "POST /admin/auth/user/add/ HTTP/1.1" 302 0
+[28/Jan/2020 15:40:48] "GET /admin/auth/user/3/change/ HTTP/1.1" 200 15981
+[28/Jan/2020 15:40:49] "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 5755
+[28/Jan/2020 15:40:49] "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 12712
+[28/Jan/2020 15:40:49] "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+[28/Jan/2020 15:40:49] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:40:49] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+[28/Jan/2020 15:40:49] "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+[28/Jan/2020 15:40:49] "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 200 655
+[28/Jan/2020 15:40:49] "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+[28/Jan/2020 15:40:49] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+[28/Jan/2020 15:40:49] "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+[28/Jan/2020 15:41:00] "POST /admin/auth/user/3/change/ HTTP/1.1" 302 0
+[28/Jan/2020 15:41:00] "GET /admin/auth/user/ HTTP/1.1" 200 7629
+[28/Jan/2020 15:41:00] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:41:09] "GET /admin/ HTTP/1.1" 200 9361
+[28/Jan/2020 15:41:17] "GET /accounts/logout/?next=/catalog/ HTTP/1.1" 302 0
+[28/Jan/2020 15:41:17] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 15:41:18] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[28/Jan/2020 15:41:26] "POST /accounts/login/ HTTP/1.1" 302 0
+[28/Jan/2020 15:41:26] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:41:43] "GET /admin/ HTTP/1.1" 200 6038
+[28/Jan/2020 15:41:45] "GET /admin/auth/user/ HTTP/1.1" 200 7454
+[28/Jan/2020 15:41:45] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:41:57] "GET /admin/auth/user/add/ HTTP/1.1" 200 5655
+[28/Jan/2020 15:41:57] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:42:10] "POST /admin/auth/user/add/ HTTP/1.1" 302 0
+[28/Jan/2020 15:42:10] "GET /admin/auth/user/4/change/ HTTP/1.1" 200 15996
+[28/Jan/2020 15:42:10] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:42:15] "POST /admin/auth/user/4/change/ HTTP/1.1" 302 0
+[28/Jan/2020 15:42:15] "GET /admin/auth/user/ HTTP/1.1" 200 8053
+[28/Jan/2020 15:42:16] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:42:18] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:42:20] "GET /accounts/logout/?next=/catalog/ HTTP/1.1" 302 0
+[28/Jan/2020 15:42:20] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 15:42:22] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[28/Jan/2020 15:42:29] "POST /accounts/login/ HTTP/1.1" 302 0
+[28/Jan/2020 15:42:29] "GET /catalog/ HTTP/1.1" 200 2359
+[28/Jan/2020 15:47:57] "GET /admin/ HTTP/1.1" 302 0
+[28/Jan/2020 15:47:57] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1976
+[28/Jan/2020 15:47:57] "GET /static/admin/css/login.css HTTP/1.1" 200 1203
+[28/Jan/2020 15:47:57] "GET /admin/ HTTP/1.1" 302 0
+[28/Jan/2020 15:47:57] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1976
+[28/Jan/2020 15:48:02] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[28/Jan/2020 15:48:02] "GET /admin/ HTTP/1.1" 200 6638
+[28/Jan/2020 15:48:03] "GET /admin/auth/user/ HTTP/1.1" 200 7873
+[28/Jan/2020 15:48:03] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:48:22] "GET /admin/auth/user/4/change/ HTTP/1.1" 200 15825
+[28/Jan/2020 15:48:22] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:48:27] "GET /admin/auth/user/4/delete/ HTTP/1.1" 200 3201
+[28/Jan/2020 15:48:27] "GET /static/admin/js/cancel.js HTTP/1.1" 200 410
+[28/Jan/2020 15:48:28] "POST /admin/auth/user/4/delete/ HTTP/1.1" 302 0
+[28/Jan/2020 15:48:29] "GET /admin/auth/user/ HTTP/1.1" 200 7603
+[28/Jan/2020 15:48:29] "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+[28/Jan/2020 15:48:34] "GET /catalog/ HTTP/1.1" 200 2548
+[28/Jan/2020 15:48:36] "GET /accounts/logout/?next=/catalog/ HTTP/1.1" 302 0
+[28/Jan/2020 15:48:36] "GET /catalog/ HTTP/1.1" 200 2145
+[28/Jan/2020 15:48:38] "GET /accounts/login/?next=/catalog/ HTTP/1.1" 200 2276
+[28/Jan/2020 15:48:46] "POST /accounts/login/ HTTP/1.1" 200 2362
+Invalid HTTP_HOST header: '10.29.5.213'. You may need to add '10.29.5.213' to ALLOWED_HOSTS.
+Bad Request: /
+[30/Jan/2020 19:35:56] "GET / HTTP/1.1" 400 61313
+Invalid HTTP_HOST header: '10.29.5.213'. You may need to add '10.29.5.213' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+[30/Jan/2020 19:35:59] "GET /favicon.ico HTTP/1.1" 400 61355
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 30, 2020 - 19:33:33
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[30/Jan/2020 19:38:57] "GET / HTTP/1.1" 301 0
+[30/Jan/2020 19:38:58] "GET /catalog/ HTTP/1.1" 200 2145
+[30/Jan/2020 19:38:59] "GET /static/images/BEAT-logo.png HTTP/1.1" 200 12064
+[30/Jan/2020 19:38:59] "GET /static/css/styles.css HTTP/1.1" 200 114
+[30/Jan/2020 19:38:59] "GET /static/images/background.jpg HTTP/1.1" 200 41531
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 30, 2020 - 19:38:08
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[04/Feb/2020 14:33:50] "GET / HTTP/1.1" 301 0
+[04/Feb/2020 14:33:50] "GET /catalog/ HTTP/1.1" 200 2546
+[04/Feb/2020 14:33:50] "GET /static/images/BEAT-logo.png HTTP/1.1" 200 12064
+[04/Feb/2020 14:33:50] "GET /static/css/styles.css HTTP/1.1" 200 114
+[04/Feb/2020 14:33:50] "GET /static/images/background.jpg HTTP/1.1" 200 41531
+Not Found: /favicon.ico
+[04/Feb/2020 14:33:52] "GET /favicon.ico HTTP/1.1" 404 2418
+Not Found: /catalog/maps
+[04/Feb/2020 14:33:55] "GET /catalog/maps HTTP/1.1" 404 7382
+[04/Feb/2020 14:33:58] "GET /catalog/map HTTP/1.1" 200 1940
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 04, 2020 - 14:33:38
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7f3680846620>
+/usr/lib/python3/dist-packages/apport/report.py:13: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import fnmatch, glob, traceback, errno, sys, atexit, locale, imp
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 109, in inner_run
+    autoreload.raise_last_exception()
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 248, in raise_last_exception
+    raise _exception[1]
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/__init__.py", line 337, in execute
+    autoreload.check_errors(django.setup)()
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/local/lib/python3.6/dist-packages/django/apps/registry.py", line 120, in populate
+    app_config.ready()
+  File "/usr/local/lib/python3.6/dist-packages/django/contrib/admin/apps.py", line 24, in ready
+    self.module.autodiscover()
+  File "/usr/local/lib/python3.6/dist-packages/django/contrib/admin/__init__.py", line 26, in autodiscover
+    autodiscover_modules('admin', register_to=site)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/module_loading.py", line 47, in autodiscover_modules
+    import_module('%s.%s' % (app_config.name, module_to_search))
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/admin.py", line 72, in <module>
+    from django_google_maps import widgets as map_widgets
+  File "/usr/lib/python3.6/site-packages/django_google_maps/widgets.py", line 5, in <module>
+    class GoogleMapsAddressWidget(widgets.TextInput):
+  File "/usr/lib/python3.6/site-packages/django_google_maps/widgets.py", line 9, in GoogleMapsAddressWidget
+    class Media:
+  File "/usr/lib/python3.6/site-packages/django_google_maps/widgets.py", line 17, in Media
+    settings.GOOGLE_MAPS_API_KEY),
+  File "/usr/local/lib/python3.6/dist-packages/django/conf/__init__.py", line 58, in __getattr__
+    val = getattr(self._wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_MAPS_API_KEY'
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7ffe6e247620>
+/usr/lib/python3/dist-packages/apport/report.py:13: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import fnmatch, glob, traceback, errno, sys, atexit, locale, imp
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/commands/runserver.py", line 109, in inner_run
+    autoreload.raise_last_exception()
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 248, in raise_last_exception
+    raise _exception[1]
+  File "/usr/local/lib/python3.6/dist-packages/django/core/management/__init__.py", line 337, in execute
+    autoreload.check_errors(django.setup)()
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/autoreload.py", line 225, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/local/lib/python3.6/dist-packages/django/apps/registry.py", line 120, in populate
+    app_config.ready()
+  File "/usr/local/lib/python3.6/dist-packages/django/contrib/admin/apps.py", line 24, in ready
+    self.module.autodiscover()
+  File "/usr/local/lib/python3.6/dist-packages/django/contrib/admin/__init__.py", line 26, in autodiscover
+    autodiscover_modules('admin', register_to=site)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/module_loading.py", line 47, in autodiscover_modules
+    import_module('%s.%s' % (app_config.name, module_to_search))
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/adam/NEA-2/catalog/admin.py", line 72, in <module>
+    from django_google_maps import widgets as map_widgets
+  File "/usr/lib/python3.6/site-packages/django_google_maps/widgets.py", line 5, in <module>
+    class GoogleMapsAddressWidget(widgets.TextInput):
+  File "/usr/lib/python3.6/site-packages/django_google_maps/widgets.py", line 9, in GoogleMapsAddressWidget
+    class Media:
+  File "/usr/lib/python3.6/site-packages/django_google_maps/widgets.py", line 17, in Media
+    settings.GOOGLE_MAPS_API_KEY),
+  File "/usr/local/lib/python3.6/dist-packages/django/conf/__init__.py", line 58, in __getattr__
+    val = getattr(self._wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_MAPS_API_KEY'
+[04/Feb/2020 14:37:07] "GET /catalog/ HTTP/1.1" 200 2546
+[04/Feb/2020 14:37:12] "GET /catalog/map HTTP/1.1" 200 1940
+Invalid HTTP_HOST header: 'f56f6742.ngrok.io'. You may need to add 'f56f6742.ngrok.io' to ALLOWED_HOSTS.
+Bad Request: /
+[04/Feb/2020 14:41:49] "GET / HTTP/1.1" 400 62331
+Invalid HTTP_HOST header: 'f56f6742.ngrok.io'. You may need to add 'f56f6742.ngrok.io' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+[04/Feb/2020 14:41:51] "GET /favicon.ico HTTP/1.1" 400 62379
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 04, 2020 - 14:37:02
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 04, 2020 - 14:37:02
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Invalid HTTP_HOST header: 'f56f6742.ngrok.io'. You may need to add 'f56f6742.ngrok.io' to ALLOWED_HOSTS.
+Bad Request: /
+[04/Feb/2020 14:42:59] "GET / HTTP/1.1" 400 62377
+Invalid HTTP_HOST header: 'f56f6742.ngrok.io'. You may need to add 'f56f6742.ngrok.io' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+[04/Feb/2020 14:43:01] "GET /favicon.ico HTTP/1.1" 400 62425
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 04, 2020 - 14:42:37
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 04, 2020 - 14:42:37
+Django version 2.1.5, using settings 'locallibrary.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+[04/Feb/2020 14:44:47] "GET / HTTP/1.1" 301 0
+[04/Feb/2020 14:44:48] "GET /catalog/ HTTP/1.1" 200 2143
+[04/Feb/2020 14:44:49] "GET /static/images/BEAT-logo.png HTTP/1.1" 200 12064
+[04/Feb/2020 14:44:49] "GET /static/css/styles.css HTTP/1.1" 200 114
+[04/Feb/2020 14:44:49] "GET /static/images/background.jpg HTTP/1.1" 200 41531
+Not Found: /favicon.ico
+[04/Feb/2020 14:44:57] "GET /favicon.ico HTTP/1.1" 404 2426
+[04/Feb/2020 14:45:48] "GET /catalog HTTP/1.1" 301 0
+[04/Feb/2020 14:45:48] "GET /catalog/ HTTP/1.1" 200 2546
+[04/Feb/2020 15:01:00] "GET /catalog/ HTTP/1.1" 200 2546
+[04/Feb/2020 15:01:05] "GET /catalog/map HTTP/1.1" 200 1940
+[04/Feb/2020 15:07:13] "GET / HTTP/1.1" 301 0
+[04/Feb/2020 15:07:14] "GET /catalog/ HTTP/1.1" 200 2143
+[04/Feb/2020 15:07:14] "GET /static/css/styles.css HTTP/1.1" 200 114
+[04/Feb/2020 15:07:15] "GET /static/images/BEAT-logo.png HTTP/1.1" 200 12064
+[04/Feb/2020 15:07:15] "GET /static/images/background.jpg HTTP/1.1" 200 41531
+Not Found: /favicon.ico
+[04/Feb/2020 15:07:18] "GET /favicon.ico HTTP/1.1" 404 2426

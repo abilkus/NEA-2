@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Title: {{ music.title }}</h1>
+<h1>Title:Test {{ music.title }}</h1>
 
 <p><strong>Composer:</strong> <a href="{% url 'composer_detail' music.composer.pk %}">{{ music.composer }}</a></p>
 <p><strong>Summary:</strong> {{ music.summary }}</p>
@@ -17,11 +17,10 @@
     <table>
         <thead></thead>
         <tbody>
-            {% for copy in available %}
+            {% for copy in reserved %}
             <tr>
                 <td>{{copy.id}}</td>
                 <td><button type="submit" name="borrowbutton" value="{{copy.id}}">Borrow</button></td>
-
             </tr>
             {% endfor %}
         </tbody>
