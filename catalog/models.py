@@ -5,6 +5,8 @@ from django.utils.timezone import now
 from django.utils import timezone
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 from django.contrib.auth.models import User
+import django_filters
+
 
 class Genre(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
@@ -57,7 +59,6 @@ class Music(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.title
-
 
 import uuid  # Required for unique music instances
 from datetime import date
@@ -148,3 +149,5 @@ from django_google_maps import fields as map_fields
 class Rental(models.Model):
     address = map_fields.AddressField(max_length=200)
     geolocation = map_fields.GeoLocationField(max_length=100)
+
+

@@ -23,7 +23,8 @@ urlpatterns += [
     path('reserved/', views.Borrow.as_view(), name='borrow'),
     path('reservedMusicDetailAll/<int:pk>', views.BorrowMusicDetail,name='borrow-music'),
     path('borrowAction',views.BorrowAction,name='borrow_action'),
-    path('map', views.map, name='mapping')
+    path('map', views.map, name='mapping'),
+    path('piechart', views.demo_piechart, name='chart')
 
 ]
 

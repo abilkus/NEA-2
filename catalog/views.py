@@ -12,6 +12,7 @@ import datetime
 from datetime import timedelta
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+import django_filters
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
@@ -332,4 +333,33 @@ def ReturnAction(request):
 def map(request):
     template = loader.get_template("catalog/maps.html")
     return HttpResponse(template.render())
+
+from django.shortcuts import render_to_response
+import random
+import datetime
+import time
+
+def demo_piechart(request):
+    """
+    pieChart page
+    """
+    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
+    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+
+    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+    charttype = "pieChart"
+
+    data = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+    }
+    return render_to_response('catalog/piechart.html', data)
+
+
+class MusicFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='iexact')
+    class Meta:
+        model = Music
+        fields = ['genre', 'language']
 
