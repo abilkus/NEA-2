@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth import get_user_model
 from django.views import generic
+from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -31,6 +32,50 @@ from django.shortcuts import render
 import random
 import datetime
 import time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class HomePageView(TemplateView):
+    template_name = 'index.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = None
+        # Generate counts of some of the main objects
+        num_music = Music.objects.all().count()
+        num_instances = MusicInstance.objects.all().count()
+        # Available copies of books
+        num_instances_available = MusicInstance.objects.filter(status__exact='a').count()
+        num_composers = Composer.objects.count()  # The 'all()' is implied by default.
+
+        # Number of visits to this view, as counted in the session variable.
+        num_visits = self.request.session.get('num_visits', 0)
+        self.request.session['num_visits'] = num_visits+1
+        can_reserve = False
+        if self.request.user.has_perm('can_self_reserve'):
+            can_reserve = True
+        xxx = (
+            {'can_reserve':can_reserve ,'num_music': num_music, 'num_instances': num_instances,
+                 'num_instances_available': num_instances_available, 'num_composers': num_composers,
+                 'num_visits': num_visits})
+        context.update(xxx)
+        return context
+
+
+
+
 
 def index(request):
     """View function for home page of site."""
@@ -65,6 +110,12 @@ class MusicListView(generic.ListView):
     """Generic class-based view for a list of music."""
     model = Music
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['hackedby'] = "Gary"
+        return context
+
 
 
 class MusicDetailView(generic.DetailView):
