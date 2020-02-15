@@ -7,7 +7,6 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 from django.contrib.auth.models import User
 import django_filters
 
-
 class Genre(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
     name = models.CharField(
@@ -59,6 +58,17 @@ class Music(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.title
+    class Meta:
+        permissions = (
+            ("can_browse_catalog", "Can see what the music library has to offer"),
+            ("can_see_availability", "Can see whether a piece is available"),
+            ("can_self_reserve", "Can make a reservation for themself"),
+            ("can_any_reserve", "Can make reservations on behalf of other users"),
+            ("can_issue", "Can set reservation as borrowed"),
+            ("can_return", "Can mark borrowed music as now returned"),
+            ("can_see_reservation_detail", "Can see who has reserved or borrowed an instance"),
+        )
+
 
 import uuid  # Required for unique music instances
 from datetime import date

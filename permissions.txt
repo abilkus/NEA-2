@@ -1,0 +1,25 @@
+The BEAT system makes use of fine-grained permissions to determine who is allowed to do what.
+Overall, django implements an admin user, who is able to do anything. Apart from them we have the followwing:
+
+- users who are given 'staff' privileges have access to the admin site
+- normal users don't and can only do things which the application has specifically coded
+- all users are either:
+    nonmembers - who can see the music in the catalogue, search it, and get information about it
+    members - who can in addition place reservations on a piece ( if available ), cancel a reservations
+        - get a list of what they've reserved or borrowed
+    librarians - who can check out a reserved piece as borrowed by a member or returned by them, and can also place
+        - a reservation on behalf of a different user and see which user has borrowed a particular instance
+
+
+
+In order to implement this, we define the following fine-grained permissions:
+can_browse_catalog
+can_see_availability
+can_self_reserve
+can_any_reserve
+can_issue
+can_return
+can_see_reservation_detail
+
+We then check these permissions as required on a view-by-view basis
+

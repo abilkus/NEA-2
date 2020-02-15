@@ -12,6 +12,11 @@ import datetime
 from datetime import timedelta
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+# Added as part of challenge!
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+
 import django_filters
 def index(request):
     """View function for home page of site."""
@@ -49,11 +54,11 @@ class MusicDetailView(generic.DetailView):
     """Generic class-based detail view for a book."""
     model = Music
 
-
-class ComposerListView(generic.ListView):
+class ComposerListView(PermissionRequiredMixin,generic.ListView):
     """Generic class-based list view for a list of authors."""
     model = Composer
     paginate_by = 10
+    permission_required = 'can_browse_catalog'
 
 
 class ComposerDetailView(generic.DetailView):
@@ -101,14 +106,11 @@ def ReservedMusicDetail(request, pk):
     context= {"music":music,"available":reserved}
     return HttpResponse(template.render(context,request))
 
-# Added as part of challenge!
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-class LoanedMusicAllListView(PermissionRequiredMixin, generic.ListView):
+class LoanedMusicAllListView(generic.ListView):
     """Generic class-based view listing all books on loan. Only visible to users with can_mark_returned permission."""
     model = MusicInstance
-    permission_required = 'catalog.can_mark_returned'
     template_name = 'catalog/musicinstance_list_borrowed_all.html'
     paginate_by = 10
 
@@ -129,13 +131,11 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
-from django.contrib.auth.decorators import permission_required
 
 # from .forms import RenewmusicForm
 from catalog.forms import RenewMusicForm
 
 
-@permission_required('catalog.can_mark_returned')
 def renew_music_librarian(request, pk):
     """View function for renewing a specific musicInstance by librarian."""
     music_instance = get_object_or_404(MusicInstance, pk=pk)
@@ -173,42 +173,31 @@ from django.urls import reverse_lazy
 from .models import Composer
 
 
-class ComposerCreate(PermissionRequiredMixin, CreateView):
+class ComposerCreate(CreateView):
     model = Composer
     fields = '__all__'
     initial = {'date_of_death': '05/01/2018'}
-    permission_required = 'catalog.can_mark_returned'
 
-
-class ComposerUpdate(PermissionRequiredMixin, UpdateView):
+class ComposerUpdate(UpdateView):
     model = Composer
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
-    permission_required = 'catalog.can_mark_returned'
 
-
-class ComposerDelete(PermissionRequiredMixin, DeleteView):
+class ComposerDelete(DeleteView):
     model = Composer
     success_url = reverse_lazy('composers')
-    permission_required = 'catalog.can_mark_returned'
-
 
 # Classes created for the forms challenge
-class MusicCreate(PermissionRequiredMixin, CreateView):
+class MusicCreate(CreateView):
     model = Music
     fields = '__all__'
-    permission_required = 'catalog.can_mark_returned'
 
-
-class MusicUpdate(PermissionRequiredMixin, UpdateView):
+class MusicUpdate(UpdateView):
     model = Music
     fields = '__all__'
-    permission_required = 'catalog.can_mark_returned'
 
-
-class MusicDelete(PermissionRequiredMixin, DeleteView):
+class MusicDelete(DeleteView):
     model = Music
     success_url = reverse_lazy('musics')
-    permission_required = 'catalog.can_mark_returned'
 
 class Reserve(generic.ListView):
     model = Music
@@ -218,6 +207,7 @@ class Reserve(generic.ListView):
     def get_queryset(self):
         is_available = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='a')
         return Music.objects.annotate(is_available=Exists(is_available)).filter(is_available=True)
+
 class Borrow(generic.ListView):
     model = Music
     template_name = 'catalog/music_list_reserved_all.html'

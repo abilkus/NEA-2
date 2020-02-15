@@ -1,0 +1,13 @@
+Visible functionality
+
+home
+all music 
+all composers
+login
+
+all simple html returns need to be proper pages
+
+user can borrow, see what they have borrowed or reserved
+
+
+
