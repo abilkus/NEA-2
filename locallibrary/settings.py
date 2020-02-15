@@ -14,7 +14,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -43,7 +42,6 @@ INSTALLED_APPS = [
     'pwa',
     # Add our new application 
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
-    'easy_maps',
     'django_filters',
 
 ]
@@ -141,12 +139,13 @@ DATABASES['default'].update(db_from_env)
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # The URL to use when referring to static files (where they will be served from)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'usermediafiles')
 STATIC_URL = '/static/'
-MEDIA_URL = '/static/images/'
+MEDIA_URL = '/userimages/'
 
 # Static file serving.
 # http://whitenoise.evans.io/en/stable/django.html#django-middleware
@@ -155,16 +154,16 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Added to test email:
 EMAIL_HOST           = 'smtp.gmail.com'
 EMAIL_PORT           = 587
-EMAIL_HOST_USER      = 'adam.bilkus@gmail.com'
-EMAIL_HOST_PASSWORD  = 'EEMontySnowy%'
+# Remember to include correct value of private/settings.py containing values for these things
+EMAIL_HOST_USER      = 'should overridden in private/settings.py'
+EMAIL_HOST_PASSWORD  = 'overridden in private/settings.py'
 EMAIL_USE_TLS        = True
 DEFAULT_FROM_EMAIL   = EMAIL_HOST_USER
 EMAIL_FROM           = EMAIL_HOST_USER
 EMAIL_SUBJECT_PREFIX = '[Project] '
 EMAIL_BACKEND        = 'django.core.mail.backends.smtp.EmailBackend'
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyATS4E8zBrFLynUOAIuxm2DcfwnUPbIdLc'
+with open("privatesettings.py") as infile:
+    exec(infile.read())
 
-EASY_MAPS_GOOGLE_KEY = 'AIzaSyATS4E8zBrFLynUOAIuxm2DcfwnUPbIdLc'
-EASY_MAPS_CENTER = (-41.3, 32)
-
+print(EMAIL_HOST_USER)

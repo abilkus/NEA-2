@@ -1,0 +1,8 @@
+python -m pip install virtualenvwrapper-win
+
+mkvirtualenv nea2
+
+workon nea2
+
+python -m pip install -r requirements.txt
+

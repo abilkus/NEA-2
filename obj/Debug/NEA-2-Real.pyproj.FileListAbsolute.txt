@@ -1,3 +1,0 @@
-C:\Users\adam\source\repos\NEA-2-Real\obj\Debug\NEA-2-Real.pyproj.CoreCompileInputs.cache
-C:\Users\adam\source\repos\NEA-2-Real\bin\Microsoft.PythonTools.WebRole.dll
-C:\Users\adam\source\repos\NEA-2-Real\bin\wfastcgi.py

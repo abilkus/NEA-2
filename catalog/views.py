@@ -334,7 +334,7 @@ def map(request):
     template = loader.get_template("catalog/maps.html")
     return HttpResponse(template.render())
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 import random
 import datetime
 import time
@@ -354,7 +354,7 @@ def demo_piechart(request):
         'charttype': charttype,
         'chartdata': chartdata,
     }
-    return render_to_response('catalog/piechart.html', data)
+    return render(None, 'catalog/piechart.html', data)
 
 
 class MusicFilter(django_filters.FilterSet):

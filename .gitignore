@@ -1,0 +1,4 @@
+privatesettings.py
+staticfiles/**
+usermediafiles/**
+.vscode/**
