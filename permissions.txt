@@ -12,7 +12,7 @@ Overall, django implements an admin user, who is able to do anything. Apart from
 
 
 
-In order to implement this, we define the following fine-grained permissions:
+In order to implement this, we define the following fine-grained permissions
 can_browse_catalog
 can_see_availability
 can_self_reserve

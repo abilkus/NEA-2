@@ -15,11 +15,26 @@ from django.contrib.auth.models import User
 # Added as part of challenge!
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
-
+from django.contrib.auth import get_user_model
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import datetime
+from catalog.forms import RenewMusicForm
 import django_filters
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Composer
+from django.shortcuts import render
+import random
+import datetime
+import time
+
 def index(request):
     """View function for home page of site."""
+    user = None
     # Generate counts of some of the main objects
     num_music = Music.objects.all().count()
     num_instances = MusicInstance.objects.all().count()
@@ -30,18 +45,20 @@ def index(request):
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
-
+    can_reserve = False
+    if request.user.has_perm('can_self_reserve'):
+        can_reserve = True
     # Render the HTML template index.html with the data in the context variable.
     return render(
         request,
         'index.html',
-        context={'num_music': num_music, 'num_instances': num_instances,
+        context={'can_reserve':can_reserve ,'num_music': num_music, 'num_instances': num_instances,
                  'num_instances_available': num_instances_available, 'num_composers': num_composers,
                  'num_visits': num_visits},
     )
 
 
-from django.views import generic
+
 
 
 class MusicListView(generic.ListView):
@@ -66,7 +83,7 @@ class ComposerDetailView(generic.DetailView):
     model = Composer
 
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 class BorrowedUser(LoginRequiredMixin, generic.ListView):
@@ -127,13 +144,8 @@ class LoanedMusicAllListView(generic.ListView):
         return MusicInstance.objects.filter(status__exact='r').order_by('due_back')
     
 '''
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-import datetime
 
-# from .forms import RenewmusicForm
-from catalog.forms import RenewMusicForm
+
 
 
 def renew_music_librarian(request, pk):
@@ -168,9 +180,6 @@ def renew_music_librarian(request, pk):
     return render(request, 'catalog/music_renew_librarian.html', context)
 
 
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .models import Composer
 
 
 class ComposerCreate(CreateView):
@@ -251,7 +260,7 @@ def ReserveMusicDetail(request, pk):
     available=music.musicinstance_set.filter(status__exact = 'a')
     context= {"music":music,"available":available}
     return HttpResponse(template.render(context,request))
-from django.contrib.auth import get_user_model
+
 def ReserveAction(request):
     whichCopy= request.POST['reservebutton']
     reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
@@ -329,10 +338,7 @@ def map(request):
     template = loader.get_template("catalog/maps.html")
     return HttpResponse(template.render())
 
-from django.shortcuts import render
-import random
-import datetime
-import time
+
 
 def demo_piechart(request):
     """

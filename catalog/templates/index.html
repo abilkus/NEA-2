@@ -5,6 +5,11 @@
 <h1 align="center">Home Page</h1>
 <p>Welcome to <em>Barnet Education Arts Trust Website</em>, a draft website developed as a start to computer science coursework</p>
 
+{% if can_reserve %}
+  This user can make reservations
+{% else %}
+  This user can only browse
+{% endif %}
 
 
 
