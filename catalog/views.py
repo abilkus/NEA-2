@@ -239,10 +239,15 @@ def BorrowMusicDetail(request, pk):
     template = loader.get_template("catalog/borrow_music.html")
     music=Music.objects.get(pk=pk)
     reserved=music.musicinstance_set.filter(status__exact = 'r')
+    context= {"music":music,"reserved":reserved}
+    return HttpResponse(template.render(context,request))
+def BorrowMusicDetailUser(request, pk):
+    template = loader.get_template('catalog/reserved_music.html')
+    music = Music.objects.get(pk = pk)
     if request.user.is_authenticated:
         username = request.user
-    reserved = music.musicinstance_set.filter(status__exact = 'r' , borrower_id = username.id)
-    context= {"music":music,"reserved":reserved, "user":username}
+    reserved = music.musicinstance_set.filter(status__exact = 'r', borrower_id = username.id)
+    context = {"music":music, "reserved":reserved, "user":username}
     return HttpResponse(template.render(context,request))
 def ReturnMusicDetail(request, pk):
     template = loader.get_template("catalog/return_music.html")

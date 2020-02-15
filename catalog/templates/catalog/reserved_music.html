@@ -16,9 +16,9 @@
     <table>
         <thead></thead>
         <tbody>
-            {% for copy in available %}
+            {% for copy in reserved %}
             <tr>
-                <td>{{copy.id}} {{copy.due_back}}</td>
+                <td>{{copy.id}}</td>
                 
             </tr>
             {% endfor %}
