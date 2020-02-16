@@ -17,7 +17,7 @@ urlpatterns += [
     path('composerDetail/<int:pk>',
          views.ComposerDetailView.as_view(), name='composer_detail'),
 ]
-'''
+
 # These patterns implement functions only available to members who therefore have reservation rights 
 urlpatterns += [
     # the button which actually makes a reservation
@@ -49,4 +49,3 @@ urlpatterns += [
     path('music/<int:pk>/delete/', views.MusicDelete.as_view(), name='music_delete'),
 ]
 
-'''

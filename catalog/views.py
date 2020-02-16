@@ -151,13 +151,32 @@ class ComposerListView(PermissionRequiredMixin,generic.ListView):
         return True
 
 class ComposerDetailView(generic.DetailView):
-    """Generic class-based detail view for an author."""
+    """Generic class-based detail view for a composer """
     model = Composer
 
 
 
+class CancelReserveAction(PermissionRequiredMixin, View):
+     print("Hello")
+
+class BorrowedOrReservedUser(PermissionRequiredMixin, generic.ListView):
+     print("Hello")
 
 
+class borrowInstanceAction(PermissionRequiredMixin, View):
+     print("Hello")
+
+
+class renewInstanceAction(PermissionRequiredMixin, View):
+     print("Hello")
+
+class returnInstanceAction(PermissionRequiredMixin, View):
+    print("Hello")
+
+class BorrowedOrReservedAll(PermissionRequiredMixin, generic.ListView):
+    print("Hello")
+
+'''
 class BorrowedUser(LoginRequiredMixin, generic.ListView):
     model = Music
     template_name = 'catalog/music_list_borrowed_user.html'
@@ -206,7 +225,7 @@ class LoanedMusicAllListView(generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(status__exact='o').order_by('due_back')
 
-'''class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
+class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
     model = Music
     permission_required = 'catalog.can_mark_returned'
     template_name = 'catalog/musicinstance_list_reserved_all.html'
@@ -253,7 +272,7 @@ def renew_music_librarian(request, pk):
 
 
 
-
+'''
 class ComposerCreate(CreateView):
     model = Composer
     fields = '__all__'
@@ -279,7 +298,7 @@ class MusicUpdate(UpdateView):
 class MusicDelete(DeleteView):
     model = Music
     success_url = reverse_lazy('musics')
-
+'''
 class Reserve(generic.ListView):
     model = Music
     template_name = 'catalog/music_list_available_all.html'
@@ -413,5 +432,6 @@ class MusicFilter(django_filters.FilterSet):
     class Meta:
         model = Music
         fields = ['genre', 'language']
+
 
 '''
