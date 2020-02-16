@@ -5,7 +5,6 @@ from . import views
 # It displays differently depending on whether you are logged in
 urlpatterns = [
     path('',views.HomePageView.as_view(),name='index'),
-    path('ajax1',views.Ajax1.as_view(),name='ajax1'),
 ]
 
 
@@ -30,9 +29,9 @@ urlpatterns += [
 
 # These are only available to librarians
 urlpatterns += [
-    path('musicInstance/<uuid:pk>/borrowAction/', views.borrowInstanceAction, name='borrow-instance'),
-    path('musicInstance/<uuid:pk>/renewAction/', views.renewInstanceAction, name='renew-instance'),
-    path('musicInstance/<uuid:pk>/returnAction/', views.returnInstanceAction, name='return-instance'),
+    path('borrowAction/', views.borrowInstanceAction.as_view(), name='borrowAction'),
+    path('renewAction/', views.renewInstanceAction.as_view(), name='renewAction'),
+    path('returnAction/', views.returnInstanceAction.as_view(), name='returnAction'),
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
 ]
 

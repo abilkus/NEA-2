@@ -1,6 +1,37 @@
-<ul>
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>All reserved or borrowed music</h1>
+
+    <ul>
     {% for musicinstance in instances %}
     <li>
-        {{musicinstance.music.title}}
+        {{musicinstance.music.title}} 
+        {{musicinstance.borrower}}
+        {% if musicinstance.status == 'r' %}
+            <label>Reserved until {{ musicinstance.due_back }}</label> 
+            <form style="display:inline" action="{%url 'cancelReserveAction' %}" method="post">
+                {% csrf_token %}
+                    <button type="submit" name="cancelReservation" value="{{musicinstance.id}}">Cancel this reservation</button>
+            </form>
+            <form style="display:inline" action="{%url 'borrowAction' %}" method="post">
+                {% csrf_token %}
+                    <button type="submit" name="instanceId" value="{{musicinstance.id}}">Check out as borrowed</button>
+            </form>
+
+        {% else %}
+                <label>Borrowed until {{ musicinstance.due_back }}</label>
+                <form style="display:inline" action="{%url 'returnAction' %}" method="post">
+                    {% csrf_token %}
+                        <button type="submit" name="instanceId" value="{{musicinstance.id}}">Return</button>
+                </form>
+                <form style="display:inline" action="{%url 'renewAction' %}" method="post">
+                    {% csrf_token %}
+                        <button type="submit" name="instanceId" value="{{musicinstance.id}}">Renew</button>
+                </form>
+
+            {% endif %}
     </li>
-</ul>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -34,18 +34,9 @@ from django_ajax.mixin import AJAXMixin
 from catalog.forms import RenewMusicForm
 from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation
 
-
 def is_in_group(user,group_name):
     group = Group.objects.get(name=group_name)
     return True if group in user.groups.all() else False
-
-# @method_decorator(ajax,name='dispatch')
-class Ajax1(AJAXMixin,View):
-    def get(self,request,*args,**kwargs):
-        return HttpResponse('ajax')
-@ajax
-def ajax1(request):
-    print("aaa")
 
 # The home page will depend on the logged in user and which group they belong to
 class HomePageView(TemplateView):
@@ -75,7 +66,7 @@ class HomePageView(TemplateView):
         num_visits = self.request.session.get('num_visits', 0)
         self.request.session['num_visits'] = num_visits+1
         can_reserve = False
-        if self.request.user.has_perm('can_self_reserve'):
+        if self.request.user.has_perm('catalog.can_self_reserve'):
             can_reserve = True
         xxx = (
             {'can_reserve':can_reserve ,'num_music': num_music, 'num_instances': num_instances,
@@ -128,8 +119,6 @@ class MusicDetailView(PermissionRequiredMixin,generic.DetailView):
         context['show_reserve_button'] = navailable > 0 and (self.request.user.has_perm('catalog.can_self_reserve') or self.request.user.has_perm('catalog.can_any_reserve'))
         return context
 
-
-
 # Clean up composer just like we did for music
 class ComposerListView(PermissionRequiredMixin,generic.ListView):
     """Generic class-based list view for a list of authors."""
@@ -174,7 +163,7 @@ class ReserveAction(PermissionRequiredMixin,View) :
             'Your Borrowed id is: ' + str(reservationnumber),
             'adam@Bilkus.com',
             [emailAddress])
-        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (whichCopy, reservationnumber))
+        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
         return HttpResponseRedirect("/catalog")
 
 class BorrowedOrReservedByUser(PermissionRequiredMixin, TemplateView):
@@ -191,57 +180,102 @@ class BorrowedOrReservedByUser(PermissionRequiredMixin, TemplateView):
         instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
         context['instances'] = instances
         return context    
-
+    
 
 class CancelReserveAction(PermissionRequiredMixin, View):
-     print("Hello")
-
-
-
-class borrowInstanceAction(PermissionRequiredMixin, View):
-     def has_permission(self):
+    def has_permission(self):
          if not self.request.user.is_authenticated:
              return False
-         if not self.request.user.has_perm('catalog.can_any_reserve'):
+         if not self.request.user.has_perm('catalog.can_self_reserve'):
              return False
          return True
-     def post(self, request, *args, **kwargs):
-         whichCopy = request.POST['borrowbutton']
-         a = MusicInstance.objects.get(id = whichCopy)
-         a.status = 'o'
-         a.due_back = date.today() + timedelta(days = 42)
-         a.save()
-         p = MusicInstanceReservation.objects.get(musicInstance = a, takenout = False)
-         p.due_back = a.due_dueback
-         p.takenout = True
-         p.takenoutdate = date.today()
-         p.returned = False
-         p.save()
-         userid = p.userid_id
-         user = User.objects.get(id = str(userid))
-         reservationnumber = p.borrowedid
-         email = user.email
-         send_mail(
-             'Music Borrowed',
-             'Your Borrowed id is: ' + str(reservationnumber),
-             'adam@Bilkus.com',
-             [email])
-         messages.info((self.request, "The borrowing was successful: %s has borrowed %s") % (username, whichCopy))
-         return HttpResponseRedirect("/catalog")
+    def post(self,request,*args,**kwargs):
+        whichCopy= request.POST['cancelReservation']
+        instance = MusicInstance.objects.get(id = whichCopy)
+        instance.status = 'a'
+        instance.due_back = None
+        instance.borrower = None
+        instance.save()
+        emailAddress= request.user.email
+        print(emailAddress)
+        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False, returned = False)
+        reservationnumber = reservation.borrowedid
+        reservation.delete()
+        send_mail(
+            'Music Reservation has been cancelled',
+            'Your Borrowed id is: ' + str(reservationnumber),
+            'adam@Bilkus.com',
+            [emailAddress])
+        messages.info(self.request,"Reservation number  %s has been cancelled" % (reservationnumber))
+        return HttpResponseRedirect("/catalog/borrowedOrReservedByUser")
+
+class borrowInstanceAction(PermissionRequiredMixin, View):
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_issue'):
+            return False
+        return True
+    def post(self, request, *args, **kwargs):
+        whichCopy = request.POST['instanceId']
+        instance = MusicInstance.objects.get(id = whichCopy)
+        instance.status = 'o'
+        instance.due_back = date.today() + timedelta(days = 42)
+        instance.save()
+        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False)
+        reservation.due_back = instance.due_back
+        reservation.takenout = True
+        reservation.takenoutdate = date.today()
+        reservation.returned = False
+        reservation.save()
+        userid = reservation.userid_id
+        user = User.objects.get(id = str(userid))
+        reservationnumber = reservation.borrowedid
+        email = user.email
+        send_mail(
+            'Music Borrowed',
+            'Your Borrowed id is: ' + str(reservationnumber),
+            'adam@Bilkus.com',
+            [email])
+        messages.info(self.request, "The borrowing was successful: %s has borrowed %s" % (user, whichCopy))
+        return HttpResponseRedirect("/catalog")
 
 class renewInstanceAction(PermissionRequiredMixin, View):
-     print("Hello")
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_issue'):
+            return False
+        return True
+
+    def post(self,request,*args,**kwargs):
+        whichCopy = request.POST['instanceId']
+        instance = MusicInstance.objects.get(id = whichCopy)
+        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = True, returned = False)
+        reservation.due_back = date.today() + timedelta(days = 42)
+        id = reservation.borrowedid
+        reservation.save()
+        userid = reservation.userid_id
+        user = User.objects.get(id = str(userid))
+        email = user.email
+        send_mail(
+            'Music Returned',
+            'Your reservation: ' + str(id) +' has been returned',
+            'adam@Bilkus.com',
+            [email])
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
+        return HttpResponseRedirect("/catalog")
 
 class returnInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
         if not self.request.user.is_authenticated:
             return False
-        if not self.request.user.has_perm('can_any_reserve'):
+        if not self.request.user.has_perm('catalog.can_issue'):
             return False
         return True
 
     def post(self,request,*args,**kwargs):
-        whichCopy = request.POST['returnbutton']
+        whichCopy = request.POST['instanceId']
         instance = MusicInstance.objects.get(id = whichCopy)
         instance.status = 'a'
         instance.due_back = None
@@ -257,12 +291,12 @@ class returnInstanceAction(PermissionRequiredMixin, View):
         email = user.email
         send_mail(
             'Music Returned',
-            'Your reservation: ' + str(c) +' has been returned',
+            'Your reservation: ' + str(id) +' has been returned',
             'adam@Bilkus.com',
             [email])
-        message.info((self.request, "Return Successful: %s has returned %s") % (username, whichCopy))
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog")
-class BorrowedOrReservedByAll(PermissionRequiredMixin, generic.ListView):
+class BorrowedOrReservedByAll(PermissionRequiredMixin, TemplateView):
     def has_permission(self):
         if not self.request.user.is_authenticated:
             return False
@@ -272,7 +306,8 @@ class BorrowedOrReservedByAll(PermissionRequiredMixin, generic.ListView):
     template_name = "catalog/borrowed_or_reserved_by_all.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        instances = MusicInstance.objects.filter(status__exact = 'r')
+        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
+        instances = MusicInstance.objects.filter(statusq)
         context['instances'] = instances
         return context
 '''

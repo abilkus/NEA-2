@@ -33,19 +33,39 @@
   </a>
   <div class="backgroundimage" style="height:100%">
     <div class="container-fluid" >
-      {% if messages %}
-      <ul class="messages" style="background-color: white;">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      <div class="row">
+        <div class="col">
+        {% if messages %}
+          <ul class="messages" style="background-color: white;">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
           {% endfor %}
-      </ul>
-      {% endif %}
+           </ul>
+        {% endif %}
+        </div>
+      </div>
       <div class="row" >
         <div class="col-sm-2">
           {% block sidebar %}
-          <ul class="sidebar-nav">
+            <nav class="nav flex-column">
+              <a class="nav-link" href="/catalog">Home</a>
+              {% if  user.is_authenticated %}
+              <a class="nav-link" href="/accounts/logout">Logout as {{user}}</a>
+              {% else %}
+              <a class="nav-link" href="/accounts/login">Login</a>
+              {% endif %}
+              <a class="nav-link" href="/catalog/musicList/">See all music</a>
+              <a class="nav-link" href="/catalog/composerList/">See all composers</a>
+              {% if  perms.catalog.can_self_reserve %}
+              <a class="nav-link" href="/catalog/borrowedOrReservedByUser">Your reservations</a>
+              {% endif %}
+              {% if perms.catalog.can_any_reserve %}
+              <a class="nav-link" href="/catalog/borrowedOrReservedByAll">All reservations</a>
+              {% endif %}
+              
 
-            {% endblock %}
+            </nav>
+          {% endblock %}
         </div>
         <div class="col-sm-10 ">
           {% block content %}{% endblock %}
