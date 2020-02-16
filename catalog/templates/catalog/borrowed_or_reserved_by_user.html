@@ -1,7 +1,22 @@
-<ul>
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>Your reserved or borrowed music</h1>
+<form action="{%url 'cancelReserveAction' %}" method="post">
+    {% csrf_token %}
+
+    <ul>
     {% for musicinstance in instances %}
     <li>
-        {{musicinstance.music.title}}</a>
+        {{musicinstance.music.title}} 
+        {% if musicinstance.status == 'r' %}
+                <button type="submit" name="cancelReservation" value="{{musicinstance.id}}">Cancel this reservation</button>
+
+        {% else %}
+                <label>Borrowed until {{ musicinstance.due_back }}</label>
+        {% endif %}
     </li>
     {% endfor %}
-</ul>
+    </ul>
+</form>
+
+{% endblock %}

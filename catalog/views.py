@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.utils.crypto import get_random_string
 from django.contrib.auth.models import User
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 from datetime import timedelta
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
@@ -28,7 +28,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import Group
-
+from django.utils.decorators import method_decorator
+from django_ajax.decorators import ajax
+from django_ajax.mixin import AJAXMixin
 from catalog.forms import RenewMusicForm
 from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation
 
@@ -36,6 +38,14 @@ from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservat
 def is_in_group(user,group_name):
     group = Group.objects.get(name=group_name)
     return True if group in user.groups.all() else False
+
+# @method_decorator(ajax,name='dispatch')
+class Ajax1(AJAXMixin,View):
+    def get(self,request,*args,**kwargs):
+        return HttpResponse('ajax')
+@ajax
+def ajax1(request):
+    print("aaa")
 
 # The home page will depend on the logged in user and which group they belong to
 class HomePageView(TemplateView):
@@ -177,7 +187,8 @@ class BorrowedOrReservedByUser(PermissionRequiredMixin, TemplateView):
     template_name = "catalog/borrowed_or_reserved_by_user.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        instances = MusicInstance.objects.filter(status__exact = 'r', borrower_id = self.request.user.id)
+        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
+        instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
         context['instances'] = instances
         return context    
 

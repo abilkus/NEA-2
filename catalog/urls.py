@@ -5,6 +5,7 @@ from . import views
 # It displays differently depending on whether you are logged in
 urlpatterns = [
     path('',views.HomePageView.as_view(),name='index'),
+    path('ajax1',views.Ajax1.as_view(),name='ajax1'),
 ]
 
 
@@ -24,7 +25,7 @@ urlpatterns += [
     path('reserveAction/', views.ReserveAction.as_view(), name='reserveAction'),
     # list of music which has been borrowed or reserved by the user
     path('borrowedOrReservedByUser/', views.BorrowedOrReservedByUser.as_view(), name='my-borrowed'),
-    path('cancelReserveAction/',views.CancelReserveAction.as_view(),name='cancelReserve'),
+    path('cancelReserveAction/',views.CancelReserveAction.as_view(),name='cancelReserveAction'),
 ]
 
 # These are only available to librarians
