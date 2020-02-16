@@ -14,14 +14,15 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 # Added as part of challenge!
 from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin,AccessMixin
 from django.contrib.auth import get_user_model
 from django.views import generic
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.urls import reverse
+from django.contrib import messages
 import datetime
 from catalog.forms import RenewMusicForm
 import django_filters
@@ -32,24 +33,26 @@ from django.shortcuts import render
 import random
 import datetime
 import time
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.models import Group
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def is_in_group(user,group_name):
+    group = Group.objects.get(name=group_name)
+    return True if group in user.groups.all() else False
 
 class HomePageView(TemplateView):
+    def get_template_names(self):
+        if  not self.request.user.is_authenticated:
+            return "visitorindex.html"
+        if is_in_group(self.request.user,"Nonmember"):
+            return "nonmemberindex.html"
+        if is_in_group(self.request.user,"Librarian"):
+            return "librarianindex.html"
+        if is_in_group(self.request.user,"Member"):
+            return "memberindex.html"
+        return super().get_template_names()
     template_name = 'index.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = None
@@ -73,48 +76,57 @@ class HomePageView(TemplateView):
         context.update(xxx)
         return context
 
+    def render_to_response(self,context,**kwargs):
+        return super().render_to_response(context);
 
-
-
-
-def index(request):
-    """View function for home page of site."""
-    user = None
-    # Generate counts of some of the main objects
-    num_music = Music.objects.all().count()
-    num_instances = MusicInstance.objects.all().count()
-    # Available copies of books
-    num_instances_available = MusicInstance.objects.filter(status__exact='a').count()
-    num_composers = Composer.objects.count()  # The 'all()' is implied by default.
-
-    # Number of visits to this view, as counted in the session variable.
-    num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits+1
-    can_reserve = False
-    if request.user.has_perm('can_self_reserve'):
-        can_reserve = True
-    # Render the HTML template index.html with the data in the context variable.
-    return render(
-        request,
-        'index.html',
-        context={'can_reserve':can_reserve ,'num_music': num_music, 'num_instances': num_instances,
-                 'num_instances_available': num_instances_available, 'num_composers': num_composers,
-                 'num_visits': num_visits},
-    )
-
-
-
-
-
-class MusicListView(generic.ListView):
+class MusicListView(PermissionRequiredMixin,generic.ListView):
     """Generic class-based view for a list of music."""
     model = Music
     paginate_by = 10
-
+    permission_required = "silly"
     def get_context_data(self, **kwargs):
+        messages.info(self.request,"MUSIC LIST VIEW HERE")
         context = super().get_context_data(**kwargs)
         context['hackedby'] = "Gary"
+        #raise PermissionDenied
+        # self.use_template = "nonexistent.html"
         return context
+        
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+           return False
+        if not self.request.user.has_perm('can_browse_catalog'):
+           return False    
+        return True       
+
+class ReserveAction(PermissionRequiredMixin,View) :     
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+           return False
+        if not self.request.user.has_perm('can_self_reserve'):
+            if not self.request.user.has_perm('can_any_reserve'):
+               return False
+        return True
+  
+    def post(self,request,*args,**kwargs):
+        whichCopy= request.POST['reservebutton']
+        reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
+        reservationnumber = int(reservationnumber)
+        instance = MusicInstance.objects.get(id = whichCopy)
+        instance.status = 'r'
+        instance.due_back = datetime.date.today() + timedelta(days=122)
+        instance.borrower = request.user
+        instance.save()
+        emailAddress= request.user.email
+        print(emailAddress)
+        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , takenoutdate = date.today(), userid=request.user, takenout= False)
+        reservation.save()
+        send_mail(
+            'Music Reserved',
+            'Your Borrowed id is: ' + str(reservationnumber),
+            'adam@Bilkus.com',
+            [emailAddress])
+        return HttpResponse( ("You have reserved %s and your reservation number is %s") % (whichCopy, reservationnumber))
 
 
 
@@ -312,28 +324,6 @@ def ReserveMusicDetail(request, pk):
     context= {"music":music,"available":available}
     return HttpResponse(template.render(context,request))
 
-def ReserveAction(request):
-    whichCopy= request.POST['reservebutton']
-    reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
-    reservationnumber = int(reservationnumber)
-    if request.user.is_authenticated:
-        username = request.user
-    a = MusicInstance.objects.get(id = whichCopy)
-    a.status = 'r'
-    a.due_back = datetime.date.today() + timedelta(days=122)
-    a.borrower = username
-    a.save()
-    b=request.user
-    c= b.email
-    print(c)
-    p = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=a , takenoutdate = date.today(), userid=username, takenout= False)
-    p.save()
-    send_mail(
-        'Music Reserved',
-        'Your Borrowed id is: ' + str(reservationnumber),
-        'adam@Bilkus.com',
-        [c])
-    return HttpResponse( ("You have reserved %s and your reservation number is %s") % (whichCopy, reservationnumber))
 
 def BorrowAction(request):
     whichCopy= request.POST['borrowbutton']
