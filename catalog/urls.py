@@ -33,7 +33,7 @@ urlpatterns += [
     path('musicInstance/<uuid:pk>/borrowAction/', views.borrowInstanceAction, name='borrow-instance'),
     path('musicInstance/<uuid:pk>/renewAction/', views.renewInstanceAction, name='renew-instance'),
     path('musicInstance/<uuid:pk>/returnAction/', views.returnInstanceAction, name='return-instance'),
-    path('borrowedOrReservedAll/', views.BorrowedOrReservedAll.as_view(), name='all-borrowed'),
+    path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
 ]
 
 # Add URLConf to create, update, and delete composers
