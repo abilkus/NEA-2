@@ -139,7 +139,16 @@ class ComposerListView(PermissionRequiredMixin,generic.ListView):
     model = Composer
     paginate_by = 10
     permission_required = 'can_browse_catalog'
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['hackedby'] = "Adam"
+        return context
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('can_browse_catalog'):
+            return False
+        return True
 
 class ComposerDetailView(generic.DetailView):
     """Generic class-based detail view for an author."""
@@ -206,7 +215,7 @@ class LoanedMusicAllListView(generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(status__exact='r').order_by('due_back')
     
-'''
+
 
 
 
@@ -405,3 +414,4 @@ class MusicFilter(django_filters.FilterSet):
         model = Music
         fields = ['genre', 'language']
 
+'''
