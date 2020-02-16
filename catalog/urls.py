@@ -21,15 +21,15 @@ urlpatterns += [
 # These patterns implement functions only available to members who therefore have reservation rights 
 urlpatterns += [
     # the button which actually makes a reservation
-    path('reserveAction/', views.ReserveAction.as_view(), name='reserve'),
-    path('cancelReserveAction/',views.CancelReserveAction.as_view(),name='cancelReserve'),
+    path('reserveAction/', views.ReserveAction.as_view(), name='reserveAction'),
     # list of music which has been borrowed or reserved by the user
-    path('borrowedOrReservedByUser/', views.BorrowedOrReservedUser.as_view(), name='my-borrowed'),
+    path('borrowedOrReservedByUser/', views.BorrowedOrReservedByUser.as_view(), name='my-borrowed'),
+    path('cancelReserveAction/',views.CancelReserveAction.as_view(),name='cancelReserve'),
 ]
 
 # These are only available to librarians
 urlpatterns += [
-    path('musicInstance/<uuid:pk>/borrowAction/', views.borrowInstanceAction, name='renew-instance'),
+    path('musicInstance/<uuid:pk>/borrowAction/', views.borrowInstanceAction, name='borrow-instance'),
     path('musicInstance/<uuid:pk>/renewAction/', views.renewInstanceAction, name='renew-instance'),
     path('musicInstance/<uuid:pk>/returnAction/', views.returnInstanceAction, name='return-instance'),
     path('borrowedOrReservedAll/', views.BorrowedOrReservedAll.as_view(), name='all-borrowed'),

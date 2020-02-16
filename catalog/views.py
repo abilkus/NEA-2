@@ -1,18 +1,17 @@
+import random
+import datetime
+from datetime import date
+import time
 from django.shortcuts import render
 from django.views import View
-# Create your views here.
 from django.http import HttpResponse
-from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation
 from django.template import loader
 from django.utils.crypto import get_random_string
-from datetime import date
 from django.contrib.auth.models import User
 from django.db.models import Exists, OuterRef
-import datetime
 from datetime import timedelta
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
-# Added as part of challenge!
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin,AccessMixin
 from django.contrib.auth import get_user_model
@@ -23,23 +22,22 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.urls import reverse
 from django.contrib import messages
-import datetime
-from catalog.forms import RenewMusicForm
 import django_filters
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Composer
 from django.shortcuts import render
-import random
-import datetime
-import time
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import Group
+
+from catalog.forms import RenewMusicForm
+from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation
+
 
 def is_in_group(user,group_name):
     group = Group.objects.get(name=group_name)
     return True if group in user.groups.all() else False
 
+# The home page will depend on the logged in user and which group they belong to
 class HomePageView(TemplateView):
     def get_template_names(self):
         if  not self.request.user.is_authenticated:
@@ -83,28 +81,68 @@ class MusicListView(PermissionRequiredMixin,generic.ListView):
     """Generic class-based view for a list of music."""
     model = Music
     paginate_by = 10
-    permission_required = "silly"
     def get_context_data(self, **kwargs):
-        messages.info(self.request,"MUSIC LIST VIEW HERE")
         context = super().get_context_data(**kwargs)
-        context['hackedby'] = "Gary"
-        #raise PermissionDenied
-        # self.use_template = "nonexistent.html"
         return context
         
     def has_permission(self):
         if not self.request.user.is_authenticated:
+           print("musiclistview not authenticated")
            return False
-        if not self.request.user.has_perm('can_browse_catalog'):
+        if not self.request.user.has_perm('catalog.can_browse_catalog'):
+           print("musiclistview user lacks can_browse_catalog")
            return False    
         return True       
+
+#messages.info(self.request,"MUSIC LIST VIEW HERE")
+
+class MusicDetailView(PermissionRequiredMixin,generic.DetailView):
+    """Generic class-based detail view for a book."""
+    model = Music
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+           return False
+        if not self.request.user.has_perm('catalog.can_browse_catalog'):
+           return False    
+        return True
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        music=kwargs['object']
+        print(music)
+        available=music.musicinstance_set.filter(status__exact = 'a')
+        navailable = available.count()
+        context['music'] = music
+        context['firstavailable'] = available.first()
+        context['navailable'] = navailable
+        context['show_reserve_button'] = navailable > 0 and (self.request.user.has_perm('catalog.can_self_reserve') or self.request.user.has_perm('catalog.can_any_reserve'))
+        return context
+
+
+
+# Clean up composer just like we did for music
+class ComposerListView(PermissionRequiredMixin,generic.ListView):
+    """Generic class-based list view for a list of authors."""
+    model = Composer
+    paginate_by = 10
+
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_browse_catalog'):
+            return False
+        return True
+
+class ComposerDetailView(generic.DetailView):
+    """Generic class-based detail view for a composer """
+    model = Composer
 
 class ReserveAction(PermissionRequiredMixin,View) :     
     def has_permission(self):
         if not self.request.user.is_authenticated:
            return False
-        if not self.request.user.has_perm('can_self_reserve'):
-            if not self.request.user.has_perm('can_any_reserve'):
+        if not self.request.user.has_perm('catalog.can_self_reserve'):
+            if not self.request.user.has_perm('catalog.can_any_reserve'):
                return False
         return True
   
@@ -126,41 +164,27 @@ class ReserveAction(PermissionRequiredMixin,View) :
             'Your Borrowed id is: ' + str(reservationnumber),
             'adam@Bilkus.com',
             [emailAddress])
-        return HttpResponse( ("You have reserved %s and your reservation number is %s") % (whichCopy, reservationnumber))
+        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (whichCopy, reservationnumber))
+        return HttpResponseRedirect("/catalog")
 
-
-
-class MusicDetailView(generic.DetailView):
-    """Generic class-based detail view for a book."""
-    model = Music
-
-class ComposerListView(PermissionRequiredMixin,generic.ListView):
-    """Generic class-based list view for a list of authors."""
-    model = Composer
-    paginate_by = 10
-    permission_required = 'can_browse_catalog'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['hackedby'] = "Adam"
-        return context
+class BorrowedOrReservedByUser(PermissionRequiredMixin, TemplateView):
     def has_permission(self):
         if not self.request.user.is_authenticated:
-            return False
-        if not self.request.user.has_perm('can_browse_catalog'):
-            return False
+           return False
+        if not self.request.user.has_perm('catalog.can_self_reserve'):
+           return False
         return True
-
-class ComposerDetailView(generic.DetailView):
-    """Generic class-based detail view for a composer """
-    model = Composer
-
+    template_name = "catalog/borrowed_or_reserved_by_user.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        instances = MusicInstance.objects.filter(status__exact = 'r', borrower_id = self.request.user.id)
+        context['instances'] = instances
+        return context    
 
 
 class CancelReserveAction(PermissionRequiredMixin, View):
      print("Hello")
 
-class BorrowedOrReservedUser(PermissionRequiredMixin, generic.ListView):
-     print("Hello")
 
 
 class borrowInstanceAction(PermissionRequiredMixin, View):
