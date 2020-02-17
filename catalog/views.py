@@ -32,7 +32,7 @@ from django.utils.decorators import method_decorator
 from django_ajax.decorators import ajax
 from django_ajax.mixin import AJAXMixin
 from catalog.forms import RenewMusicForm
-from .models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation
+from catalog.models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation,ActivityLog
 
 def is_in_group(user,group_name):
     group = Group.objects.get(name=group_name)
@@ -250,7 +250,9 @@ class ReserveAction(PermissionRequiredMixin,View) :
         instance.save()
         emailAddress= request.user.email
         print(emailAddress)
-        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , takenoutdate = date.today(), userid=request.user, takenout= False)
+        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , takenoutdate = date.today(), userid=request.user)
+        activity = ActivityLog(activityCode = 'res', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=request.user)
+        activity.save()
         reservation.save()
         send_mail(
             'Music Reserved',
@@ -276,9 +278,10 @@ class CancelReserveAction(PermissionRequiredMixin, View):
         instance.save()
         emailAddress= request.user.email
         print(emailAddress)
-        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False, returned = False)
+        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False, returned = False, cancelled = False)
         reservationnumber = reservation.borrowedid
-        reservation.delete()
+        reservation.cancelled = True
+        reservation.save()
         send_mail(
             'Music Reservation has been cancelled',
             'Your Borrowed id is: ' + str(reservationnumber),
@@ -300,7 +303,7 @@ class borrowInstanceAction(PermissionRequiredMixin, View):
         instance.status = 'o'
         instance.due_back = date.today() + timedelta(days = 42)
         instance.save()
-        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False)
+        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False, cancelled = False)
         reservation.due_back = instance.due_back
         reservation.takenout = True
         reservation.takenoutdate = date.today()
@@ -359,7 +362,7 @@ class returnInstanceAction(PermissionRequiredMixin, View):
         instance.due_back = None
         instance.borrower = None
         instance.save()
-        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = True, returned = False)
+        reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = True, returned = False, cancelled=False)
         id = reservation.borrowedid
         reservation.returneddate = date.today()
         reservation.returned = True

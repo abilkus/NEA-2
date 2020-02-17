@@ -29,11 +29,30 @@ class Language(models.Model):
         return self.name
 
 
+class Composer(models.Model):
+    atomic = False
+    """Model representing an author."""
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_death = models.DateField('died', null=True, blank=True)
+    
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular author instance."""
+        return reverse('composer_detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return '{0}, {1}'.format(self.last_name, self.first_name)
+
 class Music(models.Model):
     atomic = False
     """Model representing a piece of music  (but not a specific copy of that music)."""
     title = models.CharField(max_length=200)
-    composer = models.ForeignKey('Composer', on_delete=models.SET_NULL, null=True)
+    composer = models.ForeignKey(Composer, on_delete=models.SET_NULL, null=True)
     # Foreign Key used because music can only have one composer but composers can have multiple sets of music
     # Composer as a string rather than object because it hasn't been declared yet in file.
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
@@ -43,7 +62,7 @@ class Music(models.Model):
     genre = models.ManyToManyField(Genre, help_text="Select a genre for this music")
     # ManyToManyField used because a genre can contain many sets of music and a Music can cover many genres.
     # Genre class has already been defined so we can specify the object above.
-    language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+    language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
     def display_genre(self):
         """Creates a string for the Genre. This is required to display genre in Admin."""
@@ -81,7 +100,7 @@ class MusicInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text="Unique ID for this particular book across whole library")
-    music = models.ForeignKey('music', on_delete=models.SET_NULL, null=True)
+    music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True)
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -121,38 +140,39 @@ class MusicInstance(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return '{0} ({1})'.format(self.id, self.music.title)
+        return '{0} ({1} {2})'.format(self.id, self.music.title, self.music.composer.last_name)
 
 
-class Composer(models.Model):
-    atomic = False
-    """Model representing an author."""
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('died', null=True, blank=True)
-    
-    class Meta:
-        ordering = ['last_name', 'first_name']
-
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('composer_detail', args=[str(self.id)])
-
-    def __str__(self):
-        """String for representing the Model object."""
-        return '{0}, {1}'.format(self.last_name, self.first_name)
 
 class MusicInstanceReservation(models.Model):
     borrowedid = models.IntegerField()
-    musicInstance = models.ForeignKey("musicInstance", on_delete=models.SET_NULL, null=True)
+    musicInstance = models.ForeignKey(MusicInstance, on_delete=models.SET_NULL, null=True)
     userid= models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     takenoutdate=models.DateTimeField(default=timezone.now)
     returneddate=models.DateTimeField(default=timezone.now)
     duedate = models.DateTimeField(default=timezone.now)
     returned = models.BooleanField(default=False)
     takenout = models.BooleanField(default=False)
+    cancelled = models.BooleanField(default=False)
 
-from django.db import models
+ACTIVITY_CODE = (
+        ('res', 'Reserve'),
+        ('bor', 'Borrow'),
+        ('can', 'Cancel Res'),
+        ('ret', 'Return'),
+        ('ren', 'Renew'),
+    )
 
-
+class ActivityLog(models.Model):
+    activityTimestamp = models.DateTimeField(default=timezone.now)
+    activityCode =  models.CharField(
+        max_length=4,
+        choices=ACTIVITY_CODE,
+        null=False,
+        help_text='The activity being logged')
+    music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True)
+    musicInstance = models.ForeignKey(MusicInstance, on_delete=models.SET_NULL, null=True)
+    musicInstanceReservation = models.ForeignKey(MusicInstanceReservation, on_delete=models.SET_NULL, null=True)
+    composer = models.ForeignKey(Composer, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    
