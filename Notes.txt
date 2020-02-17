@@ -8,6 +8,6 @@ login
 all simple html returns need to be proper pages
 
 user can borrow, see what they have borrowed or reserved
-
-
-
+Get calendar setup correctly
+Overdue Items
+Cancelling if reservation overdue
