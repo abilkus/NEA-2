@@ -109,7 +109,7 @@ async def on_message(message):
     y= chat(x)
     await message.channel.send(y)
 
-client.run("NjQyMDY3Nzg4NzY0MTUxODA5.XdlGnA.Ydtxl4Q7_z1v9rIiM4curuvnNdc")
+client.run("NjQyMDY3Nzg4NzY0MTUxODA5.Xkqblg.r6vSWcDI11zJPRcwYqDv-7XZ_rY")
 
 
 

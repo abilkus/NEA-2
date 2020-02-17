@@ -1,2 +1,2 @@
-model_checkpoint_path: "/root/NEA-2/catalog/model.tflearn"
-all_model_checkpoint_paths: "/root/NEA-2/catalog/model.tflearn"
+model_checkpoint_path: "/home/adam/NEA-2/catalog/model.tflearn"
+all_model_checkpoint_paths: "/home/adam/NEA-2/catalog/model.tflearn"
