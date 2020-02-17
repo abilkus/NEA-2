@@ -125,7 +125,7 @@ class HomePageView(TemplateView):
         instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
         events = []
         for event in instances:
-            eventtext = '{title:" ' + str(event.music.title) + '",user:"' + str(event.borrower) + '",start:"' + event.due_back.strftime("%Y-%m-%d") + '"},'
+            eventtext = '{title:" ' + str(event.music.title) + '\\n user: ' + str(event.borrower) + '",start:"' + event.due_back.strftime("%Y-%m-%d") + '"},'
             events.append(eventtext)
         context['event_list'] = events
         return context
@@ -298,15 +298,9 @@ class BorrowInstanceAction(PermissionRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         whichCopy = request.POST['instanceId']
         instance = MusicInstance.objects.get(id = whichCopy)
-        instance.status = 'o'
-        instance.due_back = date.today() + timedelta(days = 42)
-        instance.save()
         reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False, cancelled = False)
-        reservation.due_back = instance.due_back
-        reservation.takenout = True
-        reservation.takenoutdate = date.today()
-        reservation.returned = False
-        reservation.save()
+        instance=reservation.borrow(request.user)
+
         userid = reservation.userid_id
         user = User.objects.get(id = str(userid))
         reservationnumber = reservation.borrowedid
@@ -331,9 +325,8 @@ class RenewInstanceAction(PermissionRequiredMixin, View):
         whichCopy = request.POST['instanceId']
         instance = MusicInstance.objects.get(id = whichCopy)
         reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = True, returned = False)
-        reservation.due_back = date.today() + timedelta(days = 42)
-        id = reservation.borrowedid
-        reservation.save()
+        reservation.renew(request.user)
+        
         userid = reservation.userid_id
         user = User.objects.get(id = str(userid))
         email = user.email
@@ -356,16 +349,9 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
     def post(self,request,*args,**kwargs):
         whichCopy = request.POST['instanceId']
         instance = MusicInstance.objects.get(id = whichCopy)
-        instance.status = 'a'
-        instance.due_back = None
-        instance.borrower = None
-        instance.save()
         reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = True, returned = False, cancelled=False)
-        id = reservation.borrowedid
-        reservation.returneddate = date.today()
-        reservation.returned = True
-        reservation.save()
-        userid = reservation.userid_id
+        user = reservation.returns(request.user)
+        userid = user.id
         user = User.objects.get(id = str(userid))
         email = user.email
         send_mail(

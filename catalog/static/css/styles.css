@@ -7,3 +7,30 @@
 body {
   background-color: purple;
 }
+
+.fc-title {
+  background-color: wheat;
+  background-color: wheat;
+  border-top-color: wheat;
+  border-bottom-color: wheat;
+  border-left-color: wheat;
+  border-right-color: wheat;
+}
+
+.fc-content {
+  background-color: wheat;
+  background-color: wheat;
+  border-top-color: wheat;
+  border-bottom-color: wheat;
+  border-left-color: wheat;
+  border-right-color: wheat;
+}
+
+.fc-event .fc-event-dot {
+  background-color: wheat;
+  border-top-color: wheat;
+  border-bottom-color: wheat;
+  border-left-color: wheat;
+  border-right-color: wheat;
+  border: 1px solid wheat;
+}

@@ -10,7 +10,8 @@ from django.utils.crypto import get_random_string
 import uuid  # Required for unique music instances
 from datetime import date,timedelta
 
-daysToReserve = 122
+daysToReserve = 14
+daysToBorrow = 122
 
 class Genre(models.Model):
     """Model representing a musical genre (e.g. Jazz, Classical, Pop)."""
@@ -192,6 +193,42 @@ class MusicInstanceReservation(models.Model):
         activity = ActivityLog(activityCode = 'can', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
         activity.save()
 
+    def borrow(self,user,**kwargs):
+        reservation = self
+        instance = self.musicInstance
+        instance.status = 'o'
+        instance.due_back = date.today() + timedelta(days = daysToBorrow)
+        instance.save()
+        
+        reservation.due_back = instance.due_back
+        reservation.takenout = True
+        reservation.takenoutdate = date.today()
+        reservation.returned = False
+        reservation.save()
+        activity = ActivityLog(activityCode = 'bor', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
+        activity.save()
+        return instance
+    def renew(self,user,**kwargs):
+        reservation = self
+        instance = self.musicInstance
+        instance.due_back = date.today() + timedelta(days = daysToBorrow)
+        instance.save()
+        activity = ActivityLog(activityCode = 'ren', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
+        activity.save()
+        reservation.duedate = instance.due_back
+    def returns(self,user,**kwargs):
+        reservation = self
+        instance = self.musicInstance
+        instance.status = 'a'
+        instance.due_back = None
+        instance.borrower = None
+        instance.save()
+        reservation.returned = True
+        reservation.returneddate = date.today()
+        reservation.save()
+        activity = ActivityLog(activityCode = 'ret', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
+        activity.save()
+        return user
     def hasExpired(self):
         return not self.takenout and not self.returned and not self.cancelled and (self.duedate < timezone.now()) 
     @staticmethod
