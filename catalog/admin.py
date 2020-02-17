@@ -1,5 +1,5 @@
 from django.contrib import admin
-from import_export.admin import ImportExportActionModelAdmin
+from import_export.admin import ImportExportActionModelAdmin,ExportActionMixin,ImportExportMixin
 
 # Register your models here.
 
@@ -16,7 +16,7 @@ class MusicInline(admin.TabularInline):
 
 
 @admin.register(Composer)
-class ComposerAdmin(ImportExportActionModelAdmin,admin.ModelAdmin):
+class ComposerAdmin(ImportExportMixin,admin.ModelAdmin):
     """Administration object for Composer models.
     Defines:
      - fields to be displayed in list view (list_display)
@@ -35,7 +35,7 @@ class MusicsInstanceInline(admin.TabularInline):
     model = MusicInstance
 
 
-class MusicAdmin(admin.ModelAdmin):
+class MusicAdmin(ImportExportMixin,admin.ModelAdmin):
     """Administration object for Music models.
     Defines:
      - fields to be displayed in list view (list_display)

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from catalog import views
 
 # The home page is the only one available to non-logged in users
 # It displays differently depending on whether you are logged in
@@ -33,6 +33,7 @@ urlpatterns += [
     path('renewAction/', views.renewInstanceAction.as_view(), name='renewAction'),
     path('returnAction/', views.returnInstanceAction.as_view(), name='returnAction'),
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
+    path('activityChart/', views.ActivityChart.as_view(), name='activityChart'),
 ]
 '''
 # Add URLConf to create, update, and delete composers
