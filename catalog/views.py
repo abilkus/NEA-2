@@ -229,6 +229,18 @@ class BorrowedOrReservedByAll(PermissionRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         return context 
 
+class ActivityChart(PermissionRequiredMixin,TemplateView):
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_any_reserve'):
+            return False
+        return True
+    template_name = "catalog/activity_chart.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context 
+
 # Now the post actions
 class ReserveAction(PermissionRequiredMixin,View) :     
     def has_permission(self):
