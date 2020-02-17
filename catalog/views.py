@@ -122,12 +122,15 @@ class HomePageView(TemplateView):
         context.update(xxx)
         context['calendarStartDate'] = date.today().strftime("%Y-%m-%d")
         statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
-        instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
+        if self.request.user.has_perm('catalog.can_any_reserve'):
+            instances = MusicInstance.objects.filter(statusq)
+        else:
+            instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
         events = []
         for event in instances:
             eventtext = '{title:" ' + str(event.music.title) + '\\n user: ' + str(event.borrower) + '",start:"' + event.due_back.strftime("%Y-%m-%d") + '"},'
             events.append(eventtext)
-        context['event_list'] = events
+            context['event_list'] = events
         return context
 
     def render_to_response(self,context,**kwargs):
