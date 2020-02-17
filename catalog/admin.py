@@ -3,7 +3,7 @@ from import_export.admin import ImportExportActionModelAdmin,ExportActionMixin,I
 
 # Register your models here.
 
-from .models import Composer, Genre, Music, MusicInstance, Language, MusicInstanceReservation 
+from catalog.models import Composer, Genre, Music, MusicInstance, Language, MusicInstanceReservation,ActivityLog
 
 
 admin.site.register(Genre)
@@ -68,6 +68,11 @@ class MusicInstanceAdmin(admin.ModelAdmin):
 @admin.register(MusicInstanceReservation)
 class MusicInstanceReservationAdmin(admin.ModelAdmin):
     model = MusicInstanceReservation
+
+@admin.register(ActivityLog)
+class ActivityLogAdmin(admin.ModelAdmin):
+    model = ActivityLog
+
 
 from django.contrib import admin
 from import_export import resources

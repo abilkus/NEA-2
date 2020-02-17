@@ -34,6 +34,7 @@ urlpatterns += [
     path('returnAction/', views.ReturnInstanceAction.as_view(), name='returnAction'),
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
     path('activityChart/', views.ActivityChart.as_view(), name='activityChart'),
+    path('routineMaintenance/',views.RoutineMaintenance.as_view(),name='routineMaintenance'),
 ]
 '''
 # Add URLConf to create, update, and delete composers

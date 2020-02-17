@@ -6,6 +6,11 @@ from django.utils import timezone
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 from django.contrib.auth.models import User
 import django_filters
+from django.utils.crypto import get_random_string
+import uuid  # Required for unique music instances
+from datetime import date,timedelta
+
+daysToReserve = 122
 
 class Genre(models.Model):
     """Model representing a musical genre (e.g. Jazz, Classical, Pop)."""
@@ -89,8 +94,6 @@ class Music(models.Model):
         )
 
 
-import uuid  # Required for unique music instances
-from datetime import date
 
 from django.contrib.auth.models import User  # Required to assign User as a borrower
 
@@ -103,6 +106,21 @@ class MusicInstance(models.Model):
     music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True)
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def reserve(self,user):
+        instance = self
+        reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
+        reservationnumber = int(reservationnumber)
+        instance.status = 'r'
+        instance.due_back = date.today() + timedelta(days=daysToReserve)
+        instance.borrower = user
+        instance.save()
+        
+        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , duedate = instance.due_back, takenoutdate = date.today(), userid=user)
+        activity = ActivityLog(activityCode = 'res', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
+        activity.save()
+        reservation.save()
+        return reservationnumber,instance
 
     @property
     def is_overdue(self):
@@ -146,41 +164,40 @@ class MusicInstanceReservation(models.Model):
     borrowedid = models.IntegerField()
     musicInstance = models.ForeignKey(MusicInstance, on_delete=models.SET_NULL, null=True)
     userid= models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    takenoutdate=models.DateTimeField(default=timezone.now)
-    returneddate=models.DateTimeField(default=timezone.now)
-    duedate = models.DateTimeField(default=timezone.now)
+    takenoutdate=models.DateTimeField(null=True,blank=True)
+    returneddate=models.DateTimeField(null=True,blank=True)
+    duedate = models.DateTimeField(null=True,blank=True)
     returned = models.BooleanField(default=False)
     takenout = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
-
-    def reserve(self,user,instance):
-        reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
-        reservationnumber = int(reservationnumber)
-        instance.status = 'r'
-        instance.due_back = datetime.date.today() + timedelta(days=122)
-        instance.borrower = request.user
-        instance.save()
-        
-        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , takenoutdate = date.today(), userid=request.user)
-        activity = ActivityLog(activityCode = 'res', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=request.user)
-        activity.save()
-        reservation.save()
-        return reservationnumber,instance
-
+    def save(self,*args,**kwargs):
+        if self.duedate == None:
+            self.duedate = timezone.now() + timedelta(days=daysToReserve)
+        if self.takenoutdate == None:
+            self.takenoutdate = timezone.now()
+        return super(MusicInstanceReservation,self).save(*args,**kwargs)
     def cancel(self,user):
         instance = self.musicInstance
         instance.status = 'a'
         instance.due_back = None
         instance.borrower = None
         instance.save()
-        print(emailAddress)
+        reservation = self
         reservation.cancelled = True
         reservation.save()
         activity = ActivityLog(activityCode = 'can', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
         activity.save()
 
     def hasExpired(self):
-        return not self.takenout and not self.returned and not self.cancelled and (self.duedate < datetime.date.today()) 
+        return not self.takenout and not self.returned and not self.cancelled and (self.duedate < timezone.now()) 
+    @staticmethod
+    def cancelExpiredReservations(user):
+        for res in MusicInstanceReservation.objects.all():
+            if res.hasExpired():
+                print("Cancelling an expired reservation")
+                res.cancel(user)
+
+
 ACTIVITY_CODE = (
         ('res', 'Reserve'),
         ('bor', 'Borrow'),
@@ -188,11 +205,7 @@ ACTIVITY_CODE = (
         ('ret', 'Return'),
         ('ren', 'Renew'),
     )
-    @classmethod
-    def cancelExpiredReservations():
-        for res in MusicInstanceReservation.object.all():
-            if res.hasExpired:
-                res.cancel
+    
 
 class ActivityLog(models.Model):
     activityTimestamp = models.DateTimeField(default=timezone.now)

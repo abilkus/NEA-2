@@ -1,15 +1,13 @@
 import random
 import datetime
-from datetime import date
+from datetime import date,timedelta
 import time
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.template import loader
-from django.utils.crypto import get_random_string
 from django.contrib.auth.models import User
 from django.db.models import Exists, OuterRef, Q
-from datetime import timedelta
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
@@ -257,7 +255,7 @@ class ReserveAction(PermissionRequiredMixin,View) :
     def post(self,request,*args,**kwargs):
         whichCopy= request.POST['reservebutton']
         instance = MusicInstance.objects.get(id = whichCopy)
-        reservationnumber,instance = instance.reserve(request.user,instance)
+        reservationnumber,instance = instance.reserve(request.user)
         emailAddress= request.user.email
         print(emailAddress)
         send_mail(
@@ -377,6 +375,15 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             [email])
         messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog")
+
+class RoutineMaintenance(PermissionRequiredMixin,View):
+    def has_permission(self):
+        if not self.request.user.is_superuser:
+            return False
+        return True
+    def get(self,request,*args,**kwargs):
+        MusicInstanceReservation.cancelExpiredReservations(request.user)
+        return HttpResponse("Routine maintenance has run")
 
 '''
 class ComposerCreate(CreateView):
