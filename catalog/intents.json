@@ -30,7 +30,7 @@
          "context_set": ""
         },
 	{"tag": "emotions",
-	 "patterns": ["how's yur day been", "how are you", "how you doing"],
+	 "patterns": ["how's yur day been", "how are you", "how you doing", "whats up"],
 	 "responses": ["I'm good", "I'm freezing start playing some games with me. ;}", "Sad as noone plays games with me :(", "Happy to see a new face. :)"],
 	 "context_set":""
 	}

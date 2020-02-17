@@ -127,7 +127,7 @@ class HomePageView(TemplateView):
         instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
         events = []
         for event in instances:
-            eventtext = '{title:" ' + str(event.id) + '",start:"' + event.due_back.strftime("%Y-%m-%d") + '"},'
+            eventtext = '{title:" ' + str(event.music.title) + '",user:"' + str(event.borrower) + '",start:"' + event.due_back.strftime("%Y-%m-%d") + '"},'
             events.append(eventtext)
         context['event_list'] = events
         return context
@@ -206,6 +206,9 @@ class BorrowedOrReservedByUser(PermissionRequiredMixin, generic.ListView):
     def get_queryset(self, **kwargs):
         statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
         instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
+        '''for i in instances:
+            if instance.statusq == 'r' and (date.today() - instance.due_back) < 0:
+           '''  
         return instances
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
