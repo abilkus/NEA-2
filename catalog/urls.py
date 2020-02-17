@@ -29,9 +29,9 @@ urlpatterns += [
 
 # These are only available to librarians
 urlpatterns += [
-    path('borrowAction/', views.borrowInstanceAction.as_view(), name='borrowAction'),
-    path('renewAction/', views.renewInstanceAction.as_view(), name='renewAction'),
-    path('returnAction/', views.returnInstanceAction.as_view(), name='returnAction'),
+    path('borrowAction/', views.BorrowInstanceAction.as_view(), name='borrowAction'),
+    path('renewAction/', views.RenewInstanceAction.as_view(), name='renewAction'),
+    path('returnAction/', views.ReturnInstanceAction.as_view(), name='returnAction'),
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
     path('activityChart/', views.ActivityChart.as_view(), name='activityChart'),
 ]

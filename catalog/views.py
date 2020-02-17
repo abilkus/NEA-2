@@ -256,19 +256,10 @@ class ReserveAction(PermissionRequiredMixin,View) :
   
     def post(self,request,*args,**kwargs):
         whichCopy= request.POST['reservebutton']
-        reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
-        reservationnumber = int(reservationnumber)
         instance = MusicInstance.objects.get(id = whichCopy)
-        instance.status = 'r'
-        instance.due_back = datetime.date.today() + timedelta(days=122)
-        instance.borrower = request.user
-        instance.save()
+        reservationnumber,instance = instance.reserve(request.user,instance)
         emailAddress= request.user.email
         print(emailAddress)
-        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , takenoutdate = date.today(), userid=request.user)
-        activity = ActivityLog(activityCode = 'res', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=request.user)
-        activity.save()
-        reservation.save()
         send_mail(
             'Music Reserved',
             'Your Borrowed id is: ' + str(reservationnumber),
@@ -287,16 +278,10 @@ class CancelReserveAction(PermissionRequiredMixin, View):
     def post(self,request,*args,**kwargs):
         whichCopy= request.POST['cancelReservation']
         instance = MusicInstance.objects.get(id = whichCopy)
-        instance.status = 'a'
-        instance.due_back = None
-        instance.borrower = None
-        instance.save()
-        emailAddress= request.user.email
-        print(emailAddress)
         reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = False, returned = False, cancelled = False)
         reservationnumber = reservation.borrowedid
-        reservation.cancelled = True
-        reservation.save()
+        reservation.cancel(request.user)
+        emailAddress= request.user.email
         send_mail(
             'Music Reservation has been cancelled',
             'Your Borrowed id is: ' + str(reservationnumber),
@@ -305,7 +290,7 @@ class CancelReserveAction(PermissionRequiredMixin, View):
         messages.info(self.request,"Reservation number  %s has been cancelled" % (reservationnumber))
         return HttpResponseRedirect("/catalog/borrowedOrReservedByUser")
 
-class borrowInstanceAction(PermissionRequiredMixin, View):
+class BorrowInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
         if not self.request.user.is_authenticated:
             return False
@@ -336,7 +321,7 @@ class borrowInstanceAction(PermissionRequiredMixin, View):
         messages.info(self.request, "The borrowing was successful: %s has borrowed %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog")
 
-class renewInstanceAction(PermissionRequiredMixin, View):
+class RenewInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
         if not self.request.user.is_authenticated:
             return False
@@ -362,7 +347,7 @@ class renewInstanceAction(PermissionRequiredMixin, View):
         messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog")
 
-class returnInstanceAction(PermissionRequiredMixin, View):
+class ReturnInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
         if not self.request.user.is_authenticated:
             return False
@@ -418,24 +403,6 @@ class MusicUpdate(UpdateView):
 class MusicDelete(DeleteView):
     model = Music
     success_url = reverse_lazy('musics')
-
-def demo_piechart(request):
-    """
-    pieChart page
-    """
-    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
-    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
-
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
-    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
-
-    data = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-    }
-    return render(None, 'catalog/piechart.html', data)
-
 
 class MusicFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='iexact')

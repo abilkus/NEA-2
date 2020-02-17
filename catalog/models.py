@@ -142,8 +142,6 @@ class MusicInstance(models.Model):
         """String for representing the Model object."""
         return '{0} ({1} {2})'.format(self.id, self.music.title, self.music.composer.last_name)
 
-
-
 class MusicInstanceReservation(models.Model):
     borrowedid = models.IntegerField()
     musicInstance = models.ForeignKey(MusicInstance, on_delete=models.SET_NULL, null=True)
@@ -155,6 +153,34 @@ class MusicInstanceReservation(models.Model):
     takenout = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
 
+    def reserve(self,user,instance):
+        reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
+        reservationnumber = int(reservationnumber)
+        instance.status = 'r'
+        instance.due_back = datetime.date.today() + timedelta(days=122)
+        instance.borrower = request.user
+        instance.save()
+        
+        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , takenoutdate = date.today(), userid=request.user)
+        activity = ActivityLog(activityCode = 'res', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=request.user)
+        activity.save()
+        reservation.save()
+        return reservationnumber,instance
+
+    def cancel(self,user):
+        instance = self.musicInstance
+        instance.status = 'a'
+        instance.due_back = None
+        instance.borrower = None
+        instance.save()
+        print(emailAddress)
+        reservation.cancelled = True
+        reservation.save()
+        activity = ActivityLog(activityCode = 'can', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
+        activity.save()
+
+    def hasExpired(self):
+        return not self.takenout and not self.returned and not self.cancelled and (self.duedate < datetime.date.today()) 
 ACTIVITY_CODE = (
         ('res', 'Reserve'),
         ('bor', 'Borrow'),
@@ -162,6 +188,11 @@ ACTIVITY_CODE = (
         ('ret', 'Return'),
         ('ren', 'Renew'),
     )
+    @classmethod
+    def cancelExpiredReservations():
+        for res in MusicInstanceReservation.object.all():
+            if res.hasExpired:
+                res.cancel
 
 class ActivityLog(models.Model):
     activityTimestamp = models.DateTimeField(default=timezone.now)

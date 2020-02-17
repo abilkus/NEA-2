@@ -2,3 +2,5 @@ privatesettings.py
 staticfiles/**
 usermediafiles/**
 .vscode/**
+__pycache__/**
+catalog/__pycache__/**
