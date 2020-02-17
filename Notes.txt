@@ -11,3 +11,8 @@ user can borrow, see what they have borrowed or reserved
 Get calendar setup correctly
 Overdue Items
 Cancelling if reservation overdue
+Import/Export
+Suggestions
+Output from activity log
+Chatbot needs to start working again
+Charts
