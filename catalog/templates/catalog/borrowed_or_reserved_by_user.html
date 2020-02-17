@@ -1,6 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
-<h1>Your reserved or borrowed music</h1>
+<h1>Reserved or borrowed music for {{user}}</h1>
 <form action="{%url 'cancelReserveAction' %}" method="post">
     {% csrf_token %}
 

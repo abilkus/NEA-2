@@ -28,9 +28,28 @@ You are logged in as a member
 <li><strong>Amount of music available:</strong> {{ num_instances_available }}</li>
 <li><strong>Composers:</strong> {{ num_composers }}</li>
 
-</ul>
-<iframe src="https://titanembeds.com/embed/642070935620550666?css=42" height="300" width="400" frameborder="0" theme=MetroEdge></iframe>
-
+</ul><div id="chatbot" style="display:none">
+  <iframe src="https://titanembeds.com/embed/642070935620550666?css=42" height="300" width="400" frameborder="0" theme=MetroEdge></iframe>
+    <button type="button" onclick="closeChatbot()" class="btn btn-primary">End Chat</button>
+  </div>
+  <div id="chatbotbutton">
+    <button type="button" onclick="showChatbot()" class="btn btn-primary">Chat with a help engine</button>
+  </div>
+  <script>
+    function showChatbot() {
+      let chatbot = document.getElementById("chatbot");
+      let chatbotbutton = document.getElementById("chatbotbutton");
+      chatbot.style.display = "block";
+      chatbotbutton.style.display = "none";
+    }
+    function closeChatbot() {
+      let chatbot = document.getElementById("chatbot");
+      let chatbotbutton = document.getElementById("chatbotbutton");
+      chatbotbutton.style.display = "block";
+      chatbot.style.display = "none";
+    }
+  </script>
+  
 
 
 {% endblock %}

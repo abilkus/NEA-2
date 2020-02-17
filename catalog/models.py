@@ -8,10 +8,10 @@ from django.contrib.auth.models import User
 import django_filters
 
 class Genre(models.Model):
-    """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
+    """Model representing a musical genre (e.g. Jazz, Classical, Pop)."""
     name = models.CharField(
         max_length=200,
-        help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)"
+        help_text="Enter a musical genre (e.g. Jazz, Classical, Pop)"
         )
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Language(models.Model):
 
 class Music(models.Model):
     atomic = False
-    """Model representing a book (but not a specific copy of a book)."""
+    """Model representing a piece of music  (but not a specific copy of that music)."""
     title = models.CharField(max_length=200)
     composer = models.ForeignKey('Composer', on_delete=models.SET_NULL, null=True)
     # Foreign Key used because music can only have one composer but composers can have multiple sets of music

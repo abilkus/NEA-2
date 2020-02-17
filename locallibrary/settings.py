@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 # Set hosts to allow any app on Heroku and the local testing URL
-ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1', 'localhost','134.209.189.59','68.183.254.115', 'gshs.tech','smartdailysaver.com','10.29.5.213', 'f56f6742.ngrok.io']
+ALLOWED_HOSTS = ['0.0.0.0','10.29.5.204','127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     # Add our new application 
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
     'django_filters',
-    'django_ajax',
-
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -167,4 +166,11 @@ EMAIL_BACKEND        = 'django.core.mail.backends.smtp.EmailBackend'
 with open("privatesettings.py") as infile:
     exec(infile.read())
 
-print(EMAIL_HOST_USER)
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.DEBUG: 'secondary',
+}

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportActionModelAdmin
 
 # Register your models here.
 
@@ -10,18 +11,18 @@ admin.site.register(Language)
 
 
 class MusicInline(admin.TabularInline):
-    """Defines format of inline book insertion (used in AuthorAdmin)"""
+    """Defines format of inline music insertion (used in composerAdmin)"""
     model = Music
 
 
 @admin.register(Composer)
-class ComposerAdmin(admin.ModelAdmin):
-    """Administration object for Author models.
+class ComposerAdmin(ImportExportActionModelAdmin,admin.ModelAdmin):
+    """Administration object for Composer models.
     Defines:
      - fields to be displayed in list view (list_display)
      - orders fields in detail view (fields),
        grouping the date fields horizontally
-     - adds inline addition of books in author view (inlines)
+     - adds inline addition of music in composor view (inlines)
     """
     list_display = ('last_name',
                     'first_name', 'date_of_birth', 'date_of_death')
@@ -30,15 +31,15 @@ class ComposerAdmin(admin.ModelAdmin):
 
 
 class MusicsInstanceInline(admin.TabularInline):
-    """Defines format of inline book instance insertion (used in BookAdmin)"""
+    """Defines format of inline instance insertion (used in ComposerAdmin)"""
     model = MusicInstance
 
 
 class MusicAdmin(admin.ModelAdmin):
-    """Administration object for Book models.
+    """Administration object for Music models.
     Defines:
      - fields to be displayed in list view (list_display)
-     - adds inline addition of book instances in book view (inlines)
+     - adds inline addition of music instances in music view (inlines)
     """
     list_display = ('title', 'composer', 'display_genre')
     inlines = [MusicsInstanceInline]
@@ -49,7 +50,7 @@ admin.site.register(Music, MusicAdmin)
 
 @admin.register(MusicInstance)
 class MusicInstanceAdmin(admin.ModelAdmin):
-    """Administration object for BookInstance models.
+    """Administration object for musicInstance models.
     Defines:
      - fields to be displayed in list view (list_display)
      - filters that will be displayed in sidebar (list_filter)
@@ -69,4 +70,21 @@ class MusicInstanceReservationAdmin(admin.ModelAdmin):
     model = MusicInstanceReservation
 
 from django.contrib import admin
+from import_export import resources
+from catalog.models import Composer
+
+class ComposerResource(resources.ModelResource):
+
+    class Meta:
+        model = Composer
+
+class MusicResource(resources.ModelResource):
+
+    class Meta:
+        model = Music
+
+class GenreResource(resources.ModelResource):
+
+    class Meta:
+        model = Genre
 

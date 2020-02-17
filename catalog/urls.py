@@ -34,7 +34,7 @@ urlpatterns += [
     path('returnAction/', views.returnInstanceAction.as_view(), name='returnAction'),
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
 ]
-
+'''
 # Add URLConf to create, update, and delete composers
 urlpatterns += [
     path('composer/create/', views.ComposerCreate.as_view(), name='composer_create'),
@@ -48,4 +48,4 @@ urlpatterns += [
     path('music/<int:pk>/update/', views.MusicUpdate.as_view(), name='music_update'),
     path('music/<int:pk>/delete/', views.MusicDelete.as_view(), name='music_delete'),
 ]
-
+'''

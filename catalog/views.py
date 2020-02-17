@@ -51,7 +51,56 @@ class HomePageView(TemplateView):
             return "memberindex.html"
         return super().get_template_names()
     template_name = 'index.html'
+# calendarStartDate event_list
+    '''
+      {
+          title: 'All Day Event',
+          start: '2020-02-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2020-02-07',
+          end: '2020-02-10'
+        },
+        {
+          groupId: '999',
+          title: 'Repeating Event',
+          start: '2020-02-09T16:00:00'
+        },
+        {
+          groupId: '999',
+          title: 'Repeating Event',
+          start: '2020-02-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2020-02-11',
+          end: '2020-02-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-02-12T10:30:00',
+          end: '2020-02-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2020-02-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-02-12T14:30:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2020-02-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2020-02-28'
+        }
 
+    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = None
@@ -73,11 +122,20 @@ class HomePageView(TemplateView):
                  'num_instances_available': num_instances_available, 'num_composers': num_composers,
                  'num_visits': num_visits})
         context.update(xxx)
+        context['calendarStartDate'] = date.today().strftime("%Y-%m-%d")
+        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
+        instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
+        events = []
+        for event in instances:
+            eventtext = '{title:" ' + str(event.id) + '",start:"' + event.due_back.strftime("%Y-%m-%d") + '"},'
+            events.append(eventtext)
+        context['event_list'] = events
         return context
 
     def render_to_response(self,context,**kwargs):
         return super().render_to_response(context);
 
+# These next views are the various ways of seeing our data
 class MusicListView(PermissionRequiredMixin,generic.ListView):
     """Generic class-based view for a list of music."""
     model = Music
@@ -95,7 +153,6 @@ class MusicListView(PermissionRequiredMixin,generic.ListView):
            return False    
         return True       
 
-#messages.info(self.request,"MUSIC LIST VIEW HERE")
 
 class MusicDetailView(PermissionRequiredMixin,generic.DetailView):
     """Generic class-based detail view for a book."""
@@ -136,6 +193,43 @@ class ComposerDetailView(generic.DetailView):
     """Generic class-based detail view for a composer """
     model = Composer
 
+class BorrowedOrReservedByUser(PermissionRequiredMixin, generic.ListView):
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+           return False
+        if not self.request.user.has_perm('catalog.can_self_reserve'):
+           return False
+        return True
+    template_name = "catalog/borrowed_or_reserved_by_user.html"
+    context_object_name = 'instances'
+    paginate_by = 10
+    def get_queryset(self, **kwargs):
+        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
+        instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
+        return instances
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context    
+    
+class BorrowedOrReservedByAll(PermissionRequiredMixin, generic.ListView):
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_any_reserve'):
+            return False
+        return True
+    template_name = "catalog/borrowed_or_reserved_by_all.html"
+    context_object_name = 'instances'
+    paginate_by = 10
+    def get_queryset(self, **kwargs):
+        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
+        instances = MusicInstance.objects.filter(statusq)
+        return instances
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context 
+
+# Now the post actions
 class ReserveAction(PermissionRequiredMixin,View) :     
     def has_permission(self):
         if not self.request.user.is_authenticated:
@@ -165,22 +259,6 @@ class ReserveAction(PermissionRequiredMixin,View) :
             [emailAddress])
         messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
         return HttpResponseRedirect("/catalog")
-
-class BorrowedOrReservedByUser(PermissionRequiredMixin, TemplateView):
-    def has_permission(self):
-        if not self.request.user.is_authenticated:
-           return False
-        if not self.request.user.has_perm('catalog.can_self_reserve'):
-           return False
-        return True
-    template_name = "catalog/borrowed_or_reserved_by_user.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
-        instances = MusicInstance.objects.filter(statusq, borrower_id = self.request.user.id)
-        context['instances'] = instances
-        return context    
-    
 
 class CancelReserveAction(PermissionRequiredMixin, View):
     def has_permission(self):
@@ -296,115 +374,6 @@ class returnInstanceAction(PermissionRequiredMixin, View):
             [email])
         messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog")
-class BorrowedOrReservedByAll(PermissionRequiredMixin, TemplateView):
-    def has_permission(self):
-        if not self.request.user.is_authenticated:
-            return False
-        if not self.request.user.has_perm('catalog.can_any_reserve'):
-            return False
-        return True
-    template_name = "catalog/borrowed_or_reserved_by_all.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        statusq = Q(status__exact = 'r') | Q(status__exact = 'o')
-        instances = MusicInstance.objects.filter(statusq)
-        context['instances'] = instances
-        return context
-'''
-class BorrowedUser(LoginRequiredMixin, generic.ListView):
-    model = Music
-    template_name = 'catalog/music_list_borrowed_user.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        is_borrowed = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='o').filter(borrower=self.request.user)
-        return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
-
-def BorrowedMusicDetail(request, pk):
-    if request.user.is_authenticated:
-        username = request.user
-    template = loader.get_template("catalog/borrowed_music.html")
-    music=Music.objects.get(pk=pk)
-    reserved=music.musicinstance_set.filter(status__exact = 'o').filter(borrower=username)
-    context= {"music":music,"available":reserved}
-    return HttpResponse(template.render(context,request))
-
-class ReservedUser(LoginRequiredMixin, generic.ListView):
-    model = Music
-    template_name = 'catalog/music_list_reserved_user.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        is_borrowed = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='r').filter(borrower=self.request.user)
-        return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
-
-
-def ReservedMusicDetail(request, pk):
-    if request.user.is_authenticated:
-        username = request.user
-    template = loader.get_template("catalog/reserved_music.html")
-    music=Music.objects.get(pk=pk)
-    reserved=music.musicinstance_set.filter(status__exact = 'r').filter(borrower=username)
-    context= {"music":music,"available":reserved}
-    return HttpResponse(template.render(context,request))
-
-
-
-class LoanedMusicAllListView(generic.ListView):
-    """Generic class-based view listing all books on loan. Only visible to users with can_mark_returned permission."""
-    model = MusicInstance
-    template_name = 'catalog/musicinstance_list_borrowed_all.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        return MusicInstance.objects.filter(status__exact='o').order_by('due_back')
-
-class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
-    model = Music
-    permission_required = 'catalog.can_mark_returned'
-    template_name = 'catalog/musicinstance_list_reserved_all.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        return MusicInstance.objects.filter(status__exact='r').order_by('due_back')
-    
-
-
-
-
-
-def renew_music_librarian(request, pk):
-    """View function for renewing a specific musicInstance by librarian."""
-    music_instance = get_object_or_404(MusicInstance, pk=pk)
-
-    # If this is a POST request then process the Form data
-    if request.method == 'POST':
-
-        # Create a form instance and populate it with data from the request (binding):
-        form = RenewMusicForm(request.POST)
-
-        # Check if the form is valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
-            music_instance.due_back = form.cleaned_data['renewal_date']
-            music_instance.save()
-
-            # redirect to a new URL:
-            return HttpResponseRedirect(reverse('all-borrowed'))
-
-    # If this is a GET (or any other method) create the default form
-    else:
-        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
-        form = RenewMusicForm(initial={'renewal_date': proposed_renewal_date})
-
-    context = {
-        'form': form,
-        'music_instance': music_instance,
-    }
-
-    return render(request, 'catalog/music_renew_librarian.html', context)
-
-
 
 '''
 class ComposerCreate(CreateView):
@@ -420,7 +389,6 @@ class ComposerDelete(DeleteView):
     model = Composer
     success_url = reverse_lazy('composers')
 
-# Classes created for the forms challenge
 class MusicCreate(CreateView):
     model = Music
     fields = '__all__'
@@ -432,116 +400,6 @@ class MusicUpdate(UpdateView):
 class MusicDelete(DeleteView):
     model = Music
     success_url = reverse_lazy('musics')
-'''
-class Reserve(generic.ListView):
-    model = Music
-    template_name = 'catalog/music_list_available_all.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        is_available = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='a')
-        return Music.objects.annotate(is_available=Exists(is_available)).filter(is_available=True)
-
-class Borrow(generic.ListView):
-    model = Music
-    template_name = 'catalog/music_list_reserved_all.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        is_reserved = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='r')
-        return Music.objects.annotate(is_reserved=Exists(is_reserved)).filter(is_reserved=True)
-class Return(generic.ListView):
-    model = Music
-    template_name = 'catalog/music_list_borrowed_all.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        is_borrowed = MusicInstance.objects.filter(music=OuterRef('pk'),status__exact='o')
-        return Music.objects.annotate(is_borrowed=Exists(is_borrowed)).filter(is_borrowed=True)
-
-def BorrowMusicDetail(request, pk):
-    template = loader.get_template("catalog/borrow_music.html")
-    music=Music.objects.get(pk=pk)
-    reserved=music.musicinstance_set.filter(status__exact = 'r')
-    context= {"music":music,"reserved":reserved}
-    return HttpResponse(template.render(context,request))
-def BorrowMusicDetailUser(request, pk):
-    template = loader.get_template('catalog/reserved_music.html')
-    music = Music.objects.get(pk = pk)
-    if request.user.is_authenticated:
-        username = request.user
-    reserved = music.musicinstance_set.filter(status__exact = 'r', borrower_id = username.id)
-    context = {"music":music, "reserved":reserved, "user":username}
-    return HttpResponse(template.render(context,request))
-def ReturnMusicDetail(request, pk):
-    template = loader.get_template("catalog/return_music.html")
-    music=Music.objects.get(pk=pk)
-    borrowed=music.musicinstance_set.filter(status__exact = 'o')
-    context= {"music":music,"available":borrowed}
-    return HttpResponse(template.render(context,request))
-def ReserveMusicDetail(request, pk):
-    template = loader.get_template("catalog/reserve_music.html")
-    music=Music.objects.get(pk=pk)
-    available=music.musicinstance_set.filter(status__exact = 'a')
-    context= {"music":music,"available":available}
-    return HttpResponse(template.render(context,request))
-
-
-def BorrowAction(request):
-    whichCopy= request.POST['borrowbutton']
-    a = MusicInstance.objects.get(id = whichCopy)
-    a.status = 'o'
-    a.due_back = date.today() + timedelta(days=42)
-    a.save()
-    p = MusicInstanceReservation.objects.get(musicInstance = a, takenout = False)
-    p.due_back = a.due_back
-    p.takenout = True
-    p.takenoutdate=date.today()
-    p.returned=False
-    p.save()
-    userid = p.userid_id
-    user = User.objects.get(id=str(userid))
-    username=user.username
-    reservationnumber = p.borrowedid
-    email = user.email
-    send_mail(
-        'Music Borrowed',
-        'Your Borrowed id is: ' + str(reservationnumber),
-        'adam@Bilkus.com',
-        [email])
-
-    return HttpResponse( ("%s has borrowed %s") % (username, whichCopy))
-
-def bview(request):
-    return HttpResponse("Hello World")
-
-def ReturnAction(request):
-    whichCopy= request.POST['returnbutton']
-    a = MusicInstance.objects.get(id = whichCopy)
-    a.status = 'a'
-    a.due_back = None
-    a.borrower = None
-    a.save()
-    p = MusicInstanceReservation.objects.get(musicInstance = a, takenout=True, returned= False)
-    c=p.borrowedid
-    p.returneddate= date.today()
-    p.returned = True
-    p.save()
-    d = p.userid_id
-    e = User.objects.get(id = str(d))
-    f = e.email
-    send_mail(
-        'Music Returned',
-        'Your reservation: ' + str(c) +' has been returned',
-        'adam@Bilkus.com',
-        [f])
-    return HttpResponse( ("You have returned %s ") % (whichCopy))
-
-def map(request):
-    template = loader.get_template("catalog/maps.html")
-    return HttpResponse(template.render())
-
-
 
 def demo_piechart(request):
     """
