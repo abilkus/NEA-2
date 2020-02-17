@@ -255,7 +255,7 @@ class ReserveAction(PermissionRequiredMixin,View) :
     def post(self,request,*args,**kwargs):
         whichCopy= request.POST['reservebutton']
         instance = MusicInstance.objects.get(id = whichCopy)
-        reservationnumber,instance = instance.reserve(request.user)
+        reservationnumber,instance = instance.reserve(request.user) #dateOverride= to override the date here
         emailAddress= request.user.email
         print(emailAddress)
         send_mail(

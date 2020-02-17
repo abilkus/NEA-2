@@ -107,16 +107,20 @@ class MusicInstance(models.Model):
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
-    def reserve(self,user):
+    def reserve(self,user,**kwargs):
         instance = self
+        now = kwargs.get('dateOverride') # to use when creating test data
+        if now == None:
+            now = timezone.now()
+        print("Making a reservation as at: %s" % (str(now)))
         reservationnumber = get_random_string(length=6, allowed_chars='1234567890')
         reservationnumber = int(reservationnumber)
         instance.status = 'r'
-        instance.due_back = date.today() + timedelta(days=daysToReserve)
+        instance.due_back = now + timedelta(days=daysToReserve)
         instance.borrower = user
         instance.save()
         
-        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , duedate = instance.due_back, takenoutdate = date.today(), userid=user)
+        reservation = MusicInstanceReservation(borrowedid = reservationnumber, musicInstance=instance , duedate = instance.due_back, takenoutdate = now, userid=user)
         activity = ActivityLog(activityCode = 'res', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
         activity.save()
         reservation.save()
@@ -176,7 +180,7 @@ class MusicInstanceReservation(models.Model):
         if self.takenoutdate == None:
             self.takenoutdate = timezone.now()
         return super(MusicInstanceReservation,self).save(*args,**kwargs)
-    def cancel(self,user):
+    def cancel(self,user,**kwargs):
         instance = self.musicInstance
         instance.status = 'a'
         instance.due_back = None
