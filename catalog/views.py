@@ -113,7 +113,7 @@ class HomePageView(TemplateView):
         num_visits = self.request.session.get('num_visits', 0)
         self.request.session['num_visits'] = num_visits+1
         can_reserve = False
-        if self.request.user.has_perm('catalog.can_self_reserve'):
+        if self.request.user.has_perm('catalog.can_issue'):
             can_reserve = True
         xxx = (
             {'can_reserve':can_reserve ,'num_music': num_music, 'num_instances': num_instances,
