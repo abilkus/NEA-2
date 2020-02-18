@@ -16,3 +16,6 @@ Suggestions
 Output from activity log
 Chatbot needs to start working again
 Charts
+
+
+https://dev.to/coderasha/how-to-export-import-data-django-package-series-3-39mk
