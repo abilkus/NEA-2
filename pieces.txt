@@ -1,0 +1,101 @@
+Name of Piece	Composer
+The Chairman Dances	ADAMS
+Allegri's Miserere	ALLEGRI
+'Badinerie' from Orchestral Suite No. 2 in B minor	BACH
+"Brandeburg Concerto No.5, 1st movt"	BACH
+"Toccata and Fugue in D minor, 'Toccata'"	BACH
+'Air on a G String' from Orchestral Suite No.3 in D	BACH
+Barber's Adagio for Strings	BARBER
+"Romanian Dances, ‘Joc cu Bât?’"	BARTÓK
+Symphony No. 5 in C minor	BEETHOVEN
+‘Ode to Joy’ from Symphony No. 9 in D minor	BEETHOVEN
+Für Elise	BEETHOVEN
+"'Moonlight Sonata', Piano Sonata No. 14 in C sharp minor - 1st movt"	BEETHOVEN
+‘Mambo’ from Symphonic Dances from West Side Story	BERNSTEIN
+March of the Toreadors from Carmen Suite No.1	BIZET
+'Farandole' from L’Arlesienne Suite No. 2	BIZET
+Hungarian Dance No.5	BRAHMS
+"The Young Person’s Guide to the Orchestra, 'Fugue'"	BRITTEN
+'Raindrop' Prelude Op. 28 No. 15	CHOPIN
+'Hoe Down' from Rodeo	COPLAND
+Fanfare for the Common Man	COPLAND
+'Ritual Fire Dance' from El Amor Brujo	de FALLA
+Prélude à l’apres-midi d’un faune	DEBUSSY
+'Flower Duet' from Lakmé	DELIBES
+The Sorcerer’s Apprentice	DUKAS
+"'Largo' from Symphony No. 9 in E minor, 'From the New World'"	DVORAK
+"Slavonic Dance, No. 8"	DVORAK
+"Cello Concerto in E minor, 1st movt"	ELGAR
+Nimrod from Enigma Variations	ELGAR
+Pomp and Circumstance March No. 1 in D	ELGAR
+Pavane in F-sharp minor	FAURÉ
+'Berceuse' from Dolly Suite	FAURÉ
+Hook	FITKIN
+Rhapsody in Blue	GERSHWIN
+Londonderry Air	GRAINGER
+'Morning Mood' from Peer Gynt Suite No.1	GRIEG
+"Piano Concerto in A minor, 1st movt"	GRIEG
+'Gavotte' from Holberg Suite	GRIEG
+'Hallelujah Chorus' from Messiah	HANDEL
+'Hornpipe' from Water Music Suite No. 1 in F major	HANDEL
+"Trumpet Concerto, 3rd movt"	HAYDN
+"'Surprise' Symphony No. 94 in G major, 2nd movt"	HAYDN
+Clog Dance from La Fille Mal Gardée	HÉROLD
+O Euchari	HILDEGARD VON BINGEN
+"'Jupiter, the Bringer of Jollity' from The Planets"	HOLST
+'Evening Prayer' from Hansel and Gretel	HUMPERDINCK
+'Eliza's Aria' from Wild Swans	KATS-CHERNIN
+" 'Sabre Dance' from Gayaneh Suite, No.3"	KHACHATURIAN
+'Viennese Musical Clock' from Hary Janos Suite	KODÁLY
+'Scherzo' from A Midsummer Night’s Dream	MENDELSSOHN
+"'Fingal’s Cave', Hebrides Overture"	MENDELSSOHN
+'Ave Maris Stella' from Vespers of the Blessed Virgin	MONTEVERDI
+"Clarinet Concerto in A major, 2nd movt "	MOZART
+"Eine Kleine Nachtmusik, 1st movement "	MOZART
+"Horn Concerto No. 4 in E flat major, 3rd movt "	MOZART
+'Papageno's Song' from The Magic Flute	MOZART
+"Symphony No. 40 in G minor, 1st movt "	MOZART
+'Baba Yaga' from Pictures at an Exhibition	MUSSORGSKY
+Night on a Bare Mountain 	MUSSORGSKY
+'O Fortuna' from Carmina Burana	ORFF
+Canon in D 	PACHELBEL
+'Peter's theme' from Peter and the Wolf	PROKOFIEV
+'Dance of the Knights' from Romeo and Juliet	PROKOFIEV
+'Troika' from Lieutenant Kijé	PROKOFIEV
+'Nessun Dorma' from Turandot	PUCCINI
+'Dido’s Lament' from Dido and Aeneas	PURCELL
+"Piano Concerto No.2 in C minor, 1st movt  "	RACHMANINOV
+Boléro	RAVEL
+Six Pianos	REICH
+Flight of the Bumble Bee	RIMSKY KORSAKOV
+"Scheherazade, 2nd movement  "	RIMSKY KORSAKOV
+"Concierto de Aranjuez, 2nd movt"	RODRIGO
+"William Tell, Overture"	ROSSINI
+Shepherd's Pipe Carol	RUTTER
+'Aquarium' from Carnival of the Animals	SAINT-SAENS
+Danse Macabre  	SAINT-SAENS
+'The Trout' from Piano Quintet in A major	SCHUBERT
+Marche Militaire  	SCHUBERT
+Andante Molto from Romances for violin and piano	SCHUMANN
+‘About foreign lands and people’ from Kinderszenen	SCHUMANN
+'Waltz' from Jazz Suite No.2	SHOSTAKOVICH
+"Symphony No. 5, 4th movement  "	SHOSTAKOVICH
+Intermezzo from Karelia Suite	SIBELIUS
+Liberty Bell  	SOUSA
+By the Beautiful Danube  	STRAUSS II
+"Also Sprach Zarathustra, 'Sunrise'"	STRAUSS
+'Russian Dance' from Petrushka	STRAVINSKY
+If ye love me  	TALLIS
+The Lamb	TAVENER
+1812 Overture	TCHAIKOVSKY
+'Dance of the Sugar Plum Fairy' from The Nutcracker	TCHAIKOVSKY
+Fantasia on Greensleeves	VAUGHAN WILLIAMS
+The Lark Ascending	VAUGHAN WILLIAMS
+"The Wasps, Overture"	VAUGHAN WILLIAMS
+Grand March from Aida	VERDI
+'La Donna è Mobile' from Rigoletto	VERDI
+"Gloria, 'Gloria in excelsis Deo'"	VIVALDI
+Winter from Four Seasons	VIVALDI
+"Ride of the Valkyries, Die Walküre"	WAGNER
+Mattachins from Capriol Suite	WARLOCK
+"Organ Symphony No. 5, Toccata "	WIDOR
