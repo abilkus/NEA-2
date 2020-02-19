@@ -479,6 +479,7 @@ class CreateRandomMusic(PermissionRequiredMixin,View):
         items = ['Symphony no: 3','Bagatelle in G','Minuet and Rondo','Concerto for Strings']
         allComposers = Composer.objects.all()
         for composer in allComposers:
+            print("creating random music for %s" % (composer.last_name))
             for itemname in items:
                 m = Music(
                 title = itemname,
