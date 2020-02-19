@@ -83,13 +83,44 @@
                 <a class="nav-link" href="/catalog/borrowedOrReservedByAll">All reservations</a>
                 </nav>
                 {% endif %}
-                {% if user.is_staff %}
+                {% if perms.catalog.is_admin %}
                 <nav class="nav-link">
                   Administration
                 </nav>
                 <nav class="nav-item pl-2">
                 <a class="nav-link" href="/admin">Admin functions</a>
                 </nav>  
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/composer/">Edit Composer</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/composer/add/">Create Composer</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/musicinstance/">Edit Music Instance</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/musicinstance/">Delete Music Instance</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/music/add/">Create Music</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/music/">Edit Music</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/genre/add/">Create Genre</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/genre/">Edit Genre</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/language/">Edit Language</a>
+                </nav>
+                <nav class="nav-item pl-2">
+                <a class="nav-link" href="/admin/catalog/language/">Add Language</a>
+                </nav>
+
               {% endif %}
               {% endif %}
 
