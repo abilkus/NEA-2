@@ -2,18 +2,18 @@
 
 {% block content %}
 
-<h1>Title: Review of {{ music.title }}</h1>
+<h1>Title: Review of {{ music.title }} by {{ user.username }} ({{user.first_name}} {{user.last_name}})</h1>
 
-You have just returned the above piece to the library.
+You have just returned the above piece to the library on behalf of the above user.
+Please help other users and provide their rating out of 10 where 1 means terrible and 10 brilliant.
 
-Please help other users and give us your rating out of 10
-
+<p>
 Many thanks
-
+</p>
 
 
 <div style="margin-left:20px;margin-top:20px">
-        <form action="/catalog/reviewMusic/{{music.id}}" method="post">
+        <form action="/catalog/reviewMusic/{{reservation.id}}" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Submit">

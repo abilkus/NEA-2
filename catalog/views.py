@@ -422,16 +422,14 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
         instance = MusicInstance.objects.get(id = whichCopy)
         reservation = MusicInstanceReservation.objects.get(musicInstance = instance, takenout = True, returned = False, cancelled=False)
         user = reservation.returns(request.user)
-        userid = user.id
-        user = User.objects.get(id = str(userid))
         email = user.email
         send_mail(
             'Music Returned',
             'Your reservation: ' + str(id) +' has been returned',
             'adam@Bilkus.com',
             [email])
-        messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
-        return HttpResponseRedirect("/catalog/reviewMusic/" + str(instance.music.id))
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user.userid, whichCopy))
+        return HttpResponseRedirect("/catalog/reviewMusic/" + str(reservation.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
     def has_permission(self):
@@ -448,21 +446,28 @@ class ReviewMusic(FormView):
     success_url = '/catalog/'
 
     def form_valid(self, form):
-        musickey=self.kwargs['pk']
-        music=Music.objects.get(id=musickey)
-        user=form.cleaned_data['user']
+        musicreservationkey=self.kwargs['pk']
+        musicreservation=MusicInstanceReservation.objects.get(id=musicreservationkey)
+        music = musicreservation.musicInstance.music
+        user = musicreservation.userid
         rating=form.cleaned_data['rating']
+        if rating == 0:
+            messages.warning(self.request,"You chose not to review this item - please do so in future!")
+            return super().form_valid(form)    
         review = Review(user=user,music=music,rating=rating)
         review.save()
         messages.info(self.request,'Thank you for your rating')
-
         return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        musickey=self.kwargs['pk']
-        print(musickey)
-        music=Music.objects.get(id=musickey)
+        musicreservationkey=self.kwargs['pk']
+        musicreservation=MusicInstanceReservation.objects.get(id=musicreservationkey)
+        music = musicreservation.musicInstance.music
+        user = musicreservation.userid
         context['music'] = music
+        context['user'] = user
+        context['reservation'] = musicreservation
         return context
 
 '''

@@ -29,12 +29,12 @@ class RenewMusicForm(forms.Form):
 
 
 class ReviewMusicForm(forms.Form):
-    user = forms.ModelChoiceField(queryset=User.objects.all())
-    rating  = forms.IntegerField()
+#    user = forms.ModelChoiceField(queryset=User.objects.all())
+    rating  = forms.ChoiceField(choices=[('0','-')]+([(x,x) for x in range(1,10)]))
     def clean_rating(self):
-        r = self.cleaned_data['rating']
+        r = int(self.cleaned_data['rating'])
         if r < 0 or r > 10:
-            raise forms.ValidationError("Rating must be between 0 and 10")
+            raise forms.ValidationError("Rating must be between 0 and 10") 
         return r
 
 class GetUserForm(forms.Form):

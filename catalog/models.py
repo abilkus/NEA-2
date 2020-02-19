@@ -229,7 +229,7 @@ class MusicInstanceReservation(models.Model):
         reservation.save()
         activity = ActivityLog(activityCode = 'ret', music=instance.music,musicInstance=instance,composer=instance.music.composer,user=user)
         activity.save()
-        return user
+        return reservation.userid
     def hasExpired(self):
         return not self.takenout and not self.returned and not self.cancelled and (self.duedate < timezone.now()) 
     @staticmethod
