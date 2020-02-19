@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User
-from django.db.models import Exists, OuterRef, Q
+from django.db.models import Exists, OuterRef, Q, Count
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
@@ -31,6 +31,8 @@ from django_ajax.decorators import ajax
 from django_ajax.mixin import AJAXMixin
 from catalog.forms import RenewMusicForm
 from catalog.models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation,ActivityLog
+from pprint import pprint
+
 
 def is_in_group(user,group_name):
     group = Group.objects.get(name=group_name)
@@ -99,6 +101,8 @@ class HomePageView(TemplateView):
         }
 
     '''
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = None
@@ -108,7 +112,6 @@ class HomePageView(TemplateView):
         # Available copies of books
         num_instances_available = MusicInstance.objects.filter(status__exact='a').count()
         num_composers = Composer.objects.count()  # The 'all()' is implied by default.
-
         # Number of visits to this view, as counted in the session variable.
         num_visits = self.request.session.get('num_visits', 0)
         self.request.session['num_visits'] = num_visits+1
@@ -241,9 +244,25 @@ class ActivityChart(PermissionRequiredMixin,TemplateView):
             return False
         return True
     template_name = "catalog/activity_chart.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        history = ActivityLog.objects.values('music__title','music__composer__last_name','activityCode').annotate(events=Count('id')).order_by('-events')
+        pprint(history)
+        chartData = '['
+        for record in history:
+            chartData += ('{ x: "' + record['music__title'] + ' ' + record['music__composer__last_name'] + ' ' + record['activityCode'] + '", value:' + str(record['events']) + '},')
+        chartData += ']'
+        context['chartData'] = chartData
         return context 
+
+''' [
+        {x: "Beethoven", value: 25},
+        {x: "Williams", value: 8},
+        {x: "Mozart", value: 12},
+        {x: "Bruch", value: 11},
+    ];
+'''
 
 # Now the post actions
 class ReserveAction(PermissionRequiredMixin,View) :     
