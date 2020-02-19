@@ -288,9 +288,17 @@ class BorrowedList(PermissionRequiredMixin,TemplateView):
 # Now the post actions
 class ReserveAction(PermissionRequiredMixin,FormView) :   
     template_name = 'catalog/music_detail.html'
-    form_class = ReviewMusicForm
+    form_class = GetUserForm
     success_url = '/catalog/'
-  
+
+    def get_context_data(self, **kwargs):
+        print('ReserveAction getcontextdata')
+        context = super().get_context_data(**kwargs)
+        whichCopy= self.request.POST['reservebutton']
+        print('Reserve action copy is ' + str(whichCopy))
+        context['music'] =  MusicInstance.objects.get(id = whichCopy).music
+        return context 
+
     def has_permission(self):
         if not self.request.user.is_authenticated:
            return False
@@ -301,6 +309,7 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
 
     def form_valid(self, form):
         request = self.request
+        print("form reserveAction is valid")
         whichCopy= request.POST['reservebutton']
         instance = MusicInstance.objects.get(id = whichCopy)
         user=form.cleaned_data['user']
@@ -422,7 +431,7 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             'adam@Bilkus.com',
             [email])
         messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
-        return HttpResponseRedirect("/catalog")
+        return HttpResponseRedirect("/catalog/reviewMusic/" + str(instance.music.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
     def has_permission(self):
