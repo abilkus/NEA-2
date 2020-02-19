@@ -289,7 +289,7 @@ class BorrowedList(PermissionRequiredMixin,TemplateView):
 class ReserveAction(PermissionRequiredMixin,FormView) :   
     template_name = 'catalog/music_detail.html'
     form_class = GetUserForm
-    success_url = '/catalog/'
+    success_url = '/catalog/feedback'
 
     def get_context_data(self, **kwargs):
         print('ReserveAction getcontextdata')
@@ -335,7 +335,7 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
             'adam@Bilkus.com',
             [emailAddress])
         messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
-        return HttpResponseRedirect("/catalog")
+        return HttpResponseRedirect("/catalog/feedback")
 
 class CancelReserveAction(PermissionRequiredMixin, View):
     def has_permission(self):
@@ -357,7 +357,7 @@ class CancelReserveAction(PermissionRequiredMixin, View):
             'adam@Bilkus.com',
             [emailAddress])
         messages.info(self.request,"Reservation number  %s has been cancelled" % (reservationnumber))
-        return HttpResponseRedirect("/catalog/borrowedOrReservedByUser")
+        return HttpResponseRedirect("/catalog/feedback")
 
 class BorrowInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
@@ -382,7 +382,7 @@ class BorrowInstanceAction(PermissionRequiredMixin, View):
             'adam@Bilkus.com',
             [email])
         messages.info(self.request, "The borrowing was successful: %s has borrowed %s" % (user, whichCopy))
-        return HttpResponseRedirect("/catalog")
+        return HttpResponseRedirect("/catalog/feedback")
 
 class RenewInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
@@ -407,7 +407,7 @@ class RenewInstanceAction(PermissionRequiredMixin, View):
             'adam@Bilkus.com',
             [email])
         messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
-        return HttpResponseRedirect("/catalog")
+        return HttpResponseRedirect("/catalog/feedback")
 
 class ReturnInstanceAction(PermissionRequiredMixin, View):
     def has_permission(self):
@@ -429,7 +429,7 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             'adam@Bilkus.com',
             [email])
         messages.info(self.request, "Return Successful: %s has returned %s" % (user.userid, whichCopy))
-        return HttpResponseRedirect("/catalog/reviewMusic/" + str(reservation.id))
+        return HttpResponseRedirect("/catalog/feedback/" + str(reservation.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
     def has_permission(self):
@@ -443,7 +443,7 @@ class RoutineMaintenance(PermissionRequiredMixin,View):
 class ReviewMusic(FormView):
     template_name = 'catalog/review_music.html'
     form_class = ReviewMusicForm
-    success_url = '/catalog/'
+    success_url = '/catalog/feedback'
 
     def form_valid(self, form):
         musicreservationkey=self.kwargs['pk']
@@ -504,7 +504,8 @@ class CreateRandomMusicInstances(PermissionRequiredMixin,View):
                 m.save()
         return HttpResponse("Random music created")
         
-        
+class FeedbackView(TemplateView):
+    template_name = 'catalog/feedback.html'
         
 '''
 class ComposerCreate(CreateView):

@@ -5,6 +5,8 @@ from catalog import views
 # It displays differently depending on whether you are logged in
 urlpatterns = [
     path('',views.HomePageView.as_view(),name='index'),
+    path('feedback/', views.FeedbackView.as_view(), name='feedback'),
+
 ]
 
 
