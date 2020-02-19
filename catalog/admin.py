@@ -28,7 +28,7 @@ class ComposerAdmin(ImportExportMixin,admin.ModelAdmin):
                     'first_name', 'date_of_birth', 'date_of_death')
     fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
     inlines = [MusicInline]
-    from_encoding = 'utf-8-sig'
+    from_encoding = 'utf-8'
 
 
 class MusicsInstanceInline(admin.TabularInline):

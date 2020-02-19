@@ -470,6 +470,41 @@ class ReviewMusic(FormView):
         context['reservation'] = musicreservation
         return context
 
+class CreateRandomMusic(PermissionRequiredMixin,View):
+    def has_permission(self):
+         if not self.request.user.is_superuser:
+             return False
+         return True
+    def get(self,request,*args,**kwargs):
+        items = ['Symphony no: 3','Bagatelle in G','Minuet and Rondo','Concerto for Strings']
+        allComposers = Composer.objects.all()
+        for composer in allComposers:
+            for itemname in items:
+                m = Music(
+                title = itemname,
+                composer = composer,
+                summary = 'Automatically generated',
+                barcode = '12345')
+                m.save()
+        return HttpResponse("Random music created")
+class CreateRandomMusicInstances(PermissionRequiredMixin,View):
+    def has_permission(self):
+         if not self.request.user.is_superuser:
+             return False
+         return True
+    def get(self,request,*args,**kwargs):
+        allMusic = Music.objects.all()
+        for music in allMusic:
+            for i in range(1,random.choice(range(1,4))):
+                print('Creating %d instances for %s' % (i,music.title))
+                m = MusicInstance(
+                    music=music
+                )
+                m.save()
+        return HttpResponse("Random music created")
+        
+        
+        
 '''
 class ComposerCreate(CreateView):
     model = Composer

@@ -62,9 +62,8 @@ class Music(models.Model):
     # Foreign Key used because music can only have one composer but composers can have multiple sets of music
     # Composer as a string rather than object because it hasn't been declared yet in file.
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
-    isbn = models.CharField('ISBN', max_length=13,
-                            help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
-                                      '">ISBN number</a>')
+    barcode = models.CharField('barcode', max_length=13,
+                            help_text='the library unique reference code for this  piece')
     genre = models.ManyToManyField(Genre, help_text="Select a genre for this music")
     # ManyToManyField used because a genre can contain many sets of music and a Music can cover many genres.
     # Genre class has already been defined so we can specify the object above.
