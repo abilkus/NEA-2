@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportActionModelAdmin,ExportActionMixin,ImportExportMixin
-
+from django.contrib.auth.models import User
 # Register your models here.
 
 from catalog.models import Composer, Genre, Music, MusicInstance, Language, MusicInstanceReservation,ActivityLog
@@ -94,3 +94,19 @@ class GenreResource(resources.ModelResource):
     class Meta:
         model = Genre
 
+admin.site.unregister(User)
+class UserResource(resources.ModelResource):
+    class Meta:
+        model = User
+
+class UserAdmin(ImportExportMixin,admin.ModelAdmin):
+    """Administration object 
+    Defines:
+     - fields to be displayed in list view (list_display)
+     - filters that will be displayed in sidebar (list_filter)
+     - grouping of fields into sections (fieldsets)
+    """
+    pass
+
+
+admin.site.register(User, UserAdmin)
