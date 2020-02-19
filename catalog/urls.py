@@ -32,8 +32,11 @@ urlpatterns += [
     path('borrowAction/', views.BorrowInstanceAction.as_view(), name='borrowAction'),
     path('renewAction/', views.RenewInstanceAction.as_view(), name='renewAction'),
     path('returnAction/', views.ReturnInstanceAction.as_view(), name='returnAction'),
+    path('reviewMusic/<int:pk>', views.ReviewMusic.as_view(), name='reviewMusic'),
+
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
-    path('activityChart/', views.ActivityChart.as_view(), name='activityChart'),
+    path('borrowedPie/', views.BorrowedPie.as_view(), name='borrowedPie'),
+    path('borrowedList/', views.BorrowedPie.as_view(), name='borrowedList'),
     path('routineMaintenance/',views.RoutineMaintenance.as_view(),name='routineMaintenance'),
 ]
 '''

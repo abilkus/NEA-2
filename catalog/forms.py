@@ -3,6 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 import datetime  # for checking renewal date range.
 
 from django import forms
+from django.db import models
+from catalog.models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation,ActivityLog
+from django.contrib.auth.models import User
 
 
 class RenewMusicForm(forms.Form):
@@ -23,3 +26,16 @@ class RenewMusicForm(forms.Form):
 
         # Remember to always return the cleaned data.
         return data
+
+
+class ReviewMusicForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all())
+    rating  = forms.IntegerField()
+    def clean_rating(self):
+        r = self.cleaned_data['rating']
+        if r < 0 or r > 10:
+            raise forms.ValidationError("Rating must be between 0 and 10")
+        return r
+
+class GetUserForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all())

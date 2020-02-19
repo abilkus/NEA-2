@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.template import loader
-from django.contrib.auth.models import User
+
 from django.db.models import Exists, OuterRef, Q, Count
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
@@ -21,7 +21,7 @@ from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.urls import reverse
 from django.contrib import messages
 import django_filters
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
@@ -29,8 +29,8 @@ from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django_ajax.decorators import ajax
 from django_ajax.mixin import AJAXMixin
-from catalog.forms import RenewMusicForm
-from catalog.models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation,ActivityLog
+from catalog.forms import *
+from catalog.models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation,ActivityLog,Review
 from pprint import pprint
 
 
@@ -178,6 +178,7 @@ class MusicDetailView(PermissionRequiredMixin,generic.DetailView):
         context['firstavailable'] = available.first()
         context['navailable'] = navailable
         context['show_reserve_button'] = navailable > 0 and (self.request.user.has_perm('catalog.can_self_reserve') or self.request.user.has_perm('catalog.can_any_reserve'))
+        context['form'] = GetUserForm(initial={'user': self.request.user})
         return context
 
 # Clean up composer just like we did for music
@@ -236,18 +237,18 @@ class BorrowedOrReservedByAll(PermissionRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         return context 
 
-class ActivityChart(PermissionRequiredMixin,TemplateView):
+class BorrowedPie(PermissionRequiredMixin,TemplateView):
     def has_permission(self):
         if not self.request.user.is_authenticated:
             return False
         if not self.request.user.has_perm('catalog.can_any_reserve'):
             return False
         return True
-    template_name = "catalog/activity_chart.html"
+    template_name = "catalog/borrowed_pie.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        history = ActivityLog.objects.values('music__title','music__composer__last_name','activityCode').annotate(events=Count('id')).order_by('-events')
+        history = ActivityLog.objects.filter(activityCode='bor').values('music__title','music__composer__last_name','activityCode').annotate(events=Count('id')).order_by('-events')
         pprint(history)
         chartData = '['
         for record in history:
@@ -264,8 +265,32 @@ class ActivityChart(PermissionRequiredMixin,TemplateView):
     ];
 '''
 
+class BorrowedList(PermissionRequiredMixin,TemplateView):
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_any_reserve'):
+            return False
+        return True
+    template_name = "catalog/borrowed_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        history = ActivityLog.objects.filter(activityCode='bor').values('music__title','music__composer__last_name','activityCode').annotate(events=Count('id')).order_by('-events')
+        pprint(history)
+        chartData = '['
+        for record in history:
+            chartData += ('{ x: "' + record['music__title'] + ' ' + record['music__composer__last_name'] + ' ' + record['activityCode'] + '", value:' + str(record['events']) + '},')
+        chartData += ']'
+        context['chartData'] = chartData
+        return context 
+
 # Now the post actions
-class ReserveAction(PermissionRequiredMixin,View) :     
+class ReserveAction(PermissionRequiredMixin,FormView) :   
+    template_name = 'catalog/music_detail.html'
+    form_class = ReviewMusicForm
+    success_url = '/catalog/'
+  
     def has_permission(self):
         if not self.request.user.is_authenticated:
            return False
@@ -273,13 +298,28 @@ class ReserveAction(PermissionRequiredMixin,View) :
             if not self.request.user.has_perm('catalog.can_any_reserve'):
                return False
         return True
-  
-    def post(self,request,*args,**kwargs):
+
+    def form_valid(self, form):
+        request = self.request
         whichCopy= request.POST['reservebutton']
         instance = MusicInstance.objects.get(id = whichCopy)
+        user=form.cleaned_data['user']
+        reservationnumber,instance = instance.reserve(user) #dateOverride= to override the date here
+        emailAddress= request.user.email
+        send_mail(
+            'Music Reserved',
+            'Your Borrowed id is: ' + str(reservationnumber),
+            'adam@Bilkus.com',
+            [emailAddress])
+        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
+        return super().form_valid(form)
+
+    def postNotUsed(self,request,*args,**kwargs):
+        whichCopy= request.POST['reservebutton']
+        instance = MusicInstance.objects.get(id = whichCopy)
+
         reservationnumber,instance = instance.reserve(request.user) #dateOverride= to override the date here
         emailAddress= request.user.email
-        print(emailAddress)
         send_mail(
             'Music Reserved',
             'Your Borrowed id is: ' + str(reservationnumber),
@@ -392,6 +432,29 @@ class RoutineMaintenance(PermissionRequiredMixin,View):
     def get(self,request,*args,**kwargs):
         MusicInstanceReservation.cancelExpiredReservations(request.user)
         return HttpResponse("Routine maintenance has run")
+
+class ReviewMusic(FormView):
+    template_name = 'catalog/review_music.html'
+    form_class = ReviewMusicForm
+    success_url = '/catalog/'
+
+    def form_valid(self, form):
+        musickey=self.kwargs['pk']
+        music=Music.objects.get(id=musickey)
+        user=form.cleaned_data['user']
+        rating=form.cleaned_data['rating']
+        review = Review(user=user,music=music,rating=rating)
+        review.save()
+        messages.info(self.request,'Thank you for your rating')
+
+        return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        musickey=self.kwargs['pk']
+        print(musickey)
+        music=Music.objects.get(id=musickey)
+        context['music'] = music
+        return context
 
 '''
 class ComposerCreate(CreateView):

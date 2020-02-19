@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2>Chart of activities</h2>
+    {% if music_list %}
+    <ul>
+
+      {% for music in music_list %}
+      <li>
+        <a href="{{ music.get_absolute_url }}">{{ music.title }}</a> ({{music.composer}})
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+    {% endif %}       
+
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+    <div id="container" style="width: 100%; height: 100%"></div>
+    <script>
+    let data = {{chartData|safe}}
+
+    let chart = anychart.pie();
+    chart.data(data);
+    chart.container('container');
+    chart.draw();
+
+    </script>
+
+{% endblock %}
+

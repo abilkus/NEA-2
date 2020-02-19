@@ -262,3 +262,8 @@ class ActivityLog(models.Model):
     composer = models.ForeignKey(Composer, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
+class Review(models.Model):
+    music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    rating = models.IntegerField()
+

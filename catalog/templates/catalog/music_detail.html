@@ -19,6 +19,9 @@
         <form action="{%url 'reserveAction' %}" method="post">
             {% csrf_token %}
             <button type="submit" name="reservebutton" value="{{firstavailable.id}}">Reserve a copy</button>
+            {% if perms.can_any_reserve %}
+               {{form}}
+            {% endif %}
         </form>
       {% endif %}
     {% endif %}
