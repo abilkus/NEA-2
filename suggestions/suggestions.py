@@ -9,58 +9,46 @@ path = 'https://media.geeksforgeeks.org/wp-content/uploads/file.tsv'
 df = pd.read_csv(path, sep='\t', names=column_names) 
   
 # Check the head of the data 
-print(df.head() )
+print(df.head())
+print()
 # Check out all the movies and their respective IDs 
 movie_titles = pd.read_csv('https://media.geeksforgeeks.org/wp-content/uploads/Movie_Id_Titles.csv') 
 movie_titles.head() 
-data = pd.merge(df, movie_titles, on='item_id') 
-print(data.head()) 
-# Calculate mean rating of all movies 
-data.groupby('title')['rating'].mean().sort_values(ascending=False).head() 
-# Calculate count rating of all movies 
-data.groupby('title')['rating'].count().sort_values(ascending=False).head() 
-# creating dataframe with 'rating' count values 
-ratings = pd.DataFrame(data.groupby('title')['rating'].mean())  
-print(ratings)  
-ratings['num of ratings'] = pd.DataFrame(data.groupby('title')['rating'].count()) 
-  
-print(ratings.head()) 
-'''
-import matplotlib.pyplot as plt 
-import seaborn as sns 
-  
-sns.set_style('white') 
-# Sorting values according to  
-# the 'num of rating column' 
-moviemat = data.pivot_table(index ='user_id', 
-              columns ='title', values ='rating') 
-  
-print(moviemat.head())
-  
-ratings.sort_values('num of ratings', ascending = False).head(10) 
-# analysing correlation with similar movies 
-starwars_user_ratings = moviemat['Star Wars (1977)'] 
-liarliar_user_ratings = moviemat['Liar Liar (1997)'] 
-  
-print(starwars_user_ratings.head()) 
-# analysing correlation with similar movies 
-similar_to_starwars = moviemat.corrwith(starwars_user_ratings) 
-similar_to_liarliar = moviemat.corrwith(liarliar_user_ratings) 
-  
-corr_starwars = pd.DataFrame(similar_to_starwars, columns =['Correlation']) 
-corr_starwars.dropna(inplace = True) 
-  
-print(corr_starwars.head()) 
-# Similar movies like starwars 
-corr_starwars.sort_values('Correlation', ascending = False).head(10) 
-corr_starwars = corr_starwars.join(ratings['num of ratings']) 
-  
-print(corr_starwars.head())
-corr_starwars[corr_starwars['num of ratings']>100].sort_values('Correlation', ascending = False).head()
-# Similar movies as of liarliar 
-corr_liarliar = pd.DataFrame(similar_to_liarliar, columns =['Correlation'])
-corr_liarliar.dropna(inplace = True)
-corr_liarliar = corr_liarliar.join(ratings['num of ratings'])
-corr_liarliar[corr_liarliar['num of ratings']>100].sort_values('Correlation', ascending = False).head()
-print(corr_liarliar)
-'''
+df = pd.merge(df, movie_titles, on='item_id') 
+print(df.head())
+print() 
+print(df.describe())
+ratings = pd.DataFrame(df.groupby('title')['rating'].mean())
+print(ratings.head())
+print()
+ratings = ratings.sort_values('rating', ascending = False)
+print(ratings.head())
+print()
+
+
+test1 = df[df["user_id"] == 0]
+test3 = test1[test1["rating"] == 5]
+
+test4 = test3["title"][0][:100]
+
+print(test4 + "\n")
+#print(test5 + "\n")
+print(test3)
+#print(test5)
+
+movie_matrix = df.pivot_table(index='user_id', columns='title', values='rating')
+movie_matrix.head()
+test4_user_rating = movie_matrix[test4]
+similar_to_test4=movie_matrix.corrwith(test4_user_rating)
+print(similar_to_test4.head())
+print()
+
+corr_test4 = pd.DataFrame(similar_to_test4, columns=['correlation'])
+corr_test4.dropna(inplace=True)
+print(corr_test4.head())
+print()
+print("Hello")
+for i in corr_test4:
+    for j in corr_test4:
+        print(corr_test4[i][j])
+    print("Test")
