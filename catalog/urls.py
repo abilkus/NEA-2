@@ -38,7 +38,7 @@ urlpatterns += [
 
     path('borrowedOrReservedByAll/', views.BorrowedOrReservedByAll.as_view(), name='all-borrowed'),
     path('borrowedPie/', views.BorrowedPie.as_view(), name='borrowedPie'),
-    path('borrowedList/', views.BorrowedPie.as_view(), name='borrowedList'),
+    path('borrowedList/', views.BorrowedList.as_view(), name='borrowedList'),
     path('routineMaintenance/',views.RoutineMaintenance.as_view(),name='routineMaintenance'),
     path('createRandomMusic/',views.CreateRandomMusic.as_view(),name='createRandomMusic'),
     path('createRandomMusicInstances/',views.CreateRandomMusicInstances.as_view(),name='createRandomMusicInstances'),

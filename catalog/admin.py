@@ -107,6 +107,4 @@ class UserAdmin(ImportExportMixin,admin.ModelAdmin):
      - grouping of fields into sections (fieldsets)
     """
     pass
-
-
 admin.site.register(User, UserAdmin)

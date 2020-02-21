@@ -236,7 +236,7 @@ class BorrowedOrReservedByAll(PermissionRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context 
-
+import json
 class BorrowedPie(PermissionRequiredMixin,TemplateView):
     def has_permission(self):
         if not self.request.user.is_authenticated:
@@ -249,21 +249,23 @@ class BorrowedPie(PermissionRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         history = ActivityLog.objects.filter(activityCode='bor').values('music__title','music__composer__last_name','activityCode').annotate(events=Count('id')).order_by('-events')
-        pprint(history)
-        chartData = '['
+        chartDataArray = []
         for record in history:
-            chartData += ('{ x: "' + record['music__title'] + ' ' + record['music__composer__last_name'] + ' ' + record['activityCode'] + '", value:' + str(record['events']) + '},')
-        chartData += ']'
-        context['chartData'] = chartData
-        return context 
-
-''' [
+            dict = {}
+            dict['x'] =  record['music__title'] + ' ' + record['music__composer__last_name'] + ' ' + record['activityCode']
+            dict['value'] = str(record['events'])
+            chartDataArray.append(dict)
+        context['chartData'] = json.dumps(chartDataArray)
+        ''' [
         {x: "Beethoven", value: 25},
         {x: "Williams", value: 8},
         {x: "Mozart", value: 12},
         {x: "Bruch", value: 11},
-    ];
-'''
+         ];
+        '''
+        return context 
+
+
 
 class BorrowedList(PermissionRequiredMixin,TemplateView):
     def has_permission(self):
@@ -277,12 +279,11 @@ class BorrowedList(PermissionRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         history = ActivityLog.objects.filter(activityCode='bor').values('music__title','music__composer__last_name','activityCode').annotate(events=Count('id')).order_by('-events')
-        pprint(history)
-        chartData = '['
+        chartDataArray = []
         for record in history:
-            chartData += ('{ x: "' + record['music__title'] + ' ' + record['music__composer__last_name'] + ' ' + record['activityCode'] + '", value:' + str(record['events']) + '},')
-        chartData += ']'
-        context['chartData'] = chartData
+            row = [ record['music__title'] + ' ' + record['music__composer__last_name'],record['events'] ]
+            chartDataArray.append(row)
+        context['chartData'] = json.dumps(chartDataArray)
         return context 
 
 # Now the post actions
