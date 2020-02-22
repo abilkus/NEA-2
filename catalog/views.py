@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from django.db.models import Exists, OuterRef, Q, Count
+from django.db.models.functions import Lower
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
@@ -172,7 +173,7 @@ class MusicListGridView(PermissionRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         #queryjson = serializers.serialize('json',music.objects().all())
-        x = list(Music.objects.values('id','title','composer__last_name','genre__name','language__name').order_by('composer__last_name'))
+        x = list(Music.objects.values('id','title','composer__last_name','genre__name','language__name').order_by(Lower('composer__last_name')))
         queryjson = json.dumps(x)
         
         context['queryjson'] = queryjson

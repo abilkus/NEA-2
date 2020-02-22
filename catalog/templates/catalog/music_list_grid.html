@@ -23,12 +23,13 @@
        toppager:true,pager:true,rowNum:15,
        colModel:[
          {name: "id",width:1,hidden:true},
-         {name: "title",label:'Title'},
+         {name: "title",label:'Title',width:300},
          {name: "composer__last_name",label:'Composer'},
-         {name: "genre__name",label:'Genre'},
-         {name: "language__name",label:'Language'},
+         {name: "genre__name",label:'Genre',width:50},
+         {name: "language__name",label:'Language',width:80},
        ],
       data: data,
+      guiStyle: "bootstrap4",
       ondblClickRow: function(rowId,iRow,iCol,e) {
           let grid = $("#grid");
           let id = grid.jqGrid('getCell',rowId,'title');
