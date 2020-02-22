@@ -6,7 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
 
-    <h2>List of all music pieces in the system V2</h2>
+    <h2>List of all music pieces in the system</h2>
     <h4>Click on a column name to sort by it, or enter in the box text to filter</h3>
     <h4>Click on a row to select it for more detail or to reserve</h4>
 
@@ -39,8 +39,7 @@
        onSelectRow: function(rowId,e) { 
          let grid = $("#grid");
          let id = grid.jqGrid('getCell',rowId,'id');
-        console.log("clicked row",rowId,e);
-        console.log('Title: ',id)
+         window.location.href = '/catalog/musicDetail/' + id;
        } 
      });
      

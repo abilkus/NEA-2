@@ -13,8 +13,8 @@ urlpatterns = [
 # From now on you must be logged in
 # These patterns correspond to the functions available to anyone whether or not a member
 urlpatterns += [
-    path('musicList/', views.MusicListView.as_view(), name='musics'),
-    path('musicListGrid/', views.MusicListGridView.as_view(), name='musicgrid'),
+    path('musicListOld/', views.MusicListView.as_view(), name='musics'),
+    path('musicList/', views.MusicListGridView.as_view(), name='musicgrid'),
     path('musicDetail/<int:pk>', views.MusicDetailView.as_view(), name='music-detail'),
     path('composerList/', views.ComposerListView.as_view(), name='composers'),
     path('composerDetail/<int:pk>',
