@@ -3,7 +3,7 @@ from import_export.admin import ImportExportActionModelAdmin,ExportActionMixin,I
 from django.contrib.auth.models import User
 # Register your models here.
 
-from catalog.models import Composer, Genre, Music, MusicInstance, Language, MusicInstanceReservation,ActivityLog
+from catalog.models import Composer, Genre, Music, MusicInstance, Language, MusicInstanceReservation,ActivityLog,Review
 
 
 admin.site.register(Genre)
@@ -73,6 +73,11 @@ class MusicInstanceReservationAdmin(admin.ModelAdmin):
 @admin.register(ActivityLog)
 class ActivityLogAdmin(admin.ModelAdmin):
     model = ActivityLog
+
+
+@admin.register(Review)
+class ReviewAdmin(ImportExportMixin,admin.ModelAdmin):
+    model = Review;
 
 
 from django.contrib import admin
