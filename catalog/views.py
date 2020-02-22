@@ -519,17 +519,49 @@ class CreateRandomMusicInstances(PermissionRequiredMixin,View):
     def get(self,request,*args,**kwargs):
         allMusic = Music.objects.all()
         for music in allMusic:
-            for i in range(1,random.choice(range(1,4))):
+            for i in random.choice(range(1,5)):
                 print('Creating %d instances for %s' % (i,music.title))
                 m = MusicInstance(
                     music=music
                 )
                 m.save()
         return HttpResponse("Random music created")
-        
+
+class CreateRandomReviews(PermissionRequiredMixin,View):
+    def has_permission(self):
+        if not self.request.user.is_superuser:
+            return False
+        return True
+    def get(self,request,*args,**kwargs):
+        allMusic = Music.objects.all()
+        for userid in range(6,9): # member1 is user id 6
+            for music in allMusic:
+                myRating = random.choice(range(-3,11))
+                if myRating < 1:
+                    continue
+                newRating = Review(user_id=userid,music=music,rating=myRating)
+                newRating.save()
+                print("Saved rating for music id " + str(music.id))
+        return HttpResponse("Random reviews created ")
+    
 class FeedbackView(TemplateView):
     template_name = 'catalog/feedback.html'
-        
+
+class SuggestionsView(PermissionRequiredMixin,TemplateView):
+    template_name = 'catalog/suggestions.html'
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+            return False
+        if not self.request.user.has_perm('catalog.can_self_reserve'):
+            return False
+        return True
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        userId =self.kwargs['pk']
+        user = User.objects.get(id=userId)
+        context['suggestions'] = Review.suggestionsForUser(user)
+        context['user'] = user
+        return context        
 '''
 class ComposerCreate(CreateView):
     model = Composer

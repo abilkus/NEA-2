@@ -78,6 +78,11 @@
                   Manage reservations
                 </nav>
                 <nav class="nav-item pl-2">
+                  {% if  perms.catalog.can_self_reserve %}
+                  <a class="nav-link" href="/catalog/suggestions/{{user.id}}">Suggestions</a>
+                  </nav>
+                  {% endif %}
+                  <nav class="nav-item pl-2">
                 {% if  perms.catalog.can_self_reserve %}
                 <a class="nav-link" href="/catalog/borrowedOrReservedByUser">Your reservations</a>
                 </nav>

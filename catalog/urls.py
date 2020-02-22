@@ -23,6 +23,7 @@ urlpatterns += [
 
 # These patterns implement functions only available to members who therefore have reservation rights 
 urlpatterns += [
+    path('suggestions/<int:pk>', views.SuggestionsView.as_view(), name='suggestions'),
     # the button which actually makes a reservation
     path('reserveAction/', views.ReserveAction.as_view(), name='reserveAction'),
     # list of music which has been borrowed or reserved by the user
@@ -43,6 +44,7 @@ urlpatterns += [
     path('routineMaintenance/',views.RoutineMaintenance.as_view(),name='routineMaintenance'),
     path('createRandomMusic/',views.CreateRandomMusic.as_view(),name='createRandomMusic'),
     path('createRandomMusicInstances/',views.CreateRandomMusicInstances.as_view(),name='createRandomMusicInstances'),
+    path('createRandomReviews/',views.CreateRandomReviews.as_view(),name='createRandomReviews'),
 ]
 '''
 # Add URLConf to create, update, and delete composers

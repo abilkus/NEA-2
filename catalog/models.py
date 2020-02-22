@@ -267,3 +267,38 @@ class Review(models.Model):
     rating = models.IntegerField()
     reviewDate = models.DateTimeField(default=timezone.now)
 
+    @staticmethod
+    def suggestionsForUser(user):
+        latestGoodReviews = Review.objects.filter(user=user).filter(rating__gte=6).order_by('-reviewDate')
+        numberOfGoodReviews = latestGoodReviews.count()
+        if numberOfGoodReviews == 0:
+            return []
+        numberOfCandidates = 0
+        compatibleUsers = set()
+        for goodReview in latestGoodReviews:
+            otherReviews = Review.objects.filter(music = goodReview.music).filter(rating__gte=goodReview.rating - 1).filter(rating__lte = goodReview.rating + 1)
+            for otherReview in otherReviews:
+                if otherReview.user == user:
+                    continue
+                compatibleUsers.add(otherReview.user)
+        itemDict = {}
+        for user in compatibleUsers:
+            positiveReviews = Review.objects.filter(user=user).filter(rating__gte = 7)
+            for positiveReview in positiveReviews:
+                if MusicInstanceReservation.objects.filter(musicInstance__music=positiveReview.music,userid=user).exists():
+                    continue
+                currentVal = itemDict.get(positiveReview.music.id)
+                if (currentVal == None):
+                    currentVal = 1
+                else:
+                    currentVal = currentVal + 1
+            itemDict[positiveReview.music] = currentVal
+        nSuggestions = 0
+        suggestions = []
+        for k, v in sorted(itemDict.items(), key=lambda item: item[1],reverse = True):
+            nSuggestions += 1
+            if (nSuggestions > 4):
+                break
+            suggestions.append(k)
+        return suggestions
+
