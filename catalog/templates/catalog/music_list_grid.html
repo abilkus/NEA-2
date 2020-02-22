@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+
+{% block content %}    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+
+    <h2>List of all music pieces in the system V2</h2>
+    <h4>Click on a column name to sort by it, or enter in the box text to filter</h3>
+    <h4>Click on the title of a piece to select it</h4>
+
+    <table id="grid"></table>
+
+  <script>
+    $(function() {
+     "use strict";
+     let data = {};
+     {% if queryjson %}
+      data = {{queryjson|safe}};
+     {% endif %}   
+     $('#grid').jqGrid({
+       toppager:true,pager:true,rowNum:15,
+       colModel:[
+         {name: "id",width:1,hidden:true},
+         {name: "title",label:'Title'},
+         {name: "composer__last_name",label:'Composer'},
+         {name: "genre__name",label:'Genre'},
+         {name: "language__name",label:'Language'},
+       ],
+      data: data,
+      ondblClickRow: function(rowId,iRow,iCol,e) {
+          let grid = $("#grid");
+          let id = grid.jqGrid('getCell',rowId,'title');
+          console.log("clicked row",rowId,id);
+          alert("clicked row",rowId,id);
+      },
+     }).jqGrid('filterToolbar').jqGrid('setGridParam',{
+       onSelectRow: function(rowId,e) { 
+         let grid = $("#grid");
+         let id = grid.jqGrid('getCell',rowId,'title');
+        console.log("clicked row",rowId,e);
+        console.log('Title: ',id)
+       } 
+     });
+     
+    })
+  </script>    
+{% endblock %}
+

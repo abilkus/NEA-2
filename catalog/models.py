@@ -177,7 +177,7 @@ class MusicInstanceReservation(models.Model):
     cancelled = models.BooleanField(default=False)
     def save(self,*args,**kwargs):
         if self.duedate == None:
-            self.duedate = timezone.now() + timedelta(days=daysToReserve)
+            self.duedate = timezone.now + timedelta(days=daysToReserve)
         if self.takenoutdate == None:
             self.takenoutdate = timezone.now()
         return super(MusicInstanceReservation,self).save(*args,**kwargs)
@@ -265,4 +265,5 @@ class Review(models.Model):
     music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     rating = models.IntegerField()
+    reviewDate = models.DateTimeField(default=timezone.now)
 

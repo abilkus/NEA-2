@@ -32,7 +32,7 @@ from django_ajax.mixin import AJAXMixin
 from catalog.forms import *
 from catalog.models import Music, Composer, MusicInstance, Genre, MusicInstanceReservation,ActivityLog,Review
 from pprint import pprint
-
+#from rest_framework import serializers
 
 def is_in_group(user,group_name):
     group = Group.objects.get(name=group_name)
@@ -157,6 +157,27 @@ class MusicListView(PermissionRequiredMixin,generic.ListView):
            return False    
         return True       
 
+class MusicListGridView(PermissionRequiredMixin,TemplateView):
+    """Generic class-based view for a list of music."""
+    template_name = "catalog/music_list_grid.html"
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+           print("musiclistview not authenticated")
+           return False
+        if not self.request.user.has_perm('catalog.can_browse_catalog'):
+           print("musiclistview user lacks can_browse_catalog")
+           return False    
+        return True       
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #queryjson = serializers.serialize('json',music.objects().all())
+        x = list(Music.objects.values('id','title','composer__last_name','genre__name','language__name').order_by('composer__last_name'))
+        queryjson = json.dumps(x)
+        
+        context['queryjson'] = queryjson
+        return context
+     
 
 class MusicDetailView(PermissionRequiredMixin,generic.DetailView):
     """Generic class-based detail view for a book."""
