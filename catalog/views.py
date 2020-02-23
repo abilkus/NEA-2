@@ -555,7 +555,7 @@ class CreateRandomGenre(PermissionRequiredMixin,View):
             print("creating random genre")
             genre = ""
             tempgenre = []
-            for letters in range(0,random.randint(4. 201)):
+            for letters in range(0,random.randint(4, 201)):
                 letter = random.choice(choices)
                 tempgenre.append(letter)
             for x in tempgenre:
