@@ -452,7 +452,7 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             'adam@Bilkus.com',
             [email])
         messages.info(self.request, "Return Successful: %s has returned %s" % (user.id, whichCopy))
-        return HttpResponseRedirect("/catalog/feedback/" + str(reservation.id))
+        return HttpResponseRedirect("/catalog/reviewMusic/" + str(reservation.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
     def has_permission(self):
