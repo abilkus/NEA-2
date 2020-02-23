@@ -343,7 +343,7 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
             'Your Borrowed id is: ' + str(reservationnumber),
             'adam@Bilkus.com',
             [emailAddress])
-        
+        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
         return super().form_valid(form)
 
     def postNotUsed(self,request,*args,**kwargs):
@@ -357,7 +357,7 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
             'Your Borrowed id is: ' + str(reservationnumber),
             'adam@Bilkus.com',
             [emailAddress])
-       
+        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
         return HttpResponseRedirect("/catalog/feedback")
 
 class CancelReserveAction(PermissionRequiredMixin, View):
@@ -379,7 +379,7 @@ class CancelReserveAction(PermissionRequiredMixin, View):
             'Your Borrowed id is: ' + str(reservationnumber),
             'adam@Bilkus.com',
             [emailAddress])
-        
+        messages.info(self.request,"Reservation number  %s has been cancelled" % (reservationnumber))
         return HttpResponseRedirect("/catalog/feedback")
 
 class BorrowInstanceAction(PermissionRequiredMixin, View):
@@ -404,7 +404,7 @@ class BorrowInstanceAction(PermissionRequiredMixin, View):
             'Your Borrowed id is: ' + str(reservationnumber),
             'adam@Bilkus.com',
             [email])
-        
+        messages.info(self.request, "The borrowing was successful: %s has borrowed %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog/feedback")
 
 class RenewInstanceAction(PermissionRequiredMixin, View):
@@ -429,7 +429,7 @@ class RenewInstanceAction(PermissionRequiredMixin, View):
             'Your reservation: ' + str(id) +' has been returned',
             'adam@Bilkus.com',
             [email])
-        
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user, whichCopy))
         return HttpResponseRedirect("/catalog/feedback")
 
 class ReturnInstanceAction(PermissionRequiredMixin, View):
@@ -451,7 +451,7 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             'Your reservation: ' + str(id) +' has been returned',
             'adam@Bilkus.com',
             [email])
-        
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user.id, whichCopy))
         return HttpResponseRedirect("/catalog/reviewMusic/" + str(reservation.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
