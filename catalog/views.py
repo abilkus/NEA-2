@@ -451,7 +451,7 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             'Your reservation: ' + str(id) +' has been returned',
             'adam@Bilkus.com',
             [email])
-        messages.info(self.request, "Return Successful: %s has returned %s" % (user.userid, whichCopy))
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user.id, whichCopy))
         return HttpResponseRedirect("/catalog/feedback/" + str(reservation.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
