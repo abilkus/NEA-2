@@ -574,7 +574,7 @@ class AssignRandomGenre(PermissionRequiredMixin,View):
         allGenre = Genre.objects.all()
         for music in allMusic:
             genre = random.choice(allGenre)
-            if music.genre != None:
+            if music.genre == "Film":
                 continue
             music.genre = genre
             music.save()
