@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h2>Chart of activities</h2>
+<form>
+  <input type=button value="Print me!" onClick="javascript:window.print()">
+  </form>
+    <h2>Chart of Borrowed Music</h2>
     {% if music_list %}
     <ul>
 
