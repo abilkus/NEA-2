@@ -564,7 +564,22 @@ class CreateRandomGenre(PermissionRequiredMixin,View):
             name = genre)
             m.save()
         return HttpResponse("Random genre created")
-
+class AssignRandomGenre(PermissionRequiredMixin,View):
+    def has_permission(self):
+        if not self.request.user.is_superuser:
+            return False
+        return True
+    def get(self,request,*args,**kwargs):
+        allMusic = Music.objects.all()
+        allGenre = Genre.objects.all()
+        for music in allMusic:
+            genre = random.choice(allGenre)
+            if music.genre != None:
+                continue
+            music.genre = genre
+            music.save()
+            print("Saved genre for music id " + str(music.id))
+        return HttpResponse("Random genre assigned")
 class FeedbackView(TemplateView):
     template_name = 'catalog/feedback.html'
 
