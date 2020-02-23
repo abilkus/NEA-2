@@ -64,7 +64,7 @@ class Music(models.Model):
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
     barcode = models.CharField('barcode', max_length=13,
                             help_text='the library unique reference code for this  piece')
-    genre = models.ForeignKey(Genre, help_text="Select a genre for this music")
+    genre = models.ForeignKey(Genre,on_delete=models.SET_NULL, null=True)
     # ManyToManyField used because a genre can contain many sets of music and a Music can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
