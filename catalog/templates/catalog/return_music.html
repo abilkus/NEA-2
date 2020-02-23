@@ -6,7 +6,7 @@
 
 <p><strong>Composer:</strong> <a href="{% url 'composer_detail' music.composer.pk %}">{{ music.composer }}</a></p>
 <p><strong>Summary:</strong> {{ music.summary }}</p>
-<p><strong>ISBN:</strong> {{ music.isbn }}</p>
+<p><strong>Barcode:</strong> {{ music.barcode }}</p>
 <p><strong>Language:</strong> {{ music.language }}</p>
 <p><strong>Genre:</strong> {% for genre in music.genre.all %}{{genre}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
