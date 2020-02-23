@@ -45,6 +45,7 @@ urlpatterns += [
     path('createRandomMusic/',views.CreateRandomMusic.as_view(),name='createRandomMusic'),
     path('createRandomMusicInstances/',views.CreateRandomMusicInstances.as_view(),name='createRandomMusicInstances'),
     path('createRandomReviews/',views.CreateRandomReviews.as_view(),name='createRandomReviews'),
+    path('createRandomGenre/',views.CreateRandomGenre.as_view(),name='createRandomGenre')
 ]
 '''
 # Add URLConf to create, update, and delete composers
