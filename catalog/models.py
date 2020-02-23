@@ -69,10 +69,6 @@ class Music(models.Model):
     # Genre class has already been defined so we can specify the object above.
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
-    def display_genre(self):
-        """Creates a string for the Genre. This is required to display genre in Admin."""
-        return ', '.join([genre.name for genre in self.genre.all()[:3]])
-
     display_genre.short_description = 'Genre'
 
     def get_absolute_url(self):
