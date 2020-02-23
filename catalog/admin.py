@@ -42,7 +42,7 @@ class MusicAdmin(ImportExportMixin,admin.ModelAdmin):
      - fields to be displayed in list view (list_display)
      - adds inline addition of music instances in music view (inlines)
     """
-    list_display = ('title', 'composer', 'display_genre')
+    list_display = ('title', 'composer', 'genre')
     inlines = [MusicsInstanceInline]
 
 

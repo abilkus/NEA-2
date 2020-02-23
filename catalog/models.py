@@ -69,8 +69,6 @@ class Music(models.Model):
     # Genre class has already been defined so we can specify the object above.
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
-    display_genre.short_description = 'Genre'
-
     def get_absolute_url(self):
         """Returns the url to access a particular book instance."""
         return reverse('music-detail', args=[str(self.id)])
