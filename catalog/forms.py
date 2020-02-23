@@ -30,7 +30,7 @@ class RenewMusicForm(forms.Form):
 
 class ReviewMusicForm(forms.Form):
 #    user = forms.ModelChoiceField(queryset=User.objects.all())
-    rating  = forms.ChoiceField(choices=[('0','-')]+([(x,x) for x in range(1,10)]))
+    rating  = forms.ChoiceField(choices=[('0','-')]+([(x,x) for x in range(1,11)]))
     def clean_rating(self):
         r = int(self.cleaned_data['rating'])
         if r < 0 or r > 10:
