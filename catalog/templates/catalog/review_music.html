@@ -1,7 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-
+{% if messages %}
+    <div class="messages" style="background: white;">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    </div>
+{% endif %}
 <h1>Title: Review of {{ music.title }} by {{ user.username }} ({{user.first_name}} {{user.last_name}})</h1>
 
 You have just returned the above piece to the library on behalf of the above user.

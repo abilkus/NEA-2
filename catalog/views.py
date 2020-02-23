@@ -451,8 +451,8 @@ class ReturnInstanceAction(PermissionRequiredMixin, View):
             'Your reservation: ' + str(id) +' has been returned',
             'adam@Bilkus.com',
             [email])
-        messages.info(self.request, "Return Successful: %s has returned %s" % (user.userid, whichCopy))
-        return HttpResponseRedirect("/catalog/feedback/" + str(reservation.id))
+        messages.info(self.request, "Return Successful: %s has returned %s" % (user.id, whichCopy))
+        return HttpResponseRedirect("/catalog/reviewMusic/" + str(reservation.id))
 
 class RoutineMaintenance(PermissionRequiredMixin,View):
     def has_permission(self):
@@ -543,7 +543,43 @@ class CreateRandomReviews(PermissionRequiredMixin,View):
                 newRating.save()
                 print("Saved rating for music id " + str(music.id))
         return HttpResponse("Random reviews created ")
-    
+
+class CreateRandomGenre(PermissionRequiredMixin,View):
+    def has_permission(self):
+         if not self.request.user.is_superuser:
+             return False
+         return True
+    def get(self,request,*args,**kwargs):
+        choices = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        for i in range(0,20):
+            print("creating random genre")
+            genre = ""
+            tempgenre = []
+            for letters in range(0,random.randint(4, 20)):
+                letter = random.choice(choices)
+                tempgenre.append(letter)
+            for x in tempgenre:
+                genre += x
+            m = Genre(
+            name = genre)
+            m.save()
+        return HttpResponse("Random genre created")
+class AssignRandomGenre(PermissionRequiredMixin,View):
+    def has_permission(self):
+        if not self.request.user.is_superuser:
+            return False
+        return True
+    def get(self,request,*args,**kwargs):
+        allMusic = Music.objects.all()
+        allGenre = Genre.objects.all()
+        for music in allMusic:
+            genre = random.choice(allGenre)
+            if music.genre == "Film":
+                continue
+            music.genre = genre
+            music.save()
+            print("Saved genre for music id " + str(music.id))
+        return HttpResponse("Random genre assigned")
 class FeedbackView(TemplateView):
     template_name = 'catalog/feedback.html'
 
