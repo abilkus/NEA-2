@@ -15,8 +15,11 @@
     <h3>There are no copies available to borrow at the moment</h3>
     {% else %}
       {% if show_reserve_button %}
-
-        <form action="{%url 'reserveAction' %}" method="post">
+      {% if perms.can_any_reserve %}
+        <form action="{%url 'reserveOtherAction' %}" method="post">
+      {% else %}
+      <form action="{%url 'reserveAction' %}" method="post">
+      {% endif %}
             {% csrf_token %}
             <button type="submit" name="reservebutton" value="{{firstavailable.id}}">Reserve a copy</button>
             {% if perms.can_any_reserve %}

@@ -33,6 +33,8 @@ urlpatterns += [
 
 # These are only available to librarians
 urlpatterns += [
+    path('reserveOtherAction/', views.ReserveOtherAction.as_view(), name='reserveOtherAction'),
+   
     path('borrowAction/', views.BorrowInstanceAction.as_view(), name='borrowAction'),
     path('renewAction/', views.RenewInstanceAction.as_view(), name='renewAction'),
     path('returnAction/', views.ReturnInstanceAction.as_view(), name='returnAction'),
