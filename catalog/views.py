@@ -309,7 +309,7 @@ class BorrowedList(PermissionRequiredMixin,TemplateView):
         return context 
 
 # Now the post actions
-class ReserveAction(PermissionRequiredMixin,FormView) :   
+class ReserveOtherAction(PermissionRequiredMixin,FormView) :   
     template_name = 'catalog/music_detail.html'
     form_class = GetUserForm
     success_url = '/catalog/feedback'
@@ -325,9 +325,8 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
     def has_permission(self):
         if not self.request.user.is_authenticated:
            return False
-        if not self.request.user.has_perm('catalog.can_self_reserve'):
-            if not self.request.user.has_perm('catalog.can_any_reserve'):
-               return False
+        if not self.request.user.has_perm('catalog.can_any_reserve'):
+           return False
         return True
 
     def form_valid(self, form):
@@ -347,6 +346,34 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
         return super().form_valid(form)
 
     def postNotUsed(self,request,*args,**kwargs):
+        whichCopy= request.POST['reservebutton']
+        instance = MusicInstance.objects.get(id = whichCopy)
+
+        reservationnumber,instance = instance.reserve(request.user) #dateOverride= to override the date here
+        emailAddress= request.user.email
+        send_mail(
+            'Music Reserved',
+            'Your Borrowed id is: ' + str(reservationnumber),
+            'adam@Bilkus.com',
+            [emailAddress])
+        messages.info(self.request,"Reservation successful: Your reservation number is %s" % (reservationnumber))
+        return HttpResponseRedirect("/catalog/feedback")
+
+class ReserveAction(PermissionRequiredMixin,View) :   
+    template_name = 'catalog/music_detail.html'
+    success_url = '/catalog/feedback'
+
+
+    def has_permission(self):
+        if not self.request.user.is_authenticated:
+           return False
+        if not self.request.user.has_perm('catalog.can_self_reserve'):
+            if not self.request.user.has_perm('catalog.can_any_reserve'):
+               return False
+        return True
+
+
+    def post(self,request,*args,**kwargs):
         whichCopy= request.POST['reservebutton']
         instance = MusicInstance.objects.get(id = whichCopy)
 
