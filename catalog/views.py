@@ -337,6 +337,8 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
         instance = MusicInstance.objects.get(id = whichCopy)
         user=form.cleaned_data['user']
         reservationnumber,instance = instance.reserve(user) #dateOverride= to override the date here
+        print(reservationnumber)
+        print(instance)
         emailAddress= request.user.email
         send_mail(
             'Music Reserved',
