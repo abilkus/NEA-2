@@ -1,3 +1,4 @@
+# All Imports
 import random
 import datetime
 from datetime import date,timedelta
@@ -52,7 +53,7 @@ class HomePageView(TemplateView):
             return "memberindex.html"
         return super().get_template_names()
     template_name = 'index.html'
-# calendarStartDate event_list
+# calendarStartDate event_list. This is used to remind me how to use the calendar app
     '''
       {
           title: 'All Day Event',
@@ -110,13 +111,14 @@ class HomePageView(TemplateView):
         # Generate counts of some of the main objects
         num_music = Music.objects.all().count()
         num_instances = MusicInstance.objects.all().count()
-        # Available copies of books
+        # Available copies of music
         num_instances_available = MusicInstance.objects.filter(status__exact='a').count()
         num_composers = Composer.objects.count()  # The 'all()' is implied by default.
         # Number of visits to this view, as counted in the session variable.
         num_visits = self.request.session.get('num_visits', 0)
         self.request.session['num_visits'] = num_visits+1
         can_reserve = False
+        #This is setting up the calendar to show different types of users different things.
         if self.request.user.has_perm('catalog.can_issue'):
             can_reserve = True
         xxx = (
@@ -325,9 +327,8 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
     def has_permission(self):
         if not self.request.user.is_authenticated:
            return False
-        if not self.request.user.has_perm('catalog.can_self_reserve'):
-            if not self.request.user.has_perm('catalog.can_any_reserve'):
-               return False
+        if not self.request.user.has_perm('catalog.can_self_reserve') or not self.request.user.has_perm('catalog.can_any_reserve'):
+            return False
         return True
 
     def form_valid(self, form):
@@ -598,6 +599,7 @@ class SuggestionsView(PermissionRequiredMixin,TemplateView):
         context['suggestions'] = Review.suggestionsForUser(user)
         context['user'] = user
         return context        
+# These are placeholders for if I wanted to be able to add these as separate pages rather than in the admin interface
 '''
 class ComposerCreate(CreateView):
     model = Composer
@@ -623,12 +625,5 @@ class MusicUpdate(UpdateView):
 class MusicDelete(DeleteView):
     model = Music
     success_url = reverse_lazy('musics')
-
-class MusicFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='iexact')
-    class Meta:
-        model = Music
-        fields = ['genre', 'language']
-
 
 '''
