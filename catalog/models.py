@@ -85,7 +85,7 @@ class Music(models.Model):
             ("can_issue", "Can set reservation as borrowed"),
             ("can_return", "Can mark borrowed music as now returned"),
             ("can_see_reservation_detail", "Can see who has reserved or borrowed an instance"),
-            ("is_admin", "Can see admin pages"), 
+            ("has_all_permissions", "Can see admin pages"), 
         )
 
 

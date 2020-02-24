@@ -94,7 +94,7 @@
                   </div>
                 </nav>
                 {% endif %}
-                {% if perms.catalog.is_admin %}
+                {% if perms.catalog.has_all_permissions %}
                 <nav class="nav-link">
                   Administration
                 </nav>
