@@ -325,7 +325,7 @@ class ReserveAction(PermissionRequiredMixin,FormView) :
     def has_permission(self):
         if not self.request.user.is_authenticated:
            return False
-        if not self.request.user.has_perm('catalog.can_self_reserve')
+        if not self.request.user.has_perm('catalog.can_self_reserve'):
             return False
         if not self.request.user.has_perm('catalog.can_any_reserve'):
             return False
