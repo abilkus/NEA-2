@@ -1,0 +1,32 @@
+Watching for file changes with StatReloader
+[25/Feb/2020 09:30:39] "GET /catalog/ HTTP/1.1" 200 7684
+[25/Feb/2020 09:30:39] "GET /static/css/styles.css HTTP/1.1" 304 0
+[25/Feb/2020 09:30:39] "GET /static/images/BEAT-logo.png HTTP/1.1" 304 0
+[25/Feb/2020 09:30:39] "GET /static/images/background.jpg HTTP/1.1" 304 0
+Not Found: /favicon.ico
+[25/Feb/2020 09:30:40] "GET /favicon.ico HTTP/1.1" 404 2418
+[25/Feb/2020 09:30:40] "GET /static/images/favicon.ico HTTP/1.1" 304 0
+[25/Feb/2020 09:30:55] "GET /catalog/borrowedOrReservedByAll/ HTTP/1.1" 200 8587
+/usr/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1310: RuntimeWarning: DateTimeField MusicInstanceReservation.takenoutdate received a naive datetime (2020-02-25 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[25/Feb/2020 09:31:02] "POST /catalog/borrowAction/ HTTP/1.1" 302 0
+[25/Feb/2020 09:31:02] "GET /catalog/feedback HTTP/1.1" 301 0
+[25/Feb/2020 09:31:02] "GET /catalog/feedback/ HTTP/1.1" 200 6041
+[25/Feb/2020 09:31:05] "GET /catalog/borrowedOrReservedByAll/ HTTP/1.1" 200 8578
+[25/Feb/2020 09:31:09] "POST /catalog/cancelReserveAction/ HTTP/1.1" 302 0
+[25/Feb/2020 09:31:09] "GET /catalog/feedback HTTP/1.1" 301 0
+[25/Feb/2020 09:31:09] "GET /catalog/feedback/ HTTP/1.1" 200 5999
+[25/Feb/2020 09:31:11] "GET /catalog/borrowedOrReservedByAll/ HTTP/1.1" 200 7659
+[25/Feb/2020 09:31:15] "POST /catalog/renewAction/ HTTP/1.1" 302 0
+[25/Feb/2020 09:31:15] "GET /catalog/feedback HTTP/1.1" 301 0
+[25/Feb/2020 09:31:15] "GET /catalog/feedback/ HTTP/1.1" 200 6030
+[25/Feb/2020 09:31:17] "GET /catalog/borrowedOrReservedByAll/ HTTP/1.1" 200 7659
+/usr/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1310: RuntimeWarning: DateTimeField MusicInstanceReservation.returneddate received a naive datetime (2020-02-25 00:00:00) while time zone support is active.
+  RuntimeWarning)
+[25/Feb/2020 09:31:20] "POST /catalog/returnAction/ HTTP/1.1" 302 0
+[25/Feb/2020 09:31:20] "GET /catalog/reviewMusic/55 HTTP/1.1" 200 7027
+[25/Feb/2020 09:31:24] "POST /catalog/reviewMusic/55 HTTP/1.1" 302 0
+[25/Feb/2020 09:31:24] "GET /catalog/feedback HTTP/1.1" 301 0
+[25/Feb/2020 09:31:24] "GET /catalog/feedback/ HTTP/1.1" 200 5979
+[25/Feb/2020 09:34:51] "GET /catalog/borrowedPie/ HTTP/1.1" 200 6448
+[25/Feb/2020 09:35:00] "GET /catalog/borrowedList/ HTTP/1.1" 200 6299
