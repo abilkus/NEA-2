@@ -277,6 +277,7 @@ class Review(models.Model):
                 if otherReview.user == user:
                     continue
                 compatibleUsers.add(otherReview.user.id)
+                print(otherReview.user.id)
         itemDict = {}
         for user in compatibleUsers:
             positiveReviews = Review.objects.filter(user=user).filter(rating__gte = 7)
