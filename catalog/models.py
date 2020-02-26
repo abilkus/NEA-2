@@ -265,7 +265,7 @@ class Review(models.Model):
     def suggestionsForUser(user):
         latestGoodReviews = Review.objects.filter(user=user).filter(rating__gte=6).order_by('-reviewDate')
         for review in latestGoodReviews:
-            print( "user %s rating %d" % (review.user.username,review.rating))
+            print( "user %s rating %d and music %d" % (review.user.username,review.rating, review.music.id))
         numberOfGoodReviews = latestGoodReviews.count()
         if numberOfGoodReviews == 0:
             return []
