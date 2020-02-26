@@ -624,7 +624,8 @@ class SuggestionsView(PermissionRequiredMixin,TemplateView):
         context = super().get_context_data(**kwargs)
         userId =self.kwargs['pk']
         user = User.objects.get(id=userId)
-        context['suggestions'] = Review.suggestionsForUser(user)
+        suggestions = Review.suggestionsForUser(user)
+        context['suggestions'] = suggestions
         context['user'] = user
         return context        
 '''

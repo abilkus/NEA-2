@@ -3,9 +3,9 @@
 {% block content %}
     <h2>Based on previous reviews, we suggest the following pieces for user {{user.first_name}} {{user.last_name}}:</h2>
     <ul>
-    {% for suggestion in suggestions %}
-    <li><a href="/catalog/musicDetail/{{suggestion.id}}">{{suggestion.title}}  {{suggestion.composer.last_name}}</a></li>  
-
+    {% for item in suggestions %}
+    <li><a href="/catalog/musicDetail/{{item.id}}">{{item.title}}  {{item.composer.last_name}}</a></li>  
+    {% endfor %}
     </ul>
 {% endblock %}
 
