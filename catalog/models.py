@@ -278,6 +278,7 @@ class Review(models.Model):
                     continue
                 compatibleUsers.add(otherReview.user.id)
                 print(otherReview.user.id)
+                print(otherReview.music.id)
         itemDict = {}
         for user in compatibleUsers:
             positiveReviews = Review.objects.filter(user=user).filter(rating__gte = 7)
