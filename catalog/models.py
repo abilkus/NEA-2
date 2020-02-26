@@ -276,7 +276,7 @@ class Review(models.Model):
             for otherReview in otherReviews:
                 if otherReview.user == user:
                     continue
-                compatibleUsers.update(otherReview.user)
+                compatibleUsers.update(otherReview.user.id)
         itemDict = {}
         for user in compatibleUsers:
             positiveReviews = Review.objects.filter(user=user).filter(rating__gte = 7)
