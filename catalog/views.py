@@ -548,7 +548,7 @@ class CreateRandomMusicInstances(PermissionRequiredMixin,View):
     def get(self,request,*args,**kwargs):
         allMusic = Music.objects.all()
         for music in allMusic:
-            for i in random.choice(range(1,5)):
+            for i in range(random.choice(range(1,5))):
                 print('Creating %d instances for %s' % (i,music.title))
                 m = MusicInstance(
                     music=music
