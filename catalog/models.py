@@ -297,6 +297,7 @@ class Review(models.Model):
             nSuggestions += 1
             if (nSuggestions > 4):
                 break
+            print(k)
             suggestions.append(k)
         return suggestions
 
