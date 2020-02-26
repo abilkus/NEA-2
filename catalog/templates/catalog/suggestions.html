@@ -5,7 +5,7 @@
     <ul>
     {% for suggestion in suggestions %}
     <li><a href="/catalog/musicDetail/{{suggestion.id}}">{{suggestion.title}}  {{suggestion.composer.last_name}}</a></li>  
-    {% endfor %}
+
     </ul>
 {% endblock %}
 

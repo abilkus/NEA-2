@@ -295,7 +295,7 @@ class Review(models.Model):
         suggestions = []
         for k, v in sorted(itemDict.items(), key=lambda item: item[1],reverse = True):
             nSuggestions += 1
-            if (nSuggestions > 4):
+            if (nSuggestions = 5):
                 break
             print(k)
             suggestions.append(k)
